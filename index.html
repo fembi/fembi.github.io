@@ -4,1465 +4,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENCYCLOPEDIA: Titan Sniper V8.9 - Complete Command Manual</title>
+    <title>Macro Analysis Command Center | Fembi Isnanto</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
+            --bg: #030406;
+            --card-bg: rgba(16, 18, 24, 0.8);
             --primary: #FFD700;
-            --primary-dark: #B8860B;
-            --bg: #050608;
-            --card-bg: #101218;
-            --sidebar-bg: #0A0C10;
+            /* Gold */
             --accent: #00FFBB;
-            --danger: #FF4B5C;
-            --warning: #FFA500;
-            --info: #00CED1;
+            /* Mint */
+            --btc: #F7931A;
+            /* Bitcoin Orange */
+            --forex: #4CAF50;
+            /* Green */
             --text: #E0E0E0;
             --text-dim: #9499A6;
             --border: rgba(255, 255, 255, 0.08);
-            --gold-glow: 0 0 20px rgba(255, 215, 0, 0.15);
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glow-gold: 0 0 30px rgba(255, 215, 0, 0.1);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg);
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 187, 0.03) 0%, transparent 40%);
             color: var(--text);
             font-family: 'Inter', sans-serif;
-            line-height: 1.8;
-            display: block;
-            /* Removed flex sidebar layout */
-        }
-
-        /* Modern Sticky Header */
-        nav {
-            width: 100%;
-            height: 70px;
-            background: rgba(10, 12, 16, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
+            justify-content: center;
+            overflow-x: hidden;
         }
 
-        .nav-logo {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 800;
-            font-size: 1.3rem;
-            color: var(--primary);
-            letter-spacing: 2px;
-            margin: 0;
-        }
-
-        .nav-links-header {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-link-h {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-
-        .nav-link-h:hover {
-            color: var(--primary);
-        }
-
-        /* Hero Hub Navigation */
-        .hub-container {
-            padding: 100px 5% 60px 5%;
-            background: radial-gradient(circle at top right, rgba(255, 215, 0, 0.05), transparent 40%);
-        }
-
-        .hub-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 50px;
-        }
-
-        .hub-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 25px;
-            border-radius: 16px;
-            text-decoration: none;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hub-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.1);
-        }
-
-        .hub-card::before {
-            content: '';
-            position: absolute;
+        .background-overlay {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 4px;
+            width: 100%;
             height: 100%;
-            background: var(--primary);
-            opacity: 0;
-            transition: 0.3s;
+            z-index: -1;
+            opacity: 0.1;
+            pointer-events: none;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
         }
 
-        .hub-card:hover::before {
-            opacity: 1;
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            text-align: center;
+            padding: 40px 0;
+            animation: fadeIn 1s ease-out;
         }
 
-        .hub-card .num {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 10px;
-            display: block;
-        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
 
-        .hub-card .title {
-            color: #fff;
-            font-weight: 700;
-            font-size: 1rem;
-            line-height: 1.3;
-        }
-
-        /* Main Content Area */
-        main {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 5% 100px 5%;
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         header {
-            margin-bottom: 80px;
+            margin-bottom: 60px;
         }
 
         .badge {
-            background: var(--gold-glow);
-            border: 1px solid var(--primary);
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.1);
             color: var(--primary);
-            padding: 4px 12px;
+            padding: 6px 16px;
             border-radius: 50px;
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            margin-bottom: 20px;
         }
 
         h1 {
             font-family: 'Outfit', sans-serif;
             font-size: 3.5rem;
             font-weight: 800;
-            margin: 20px 0;
-            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
         }
 
-        .intro-text {
-            font-size: 1.2rem;
+        p.subtitle {
+            font-size: 1.1rem;
             color: var(--text-dim);
-            max-width: 900px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        section {
-            margin-bottom: 120px;
-        }
-
-        .sec-num {
-            color: var(--primary);
-            font-family: 'Outfit', sans-serif;
-            font-weight: 800;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-        }
-
-        .grid {
+        .hub-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
         }
 
-        .card {
+        .shortcut-card {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
             border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .shortcut-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-hover);
+            /* set dynamically */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            transition: 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .card-titansniper {
+            --brand: var(--primary);
+        }
+
+        .card-brfx {
+            --brand: var(--forex);
+        }
+
+        .card-btcbreakout {
+            --brand: var(--btc);
+        }
+
+        .shortcut-card:hover .icon-box {
+            background: var(--brand);
+            color: #000;
+            transform: scale(1.1) rotate(5deg);
+            border-color: transparent;
+        }
+
+        .shortcut-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .shortcut-card p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .go-icon {
+            margin-top: 25px;
+            font-size: 1.2rem;
+            color: var(--brand);
+            opacity: 0;
+            transform: translateX(-10px);
             transition: 0.3s;
         }
 
-        .card:hover {
-            border-color: rgba(255, 215, 0, 0.3);
-            box-shadow: var(--gold-glow);
+        .shortcut-card:hover .go-icon {
+            opacity: 1;
+            transform: translateX(0);
         }
 
-        .card h3 {
-            color: #fff;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        /* Hover border glows */
+        .card-titansniper:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
         }
 
-        .logic-block {
-            background: #000;
-            padding: 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            border: 1px solid #222;
+        .card-brfx:hover {
+            border-color: var(--forex);
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.1);
         }
 
-        .logic-box {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 15px 0;
-        }
-
-        .formula {
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .highlight-text {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .danger-text {
-            color: var(--danger);
-            font-weight: 600;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th {
-            text-align: left;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            padding: 15px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        td {
-            padding: 18px 15px;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.95rem;
-        }
-
-        .code-pill {
-            background: rgba(255, 75, 92, 0.1);
-            color: var(--danger);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-family: 'Fira Code', monospace;
-            font-weight: 700;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 40px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 15px;
-            top: 0;
-            width: 2px;
-            height: 100%;
-            background: var(--border);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 50px;
-        }
-
-        .timeline-point {
-            position: absolute;
-            left: -33px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary);
-            border: 4px solid var(--bg);
+        .card-btcbreakout:hover {
+            border-color: var(--btc);
+            box-shadow: 0 0 20px rgba(247, 147, 26, 0.1);
         }
 
         footer {
-            text-align: center;
-            color: var(--text-dim);
-            padding: 60px 0;
-            font-size: 0.9rem;
+            margin-top: 80px;
+            padding: 30px;
             border-top: 1px solid var(--border);
-            margin-top: 100px;
+            width: 100%;
+            text-align: center;
         }
 
-        .parameter-list {
-            list-style: none;
+        .copyright {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
         }
 
-        .parameter-list li {
-            margin-bottom: 12px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
+        .social-icons {
+            margin-bottom: 15px;
         }
 
-        .param-name {
+        .social-icons a {
+            color: var(--text-dim);
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
             color: var(--primary);
-            font-weight: 700;
-            margin-right: 12px;
-            min-width: 100px;
-            display: inline-block;
         }
 
-        @media (max-width: 1000px) {
-            nav {
-                width: 0;
-                padding: 0;
-                overflow: hidden;
-                border: none;
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
             }
 
-            main {
-                margin-left: 0;
-                width: 100%;
-                padding: 40px 20px;
+            .hub-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 
 <body>
+    <div class="background-overlay"></div>
 
-    <nav>
-        <div class="nav-logo">TITAN SNIPER</div>
-        <div class="nav-links-header">
-            <a href="#hub" class="nav-link-h">Directory</a>
-            <a href="#logic-engine" class="nav-link-h">Intelligence</a>
-            <a href="#gallery" class="nav-link-h">Scenarios</a>
-            <a href="#faq" class="nav-link-h">Support</a>
-        </div>
-    </nav>
-
-    <div class="hub-container" id="hub">
-        <header id="intro">
-            <span class="badge">Titan Sniper Edition</span>
-            <h1>The Gold Macro Encyclopedia</h1>
-            <p class="intro-text" style="max-width: 1000px;">Titan Sniper adalah sistem navigasi perdagangan emas elit
-                yang dirancang untuk menjembatani kesenjangan antara trader ritel dan investor institusional. Sistem ini
-                bekerja dengan mensintesis tiga pilar utama intelijen pasar:</p>
-
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; text-align: left;">
-                <div class="logic-box"
-                    style="margin:0; border-top: 2px solid var(--primary); background: rgba(255, 215, 0, 0.02);">
-                    <h4 style="color:var(--primary); margin-bottom:10px;">📊 Macro Institutional Data</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">Memantau secara real-time
-                        10 variabel penggerak utama (VIX, Bond Yields, Credit Spreads, DXY, dll) yang digunakan oleh
-                        pemain besar untuk menentukan arah aliran dana global (Flow of Funds) ke aset aman.</p>
-                </div>
-                <div class="logic-box"
-                    style="margin:0; border-top: 2px solid var(--accent); background: rgba(0, 255, 187, 0.02);">
-                    <h4 style="color:var(--accent); margin-bottom:10px;">🧠 Bayesian Intelligence</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">Mesin validasi statistik
-                        yang menggunakan Teorema Bayes untuk menghitung probabilitas keberhasilan. Ini memastikan setiap
-                        sinyal teknikal di chart memiliki landasan fundamental yang kuat sebelum diberikan kepada Anda.
-                    </p>
-                </div>
-                <div class="logic-box"
-                    style="margin:0; border-top: 2px solid var(--info); background: rgba(0, 206, 209, 0.02);">
-                    <h4 style="color:var(--info); margin-bottom:10px;">🚀 Tactical Command</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">Dashboard visual yang
-                        mendestilasi data kompleks menjadi narasi taktis. Memberikan instruksi yang jelas
-                        (Ready/Rejected) dan target harga yang diproyeksikan secara dinamis berdasarkan volatilitas
-                        harian.</p>
-                </div>
-            </div>
+    <div class="container">
+        <header>
+            <span class="badge">Master Command Dashboard</span>
+            <h1>Institutional Trading Hub</h1>
+            <p class="subtitle">Gerbang navigasi utama menuju ekosistem intelijen pasar: mencakup analisis makro
+                institusional, algoritma presisi, serta protokol breakout elit untuk instrumen Forex, Komoditas, Indeks,
+                hingga Kripto.</p>
         </header>
 
-        <h3
-            style="font-family:'Outfit'; text-transform:uppercase; letter-spacing:3px; color:var(--text-dim); font-size:0.8rem;">
-            Command Directory</h3>
         <div class="hub-grid">
-            <a href="#assets" class="hub-card"><span class="num">01</span><span class="title">Ensiklopedia
-                    Aset</span></a>
-            <a href="#regime" class="hub-card"><span class="num">02</span><span class="title">Mesin Rezim
-                    Risiko</span></a>
-            <a href="#macro-engine" class="hub-card"><span class="num">03</span><span class="title">Intelijen
-                    Makro</span></a>
-            <a href="#protocol" class="hub-card"><span class="num">04</span><span class="title">Protokol
-                    Entry</span></a>
-            <a href="#rejection" class="hub-card"><span class="num">05</span><span class="title">Matriks
-                    Penolakan</span></a>
-            <a href="#gallery" class="hub-card"><span class="num">06</span><span class="title">Galeri
-                    Skenario</span></a>
-            <a href="#panel-docs" class="hub-card"><span class="num">07</span><span class="title">Panduan
-                    Dashboard</span></a>
-            <a href="#visual-docs" class="hub-card"><span class="num">08</span><span class="title">Ensiklopedia
-                    Ikon</span></a>
-            <a href="#logic-engine" class="hub-card"><span class="num">09</span><span class="title">Technical
-                    Logic</span></a>
-            <a href="#risk-mgmt" class="hub-card"><span class="num">10</span><span class="title">Manajemen
-                    Risiko</span></a>
-            <a href="#scaling" class="hub-card"><span class="num">11</span><span class="title">Positioning &
-                    Scaling</span></a>
-            <a href="#presets" class="hub-card"><span class="num">12</span><span class="title">Optimasi
-                    Preset</span></a>
-            <a href="#routine" class="hub-card"><span class="num">13</span><span class="title">Daily Routine</span></a>
-            <a href="#glossary" class="hub-card"><span class="num">14</span><span class="title">Glosarium
-                    Makro</span></a>
-            <a href="#faq" class="hub-card"><span class="num">15</span><span class="title">FAQ & Bantuan</span></a>
+            <!-- TITAN SNIPER -->
+            <a href="titansniper.html" class="shortcut-card card-titansniper">
+                <div class="icon-box">
+                    <i class="fa-solid fa-crosshairs"></i>
+                </div>
+                <h3>Titan Sniper</h3>
+                <p>Ensiklopedia makro dan sistem navigasi emas berbasis intelijen Bayesian & anomali institusional.</p>
+                <div class="go-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+
+            <!-- BRFX -->
+            <a href="brfx.html" class="shortcut-card card-brfx">
+                <div class="icon-box">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h3>BRFX System</h3>
+                <p>Algoritma pemindai tren dengan filter volatilitas adaptif dan validasi struktural tingkat
+                    lanjut.</p>
+                <div class="go-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+
+            <!-- BTC BREAKOUT -->
+            <a href="btcbreakout.html" class="shortcut-card card-btcbreakout">
+                <div class="icon-box">
+                    <i class="fa-brands fa-bitcoin"></i>
+                </div>
+                <h3>BTC Breakout</h3>
+                <p>Protokol eksekusi momentum Bitcoin yang dirancang untuk menangkap pergerakan eksplosif aset kripto.
+                </p>
+                <div class="go-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
         </div>
     </div>
 
-    <main>
-
-        <!-- 01. Ensiklopedia Aset -->
-        <section id="assets">
-            <span class="sec-num">01</span>
-            <h2>Ensiklopedia Aset Makro (The Full List)</h2>
-            <p class="intro-text" style="font-size: 1.1rem; margin-bottom: 40px;">Titan Sniper menggunakan 10 pilar data
-                makro untuk menghitung skor presisi. Memahami variabel ini adalah kunci untuk membaca arah aliran modal
-                institusi (Smart Money).</p>
-
-            <div class="grid">
-                <div class="card" style="border-top: 2px solid var(--primary);">
-                    <h3>DFII10 (10Y Real Yields)</h3>
-                    <p>Suku bunga riil Amerika (FRED). Variabel paling dominan dalam ekosistem emas.</p>
-                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--primary);">
-                        <b>Institutional Insight:</b> Karena emas adalah aset non-yielding (tidak memberikan bunga),
-                        Real Yield adalah kompetitor utamanya. Jika Yield naik, emas secara matematis akan ditekan
-                        sebagai biaya peluang (Opportunity Cost).
-                    </div>
-                    <p style="margin-top:10px;"><span class="highlight-text">Logika Sniper: Yield ⬆️ ⮕ Emas ⬇️</span>
-                    </p>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--primary);">
-                    <h3>DXY (Dollar Index)</h3>
-                    <p>Indeks kekuatan Dollar AS terhadap mata uang utama dunia lainnya.</p>
-                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--primary);">
-                        <b>Institutional Insight:</b> Emas dihargai dalam USD. Saat DXY menguat, pembeli di luar AS
-                        harus membayar lebih banyak mata uang lokal mereka untuk membeli jumlah emas yang sama, sehingga
-                        menekan permintaan global.
-                    </div>
-                    <p style="margin-top:10px;"><span class="highlight-text">Logika Sniper: DXY ⬆️ ⮕ Emas ⬇️</span></p>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--primary);">
-                    <h3>VIX (Fear Index)</h3>
-                    <p>Indikator volatilitas S&P 500. Sering disebut sebagai "Barometer Ketakutan" Wall Street.</p>
-                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--primary);">
-                        <b>Institutional Insight:</b> VIX memantau permintaan opsi (options) pelindung. Jika VIX
-                        melonjak di atas 25, modal akan ditarik dari saham dan dipindahkan ke 'Safe Haven' seperti Emas
-                        dalamhitungan menit.
-                    </div>
-                    <p style="margin-top:10px;"><span class="highlight-text">Logika Sniper: VIX ⬆️ ⬆️ ⮕ Emas ⬆️</span>
-                    </p>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--primary);">
-                    <h3>RRP (Reverse Repo)</h3>
-                    <p>Fasilitas di mana bank menyimpan uang tunai berlebih di Federal Reserve.</p>
-                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--primary);">
-                        <b>Liquidity Logic:</b> Jika angka RRP turun (Uang keluar dari Fed), berarti ada likuiditas baru
-                        yang masuk ke sistem keuangan. Likuiditas yang melimpah adalah bahan bakar utama kenaikan aset
-                        keras seperti Emas.
-                    </div>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--primary);">
-                    <h3>HY OAS (Credit Spread)</h3>
-                    <p>Selisih bunga obligasi berisiko tinggi (High Yield) vs obligasi pemerintah.</p>
-                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--primary);">
-                        <b>Stress Signal:</b> Jika spread melebar, berarti sistem kredit sedang dalam bahaya. Institusi
-                        akan menganggap ekonomi dalam mode krisis, memicu pembelian emas secara agresif sebelum berita
-                        muncul di media.
-                    </div>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--primary);">
-                    <h3>TLT/HYG Ratio</h3>
-                    <p>Rasio antara obligasi jangka panjang aman (TLT) vs obligasi sampah berisiko (HYG).</p>
-                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--primary);">
-                        <b>Market Defense:</b> Kenaikan rasio ini menunjukkan investor sedang membuang aset berisiko.
-                        Emas hampir selalu bergerak selaras (Correlation > 0.8) dengan peningkatan permintaan obligasi
-                        aman ini.
-                    </div>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--primary);">
-                    <h3>XLP/XLY Ratio</h3>
-                    <p>Sektor kebutuhan pokok vs barang mewah. Jika rasio naik (orang irit belanja mewah), artinya
-                        ancaman resesi meningkat, yang mana sangat menguntungkan emas. <br><span
-                            class="highlight-text">Logika: Rasio ⬆️ ⮕ Emas ⬆️</span></p>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--primary);">
-                    <h3>USDJPY & USDCHF</h3>
-                    <p>JPY dan CHF adalah mata uang pelarian saat krisis. Titan Sniper memantau kekuatan mereka sebagai
-                        konfirmasi tambahan dari pergerakan emas global. <br><span class="highlight-text">Kategori:
-                            Haven Correlation.</span></p>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--primary);">
-                    <h3>S&P 500 (Risk Proxy)</h3>
-                    <p>Pergerakan bursa saham. Kejatuhan tajam di bursa saham biasanya memicu aliran dana segar ke emas
-                        sebagai instrumen lindung nilai portofolio. <br><span class="highlight-text">Logika: SPX ⬇️ ⮕
-                            Emas ⬆️</span></p>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--primary);">
-                    <h3>GLD (Gold ETF Flows)</h3>
-                    <p>Memantau apakah institusi besar sedang menambah kepemilikan emas fisik mereka melalui ETF. Ini
-                        adalah detak nadi permintaan korporat. <br><span class="highlight-text">Kategori: Institutional
-                            Demand.</span></p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 02. Mesin Rezim Risiko -->
-        <section id="regime">
-            <span class="sec-num">02</span>
-            <h2>Mesin Rezim Risiko (The Master Filter)</h2>
-            <div class="card" style="width: 100%;">
-                <p style="margin-bottom: 25px;">Risk-Off Index adalah "otak" utama Titan Sniper yang menggabungkan 10
-                    variabel makro menjadi satu angka tunggal (-3.0 hingga +3.0). Indeks ini menentukan arah operasional
-                    Anda.</p>
-
-                <div class="logic-block">
-                    <span class="formula">Index = Σ (Z-Score Asset × Weight) / Total Weight</span>
-                </div>
-
-
-                <table style="margin-top: 40px;">
-                    <thead>
-                        <tr>
-                            <th>Nilai Index</th>
-                            <th>Nama Rezim</th>
-                            <th>Warna Chart</th>
-                            <th>Aksi Operasional</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span style="color: #00FF00;">> +0.75</span></td>
-                            <td><strong>Extreme Risk-Off</strong></td>
-                            <td>Hijau Tua 🟢</td>
-                            <td>Bullish Mutlak. Cari Sniper Buy.</td>
-                        </tr>
-                        <tr>
-                            <td><span style="color: #ADFF2F;">+0.15 s/d +0.45</span></td>
-                            <td><strong>Standard Risk-Off</strong></td>
-                            <td>Hijau Muda 🍏</td>
-                            <td>Trend Bullish. Buy on Pullback.</td>
-                        </tr>
-                        <tr>
-                            <td><span style="color: #A0A0A0;">-0.15 s/d +0.15</span></td>
-                            <td><strong>Neutral</strong></td>
-                            <td>Abu-abu 🔘</td>
-                            <td>Side-way. Tunggu Sinyal Grade A+.</td>
-                        </tr>
-                        <tr>
-                            <td><span style="color: #FF4500;">
-                                    < -0.45</span>
-                            </td>
-                            <td><strong>Risk-On</strong></td>
-                            <td>Merah 🔴</td>
-                            <td>Bearish Emas. Fokus Cari Peluang Sell.</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="logic-box" style="margin-top: 40px; border-left-color: var(--accent);">
-                    <h3 style="color: var(--accent);">🏷️ Interpretasi Label Chart: Risk-Off vs Risk-On</h3>
-                    <p style="margin-bottom: 20px;">Titan Sniper tidak hanya memberi warna pada chart, tapi juga
-                        mencetak label teks otomatis di atas/bawah bar candlestick. Berikut arti mendalamnya:</p>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                        <div class="card" style="background: rgba(0,255,187,0.03);">
-                            <h4 style="color: #00FF00;">🟢 Label: RISK-OFF / EXTREME RISK-OFF</h4>
-                            <p style="font-size: 0.85rem;">Teridentifikasi saat instrumen pelindung (VIX, Yield Turun,
-                                DXY Lemah) mendominasi pasar.</p>
-                            <ul style="font-size: 0.8rem; margin-top: 10px; color: var(--text-dim);">
-                                <li><b>Triger:</b> Muncul saat Index Risiko menembus batas positif (+0.15 s/d +0.75).
-                                </li>
-                                <li><b>Psikologi:</b> Pasar sedang ketakutan. Investor menjual saham dan membeli "Safe
-                                    Haven" (Emas).</li>
-                                <li><b>Instruksi:</b> Abaikan setiap sinyal SELL. Fokus hanya pada pembalikan arah ke
-                                    atas.</li>
-                            </ul>
-                        </div>
-
-                        <div class="card" style="background: rgba(255,69,0,0.03);">
-                            <h4 style="color: #FF4500;">🔴 Label: RISK-ON / EXTREME RISK-ON</h4>
-                            <p style="font-size: 0.85rem;">Teridentifikasi saat selera risiko tinggi (Saham naik, VIX
-                                rendah, Yield melonjak) melanda pasar.</p>
-                            <ul style="font-size: 0.8rem; margin-top: 10px; color: var(--text-dim);">
-                                <li><b>Triger:</b> Muncul saat Index Risiko jatuh ke area negatif (Di bawah -0.15).</li>
-                                <li><b>Psikologi:</b> Pasar sedang optimis (Greed). Uang mengalir keluar dari emas.</li>
-                                <li><b>Instruksi:</b> Sangat berbahaya menahan posisi BUY. Fokus pada pola rejection
-                                    atas.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div
-                        style="margin-top: 25px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                        <p style="font-size: 0.9rem;"><strong>⚠️ Peringatan Tanda ⚠️ (Extreme):</strong> Jika label
-                            disertai ikon peringatan, berarti volatilitas makro sedang berada di titik jenuh. Biasanya
-                            akan terjadi dorongan harga (Spike) yang sangat kuat namun singkat.</p>
-                    </div>
-
-                    <div class="logic-box"
-                        style="margin-top: 30px; border-top: 2px solid var(--accent); background: rgba(0, 255, 187, 0.05);">
-                        <h4 style="color: var(--accent);">🔦 Case Study: Krisis Perbankan AS (Maret 2023)</h4>
-                        <p style="font-size: 0.85rem; margin-top: 10px;">
-                            Saat Silicon Valley Bank (SVB) kolaps, harga emas melonjak dari $1,810 ke $2,000 hanya dalam
-                            hitungan hari. Titan Sniper mendeteksi ini melalui Credit Spread (HY OAS) yang melebar tajam
-                            dan VIX yang melonjak > 30. Label <b>EXTREME RISK-OFF</b> muncul di chart jauh sebelum media
-                            melaporkan kepanikan massal.
-                        </p>
-                    </div>
-                </div>
-
-                <div style="margin-top: 25px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                    <p style="font-size: 0.9rem;"><strong>⚠️ Peringatan Tanda ⚠️ (Extreme):</strong> Jika label
-                        disertai ikon peringatan, berarti volatilitas makro sedang berada di titik jenuh. Biasanya
-                        akan terjadi dorongan harga (Spike) yang sangat kuat namun singkat sebelum pembalikan besar.
-                    </p>
-                </div>
-
-                <div class="logic-box"
-                    style="margin-top: 30px; border-top: 2px solid var(--accent); background: rgba(0, 255, 187, 0.05);">
-                    <h4 style="color: var(--accent);">🔦 Case Study: Krisis Perbankan AS (Maret 2023)</h4>
-                    <p style="font-size: 0.85rem; margin-top: 10px;">
-                        Saat Silicon Valley Bank (SVB) kolaps, harga emas melonjak dari $1,810 ke $2,000 hanya dalam
-                        hitungan hari. <br><br>
-                        <b>Bagaimana Titan Sniper Merespons:</b><br>
-                        1. <b>H-1 Pengumuman:</b> Credit Spread (HY OAS) melebar tajam (Index Risiko naik).<br>
-                        2. <b>Hari Kejadian:</b> VIX melonjak > 30, Yield turun vertikal. Index Risiko mencetak
-                        angka <b>+1.20 (Extreme Risk-Off)</b>.<br>
-                        3. <b>Hasil:</b> Label <b>EXTREME RISK-OFF</b> muncul di chart jauh sebelum media melaporkan
-                        kepanikan massal. Trader Sniper yang mengikuti label ini berhasil menangkap pergerakan $100+
-                        tanpa keraguan.
-                    </p>
-                </div>
-
-                <!-- Panduan Taktis Entry -->
-                <div style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
-                    <h4 style="color: var(--info); margin-bottom: 20px;">📘 Panduan Taktis Entry Menggunakan Label
-                        Rezim</h4>
-                    <div class="timeline" style="margin-top: 20px;">
-                        <div class="timeline-item">
-                            <div class="timeline-point" style="background: var(--accent);"></div>
-                            <h4>Langkah 1: Munculnya Label Dominan</h4>
-                            <p style="font-size: 0.85rem;">Tunggu hingga chart mencetak label <b>RISK-OFF</b>
-                                (Hijau) atau <b>RISK-ON</b> (Merah). Label ini mengonfirmasi bahwa modal besar (Big
-                                Money) telah memilih arah. Jangan mencoba melakukan "Front-run" sebelum label
-                                tercetak.</p>
-                            <div class="logic-box" style="font-size: 0.75rem; margin-top:10px;">
-                                <b>Contoh:</b> Anda melihat berita perang, tapi label masih Neutral (Abu-abu).
-                                <b>Tunggu!</b> Itu berarti "Big Money" belum menganggap berita tersebut cukup serius
-                                untuk menggerakkan pasar.
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-point" style="background: var(--accent);"></div>
-                            <h4>Langkah 2: Konfirmasi MTF (Sinkronisasi)</h4>
-                            <p style="font-size: 0.85rem;">Cek panel **MTF Confluence**. Pastikan titik H1 dan H4
-                                memiliki warna yang sama dengan label di chart. Jika berbeda, ini hanyalah koreksi
-                                sementara, bukan tren utama.</p>
-                            <div class="logic-box" style="font-size: 0.75rem; margin-top:10px;">
-                                <b>Kekuatan Sinkronisasi:</b> Jika M5 (Chart) Hijau dan H4 (MTF) Hijau, probabilitas
-                                profit meningkat hingga 85%. Jika M5 Hijau tapi H4 Merah, kemungkinan ini hanyalah
-                                <i>Dead Cat Bounce</i>.
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-point" style="background: var(--accent);"></div>
-                            <h4>Langkah 3: Trigger Eksekusi</h4>
-                            <p style="font-size: 0.85rem;">Masuklah posisi (Entry) saat harga melakukan **Pullback**
-                                ke garis tengah (HMA/Cloud) atau saat muncul label sinyal **Sniper** (🚀).</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-point" style="background: var(--accent);"></div>
-                            <h4>Langkah 4: Penjagaan Modal (Exit)</h4>
-                            <p style="font-size: 0.85rem;">Letakkan Stop Loss di balik struktur terakhir atau level
-                                SL yang disarankan panel. Segera pindahkan ke BE (Break Even) jika label berubah
-                                warna atau muncul peringatan *Exhaustion ⚠️*.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </section>
-
-        <!-- 03. Intelijen Makro -->
-        <section id="macro-engine">
-            <span class="sec-num">03</span>
-            <h2>Mesin Skor Makro & Bayesian (Advanced Intel)</h2>
-            <div class="grid">
-                <div class="card" style="grid-column: span 2;">
-                    <h3>📊 Z-Score Normalisasi (Standardisasi Data)</h3>
-                    <p>Titan Sniper menghitung rata-rata dan deviasi standar setiap aset dalam 75 bar terakhir untuk
-                        menyamakan skala berbagai instrumen.</p>
-                    <div class="logic-block"><span class="formula">Z = (Harga Saat Ini - Rata-rata 75 Bar) / Deviasi
-                            Standar</span></div>
-                    <p style="font-size: 0.9rem; color: var(--text-dim);">Ini memastikan pergerakan ekstrem di satu aset
-                        tidak menenggelamkan data aset lainnya, memberikan skor yang adil dan akurat.</p>
-                </div>
-
-                <div id="bayesian" class="card" style="grid-column: span 2; border-left: 4px solid var(--accent);">
-                    <h3>🧠 Bayesian Sniper Intelligence</h3>
-                    <p>Bayesian menggabungkan dua elemen statistik sejarah untuk memprediksi probabilitas tren:</p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
-                        <div class="logic-box" style="background: rgba(0,255,187,0.05);">
-                            <h4 style="color: var(--accent);">1. Prior (Kondisi Makro)</h4>
-                            <p style="font-size: 0.85rem;">Keyakinan awal yang didasarkan pada Skor Makro dan Warna
-                                Rezim.</p>
-                        </div>
-                        <div class="logic-box" style="background: rgba(0,255,187,0.05);">
-                            <h4 style="color: var(--accent);">2. Evidence (Aksi Harga)</h4>
-                            <p style="font-size: 0.85rem;">Konfirmasi nyata dari momentum chart (HMA, RSI, Volume).</p>
-                        </div>
-                    </div>
-                    <div class="logic-block" style="text-align: center;">
-                        <p style="font-size: 1.1rem; color: #fff;"><strong>Posterior Prob = (Prior × Evidence) ⮕
-                                Confidence %</strong></p>
-                    </div>
-
-                    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
-                        <div class="logic-box" style="font-size: 0.8rem; border-top: 2px solid var(--primary);">
-                            <b>Contoh Sukses (High Conf):</b><br>
-                            Macro Score +2.0 (Prior) + Harga di atas HMA (Evidence) = <b>Conf 94%</b>. Sinyal Sangat
-                            Kuat.
-                        </div>
-                        <div class="logic-box" style="font-size: 0.8rem; border-top: 2px solid var(--danger);">
-                            <b>Contoh Gagal (Rejected):</b><br>
-                            Macro Score +2.0 (Prior) + Harga Tembus ke Bawah HMA (Evidence) = <b>Conf 45%</b>. Sinyal
-                            Ditolak karena aksi harga tidak mendukung fundamental.
-                        </div>
-                    </div>
-
-                    <p style="font-size: 0.9rem; margin-top: 15px;">Jika **Confidence > 80%**, sinyal dianggap sah
-                        secara statistik. Jika di bawah 80%, panel akan memberikan peringatan penolakan.</p>
-                </div>
-
-                <div id="quality" class="card" style="grid-column: span 2;">
-                    <h3>💎 Sistem Grade Kualitas (Signal Quality Score)</h3>
-                    <p>Setelah lolos filter Bayesian, sinyal diberikan Grade (A-D) berdasarkan bobot berikut:</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Parameter</th>
-                                <th>Bobot</th>
-                                <th>Deskripsi Petunjuk</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Correlation Integrity</strong></td>
-                                <td>30%</td>
-                                <td>Stabilitas hubungan historis antar aset makro.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Asset Agreement</strong></td>
-                                <td>25%</td>
-                                <td>Berapa banyak aset makro yang searah dengan sinyal.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Signal Magnitude</strong></td>
-                                <td>20%</td>
-                                <td>Kekuatan daya tembus Skor Makro terhadap Threshold.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Volume Divergence</strong></td>
-                                <td>15%</td>
-                                <td>Konfirmasi volume institusi (Smart Money).</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Adaptive Volatility</strong></td>
-                                <td>10%</td>
-                                <td>Filter terhadap kebisingan (Noise) pasar saat ini.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- 04. Protokol Eksekusi -->
-        <section id="protocol">
-            <span class="sec-num">04</span>
-            <h2>Protokol Eksekusi Titan Sniper</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-point"></div>
-                    <h4>1. Identifikasi Warna Rezim</h4>
-                    <p>Filter pertama. Hijau (Extreme/Standard) = BUY Only. Merah = SELL Only.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-point"></div>
-                    <h4>2. Skor Makro Breakout</h4>
-                    <p>Skor di panel harus menembus ambang ±1.5 untuk konviktivitas tinggi.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-point"></div>
-                    <h4>3. Validasi Grade & Kualitas</h4>
-                    <p>Hanya ambil sinyal dengan Grade A atau B. Abaikan Grade C/D kecuali Anda sangat agresif.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-point"></div>
-                    <h4>4. Sniper Ready Confirmation</h4>
-                    <p>Entry saat status 🎯 READY muncul di panel dan label Sniper tercetak di chart.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 05. Matriks Penolakan -->
-        <section id="rejection">
-            <span class="sec-num">05</span>
-            <h2>Matriks Penolakan (REJECTED Codes)</h2>
-            <div class="card" style="width: 100%;">
-                <p style="margin-bottom:20px;">Titan Sniper sangat selektif. Berikut adalah alasan mengapa sinyal
-                    mungkin ditolak (Rejected):</p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Kode</th>
-                            <th>Nama Filter</th>
-                            <th>Logika Filter</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="code-pill">R</span></td>
-                            <td><b>Regime Mistrust</b></td>
-                            <td>Arah sinyal berlawanan dengan warna Rezim makro.</td>
-                        </tr>
-                        <tr>
-                            <td><span class="code-pill">Q</span></td>
-                            <td><b>Quality Failure</b></td>
-                            <td>Skor Kualitas (SQS) di bawah ambang batas minimum.</td>
-                        </tr>
-                        <tr>
-                            <td><span class="code-pill">M</span></td>
-                            <td><b>MTF Conflict</b></td>
-                            <td>Timeframe besar (H1/H4) berlawanan dengan arah entry Anda.</td>
-                        </tr>
-                        <tr>
-                            <td><span class="code-pill">B</span></td>
-                            <td><b>Bayesian Low</b></td>
-                            <td>Probabilitas statistik di bawah 80%. Terlalu beresiko.</td>
-                        </tr>
-                        <tr>
-                            <td><span class="code-pill">V</span></td>
-                            <td><b>Volume Trap</b></td>
-                            <td>Volume rendah atau terdeteksi jebakan institusi (VPA).</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- 06. Galeri Skenario (ULTRA DETAIL) -->
-        <section id="gallery">
-            <span class="sec-num">06</span>
-            <h2>Galeri Skenario Entry & Eksekusi (Institutional Blueprint)</h2>
-            <p class="intro-text" style="margin-bottom:40px;">Bukan sekadar sinyal, Titan Sniper memberikan konteks
-                naratif. Berikut adalah 10 skenario utama yang mencakup seluruh dinamika pasar global untuk mencapai
-                konsistensi profit tingkat institusi:</p>
-
-            <div class="grid">
-
-                <!-- Skenario 1: Rocket Sniper -->
-                <div class="card" style="border-top: 4px solid var(--accent); grid-column: span 2;">
-                    <div class="badge" style="background: var(--accent); color: #000;">BLUEPRINT 01: THE GOLDEN SYNC
-                    </div>
-                    <h3>🚀 The Rocket Sniper (Perfect Macro-Technical Sync)</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
-                        <div>
-                            <h4>Karakteristik Visual:</h4>
-                            <p style="font-size: 0.9rem; color: var(--text-dim);">Candle menembus zona konsolidasi
-                                bersamaan dengan munculnya label 🚀 dan warna chart berubah menjadi Hijau Tua/Merah
-                                solid.</p>
-                            <h4 style="margin-top:20px;">Persyaratan Panel:</h4>
-                            <ul class="parameter-list">
-                                <li><span class="param-name">Score:</span> ±2.0 s/d ±3.0 (Warna Cerah)</li>
-                                <li><span class="param-name">Quality:</span> Grade A+ atau A</li>
-                                <li><span class="param-name">Bayes:</span> > 90% (Ultra Confidence)</li>
-                                <li><span class="param-name">Status:</span> 🎯 READY</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Cetak Biru Eksekusi (Execution):</h4>
-                            <div class="logic-block">
-                                <b>1. Entry:</b> Instant Market Order saat bar 🚀 ditutup.<br>
-                                <b>2. Stop Loss:</b> 10-15 Pips di balik High/Low Candle Sinyal.<br>
-                                <b>3. Level TP:</b> Gunakan Target Projection atau Exit saat Momentum menunjukkan
-                                "Exhaustion ⚠️".
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Skenario 2: Macro Breakout -->
-                <div class="card" style="border-top: 4px solid var(--primary);">
-                    <div class="badge">BLUEPRINT 02</div>
-                    <h3>📈 The Macro Breakout (Frontrunning Smart Money)</h3>
-                    <p style="font-size: 0.9rem; margin-top: 15px;">Skenario di mana Skor Makro bergerak membelok tajam
-                        (Breakout) mendahului pergerakan harga emas.</p>
-                    <div class="logic-box" style="margin-top:20px;">
-                        <strong>Petunjuk Eksekusi:</strong><br>
-                        Tunggu Skor Makro menembus batas ±1.5. Meskipun harga belum bergerak jauh, ini adalah indikasi
-                        Institusi sedang mengakumulasi posisi. Entry saat harga melakukan <i>Retest</i> ke garis HMA
-                        atau Cloud.
-                    </div>
-                    <ul class="parameter-list" style="margin-top:20px;">
-                        <li><span class="param-name">Trigger:</span> Score Δ > 0.5 per Bar.</li>
-                        <li><span class="param-name">Reliability:</span> Sangat Tinggi di awal Sesi New York.</li>
-                    </ul>
-                </div>
-
-                <!-- Skenario 3: Divergence Sniper -->
-                <div class="card" style="border-top: 4px solid var(--info);">
-                    <div class="badge" style="background:var(--info); color:#000;">BLUEPRINT 03</div>
-                    <h3>🔄 Divergence Sniper (The Reversal Hunter)</h3>
-                    <p style="font-size: 0.9rem; margin-top: 15px;">Harga membuat Lower Low, tapi Skor Makro membuat
-                        Higher Low. Ini adalah jebakan (Bear Trap) bagi trader ritel.</p>
-                    <div class="logic-box" style="margin-top:20px; border-color: var(--info);">
-                        <strong>Petunjuk Eksekusi:</strong><br>
-                        Identifikasi titik terendah baru di chart yang tidak disertai titik terendah baru di Skor Panel.
-                        Jika muncul label 🚀, segera entry melawan tren minor tersebut.
-                    </div>
-                    <ul class="parameter-list" style="margin-top:20px;">
-                        <li><span class="param-name">Konfirmasi:</span> Bayesian Confidence naik dari < 20% ke> 70%
-                                secara drastis.</li>
-                        <li><span class="param-name">Target:</span> Reversion to Mean (HMA 50).</li>
-                    </ul>
-                </div>
-
-                <!-- Skenario 4: Institutional Absorption -->
-                <div class="card" style="border-top: 4px solid var(--warning); grid-column: span 2;">
-                    <div class="badge" style="background: var(--warning); color: #000;">BLUEPRINT 04: THE SAFETY FILTER
-                    </div>
-                    <h3>💀 Absorption Trap (Institutional Exhaustion)</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
-                        <div>
-                            <h4>Gejala Pasar:</h4>
-                            <p style="font-size: 0.9rem; color: var(--text-dim);">Harga terus naik dengan volume besar,
-                                namun Skor Makro stagnan atau menurun drastis. Ikon 💀 muncul di chart.</p>
-                        </div>
-                        <div>
-                            <h4>Tindakan Penyelamatan:</h4>
-                            <div class="logic-block" style="border-color: var(--warning);">
-                                <b>DILARANG ENTRY BUY!</b><br>
-                                Jika Panel menunjukkan <b>"REJECTED V"</b> (Volume Trap), segera tutup posisi buy Anda
-                                atau pasang Trailing Stop ketat di bawah bar 💀 tersebut. Institusi sedang membuang
-                                barang (Distribusi).
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Skenario 5: Velocity News Spike -->
-                <div class="card" style="border-top: 4px solid var(--text); background: rgba(255,255,255,0.02);">
-                    <div class="badge" style="background: #fff; color: #000;">BLUEPRINT 05</div>
-                    <h3>⚡ Velocity Spike (News Event Management)</h3>
-                    <p style="font-size: 0.9rem; margin-top: 15px;">Terjadi saat rilis data NFP atau CPI. Skor makro
-                        akan berayun gila-gilaan dalam hitungan detik.</p>
-                    <div class="logic-box" style="margin-top:20px;">
-                        <strong>Aturan Sniper:</strong><br>
-                        Abaikan 10 menit pertama sesudah berita. Tunggu Skor Makro "mendarat" di satu sisi secara
-                        stabil. Entry hanya jika **Bayesian Conf > 85%** pasca ledakan harga.
-                    </div>
-                </div>
-
-                <!-- Skenario 6: The Liquidity Sweep -->
-                <div class="card" style="border-top: 4px solid var(--danger);">
-                    <div class="badge" style="background:var(--danger); color:#fff;">BLUEPRINT 06</div>
-                    <h3>🪤 The Liquidity Sweep (Stop Hunt Recovery)</h3>
-                    <p style="font-size: 0.9rem; margin-top: 15px;">Harga menembus level Support penting (memancing Sell
-                        ritel), lalu meledak naik didorong oleh Skor Makro yang tiba-tiba berbalik positif.</p>
-                    <div class="logic-box" style="margin-top:20px; border-color: var(--danger);">
-                        <strong>Petunjuk Eksekusi:</strong><br>
-                        Entry saat harga kembali masuk ke dalam <i>Trading Range</i> lama dengan label Sniper yang
-                        meyakinkan. Target adalah struktur atas yang terjauh.
-                    </div>
-                </div>
-
-                <!-- Skenario 7: Safe-Haven Rotation -->
-                <div class="card" style="border-top: 4px solid var(--info);">
-                    <div class="badge" style="background:var(--info); color:#fff;">BLUEPRINT 07</div>
-                    <h3>🛡️ Safe-Haven Rotation (Flight to Quality)</h3>
-                    <p style="font-size: 0.9rem; margin-top: 15px;">VIX naik, Saham (SPX) turun, dan USDJPY turun tajam.
-                        Ini adalah rotasi modal global menuju Emas sebagai penyelamat.</p>
-                    <div class="logic-box" style="margin-top:20px;">
-                        <strong>Cara Main:</strong><br>
-                        Lihat metriks **Intrinsic Strength**. Jika INTRINSIC berada di zona Hijau, meskipun Dollar (DXY)
-                        juga naik, Emas tetap akan naik karena faktor *Fear*. Ini adalah kondisi "Invisible Bullish".
-                    </div>
-                </div>
-
-                <!-- Skenario 8: The Yield-Curve Squeeze -->
-                <div class="card" style="border-top: 4px solid var(--warning);">
-                    <div class="badge" style="background:var(--warning); color:#000;">BLUEPRINT 08</div>
-                    <h3>📉 The Yield Squeeze (Real Yield Dominance)</h3>
-                    <p style="font-size: 0.9rem; margin-top: 15px;">DFII10 (Real Yield) jatuh bebas di bawah rata-rata.
-                        Emas akan merespons ini dengan kenaikan vertikal parabola.</p>
-                    <div class="logic-box" style="margin-top:20px;">
-                        <strong>Strategi:</strong><br>
-                        Gunakan preset **Aggressive** saat melihat Yield menanjak/menurun tanpa hambatan. Jangan mencoba
-                        melawan arah Yield meskipun indikator teknikal lain menunjukkan *Overbought*.
-                    </div>
-                </div>
-
-                <!-- Skenario 9: Asian Breakout Flow -->
-                <div class="card" style="border-top: 4px solid var(--accent);">
-                    <div class="badge" style="background:var(--accent); color:#000;">BLUEPRINT 09</div>
-                    <h3>🌏 Asian Breakout (London Open Flow)</h3>
-                    <p style="font-size: 0.9rem; margin-top: 15px;">Memanfaatkan lonjakan volume saat Sesi London dibuka
-                        untuk menembus konsolidasi Sesi Asia.</p>
-                    <div class="logic-box" style="margin-top:20px;">
-                        <strong>Petunjuk Eksekusi:</strong><br>
-                        Cek **MTF Confluence** pada jam 14:00 - 15:00 WIB. Jika H1 dan H4 sudah sinkron dengan label 🚀
-                        di M5, masuklah dengan target target projection penuh (TP3).
-                    </div>
-                </div>
-
-                <!-- Skenario 10: Dead Cat Bounce Detection -->
-                <div class="card" style="border-top: 4px solid var(--text);">
-                    <div class="badge" style="background:#555; color:#fff;">BLUEPRINT 10</div>
-                    <h3>🐈 Dead Cat Bounce Detection (Bayesian Filter)</h3>
-                    <p style="font-size: 0.9rem; margin-top: 15px;">Harga memantul naik setelah jatuh dalam, namun Skor
-                        Makro tetap Merah membara.</p>
-                    <div class="logic-block" style="border-color: #555;">
-                        <strong>KESIMPULAN:</strong><br>
-                        Ini hanyalah pantulan sementara. Sinyal BUY akan ditolak oleh **Bayesian Engine** karena
-                        "Evidence" (Price) tidak didukung oleh "Prior" (Macro). Tunggu harga kembali jatuh untuk mencari
-                        entry SELL baru yang berkualitas tinggi (A+).
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 07. Ensiklopedia Dashboard (Ultra Detailed) -->
-        <section id="panel-docs">
-            <span class="sec-num">07</span>
-            <h2>Ensiklopedia Dashboard (11 Metrik Command Panel)</h2>
-            <p class="intro-text" style="margin-bottom:40px;">Command Panel adalah pusat intelijen taktis Anda. Setiap
-                baris data dirancang untuk memberikan keunggulan statistik di atas rata-rata trader ritel. Berikut
-                adalah bedah tuntas kesebelas metrik tersebut:</p>
-
-            <div class="grid">
-
-                <!-- 1. SIGNAL & SCORE -->
-                <div class="card" style="border-top: 4px solid var(--accent); grid-column: span 2;">
-                    <h3>⚡ SIGNAL & SCORE (The Engine Output)</h3>
-                    <p><b>Fungsi Utama:</b> Menghasilkan instruksi arah operasional berdasarkan anomali makro global.
-                    </p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
-                        <div class="logic-box">
-                            <strong>Cara Membaca:</strong><br>
-                            Skor berkisar dari -3.0 (Bearish Ekstrem) hingga +3.0 (Bullish Ekstrem). Skor 0.0 berarti
-                            pasar dalam ekuilibrium sempurna (konsolidasi).
-                        </div>
-                        <div class="logic-box" style="border-color: var(--accent);">
-                            <strong>🚀 Pro-Tip:</strong><br>
-                            Sinyal paling "maut" adalah saat Skor menembus 2.0 dengan kecepatan tinggi. Ini menandakan
-                            aliran dana besar (Institutional Flow) sedang masuk ke emas.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. STATUS -->
-                <div class="card" style="border-top: 4px solid var(--danger);">
-                    <h3>🎯 STATUS (The Validation Gate)</h3>
-                    <p><b>Fungsi Utama:</b> Pintu terakhir yang menentukan apakah sinyal layak dieksekusi atau tidak.
-                    </p>
-                    <p style="font-size: 0.85rem; margin-top: 10px;">
-                        - <strong style="color:var(--accent);">READY:</strong> Lampu hijau mutlak. Seluruh filter makro
-                        dan teknikal dalam kondisi optimal. <br>
-                        - <strong style="color:var(--danger);">REJECTED:</strong> Sinyal dilarang karena tidak lolos
-                        satu atau lebih sensor keamanan.
-                    </p>
-                    <div class="logic-box" style="font-size: 0.75rem; margin-top:10px;">
-                        <b>Skenario:</b> Harga naik tinggi tapi Status tetap REJECTED Q. <b>Respon:</b> Abaikan! Itu
-                        hanyalah "Fake Move" ritel. Harga akan segera longsor kembali.
-                    </div>
-                </div>
-
-                <!-- 3. REGIME -->
-                <div class="card">
-                    <h3>🌍 REGIME (The Global Atmosphere)</h3>
-                    <p><b>Fungsi Utama:</b> Menentukan "cuaca" besar pasar yang menggerakkan instrumen haven.</p>
-                    <p style="font-size: 0.85rem; margin-top: 10px;">Warna latar belakang (Hijau/Merah/Abu) adalah
-                        representasi visual dari sentimen risiko. Simbol ⚠️ muncul jika volatilitas makro berada di
-                        titik jenuh.</p>
-                    <div class="logic-box" style="font-size: 0.75rem; margin-top:10px;">
-                        <b>Pro-Tip:</b> Selalu trading SEARAH dengan warna Regime untuk mendapatkan <i>win-rate</i>
-                        tertinggi.
-                    </div>
-                </div>
-
-                <!-- 4. IMPACT -->
-                <div class="card">
-                    <h3>💥 IMPACT (Velocity & Power)</h3>
-                    <p><b>Fungsi Utama:</b> Mengukur seberapa besar daya ledak yang tersimpan dalam sinyal tersebut.</p>
-                    <p style="font-size: 0.85rem; margin-top: 10px;">Impact dihitung dari percepatan perubahan data
-                        makro. Semakin tinggi Impact, semakin cepat harga akan mencapai target TP.</p>
-                    <div class="logic-box" style="font-size: 0.75rem; margin-top:10px;">
-                        <b>Respon:</b> Jika Impact <b>CRITICAL</b>, jangan menunggu retest. Langsung hajar Market Order.
-                    </div>
-                </div>
-
-                <!-- 5. QUALITY GRADE -->
-                <div class="card">
-                    <h3>💎 QUALITY (Signal Integrity Score)</h3>
-                    <p><b>Fungsi Utama:</b> Menilai keaslian dan kesehatan sinyal di balik layar.</p>
-                    <p style="font-size: 0.85rem; margin-top: 10px;">Grade (A-D) dievaluasi dari 5 parameter: Korelasi,
-                        Kesepakatan Aset, Magnitudo, Volume, dan Volatilitas Adaptif.</p>
-                    <div class="logic-box" style="font-size: 0.75rem; margin-top:10px;">
-                        <b>Golden Rule:</b> Gunakan lot 2x lipat pada sinyal Grade A+ dengan MTF Sinkron.
-                    </div>
-                </div>
-
-                <!-- 6. BAYES CONF (%) -->
-                <div class="card" style="border-left: 4px solid var(--accent);">
-                    <h3>🧠 BAYES CONF (Statistical Probability)</h3>
-                    <p><b>Fungsi Utama:</b> Menghitung probabilitas keberhasilan berdasarkan data sejarah ribuan bar
-                        terakhir.</p>
-                    <p style="font-size: 0.85rem; margin-top: 10px;">Jika angka di bawah 80%, panel akan memberikan kode
-                        REJECTED B. Ini berarti kondisi fundamental saat ini terlalu tidak menentu.</p>
-                </div>
-
-                <!-- 7. MOMENTUM -->
-                <div class="card">
-                    <h3>🌊 MOMENTUM (Trend Life Cycle)</h3>
-                    <p><b>Fungsi Utama:</b> Memberitahu Anda di fase mana tren tersebut berada.</p>
-                    <p style="font-size: 0.85rem; margin-top: 10px;">
-                        - <b>ACCELERATION:</b> Tren baru dimulai (Waktu terbaik menambah posisi). <br>
-                        - <b>EXHAUSTION ⚠️:</b> Tren mulai jenuh. Segera ambil profit sebagian (Partial TP).
-                    </p>
-                </div>
-
-                <!-- 8. INTRINSIC STRENGTH -->
-                <div class="card">
-                    <h3>🧬 INTRINSIC (Real vs Fake Strength)</h3>
-                    <p><b>Fungsi Utama:</b> Membedakan pergerakan spekulatif Dollar vs kekuatan murni emas.</p>
-                    <p style="font-size: 0.85rem; margin-top: 10px;">Jika Emas naik tapi Intrinsic Merah, berarti Emas
-                        naik hanya karena Dollar sedang lemah. Ini adalah kenaikan yang "rapuh".</p>
-                </div>
-
-                <!-- 9. SCENARIO -->
-                <div class="card">
-                    <h3>🎬 SCENARIO (Market Narrative)</h3>
-                    <p><b>Fungsi Utama:</b> Artificial Intelligence memberikan narasi kontekstual pada pergerakan harga.
-                    </p>
-                    <p style="font-size: 0.85rem; margin-top: 10px;">Contoh: <i>"Rocket Sniper"</i> (Ideal),
-                        <i>"Velocity Spike"</i> (News), <i>"Institutional Absorption"</i> (Big Money Accumulation).
-                    </p>
-                </div>
-
-                <!-- 10. TARGET -->
-                <div class="card" style="border-left: 4px solid var(--primary);">
-                    <h3>🎯 TARGET (Statistical Price Projection)</h3>
-                    <p><b>Fungsi Utama:</b> Menghitung level harga yang kemungkinan besar akan dikunjungi harga dalam
-                        waktu dekat.</p>
-                    <p style="font-size: 0.85rem; margin-top: 10px;">Target ini dihitung secara dinamis menyesuaikan
-                        volatilitas harian. Jika panel berubah warna menjadi Gold 🟡, harga sudah berada di area TP zona
-                        aman.</p>
-                </div>
-
-                <!-- 11. MTF CONFLUENCE -->
-                <div class="card" style="grid-column: span 2; border-top: 4px solid var(--info);">
-                    <h3>🔄 MTF CONFLUENCE (Multi-Timeframe Sync)</h3>
-                    <p><b>Fungsi Utama:</b> Mengunci sinyal intraday Anda dengan tren besar institusi.</p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 15px;">
-                        <div>
-                            <h4>Visualisasi:</h4>
-                            <p style="font-size: 0.85rem;">Empat titik warna mewakili M5, M15, H1, dan H4. Jika
-                                keempatnya berwarna sama, Anda sedang berada dalam tren "Full Sync" yang sangat kuat.
-                            </p>
-                        </div>
-                        <div class="logic-box" style="background: rgba(0, 206, 209, 0.05);">
-                            <strong>Aturan Emas:</strong><br>
-                            Jangan pernah melakukan SELL jika titik H4 adalah Hijau, dan jangan pernah melakukan BUY
-                            jika titik H4 adalah Merah. Hormati tren besar!
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 08. Ensiklopedia Ikon & Visual -->
-        <section id="visual-docs">
-            <span class="sec-num">08</span>
-            <h2>Ensiklopedia Ikon & Visual (The Legend)</h2>
-            <div class="grid">
-                <div class="card" style="border-top: 2px solid var(--accent);">
-                    <h3>🚀 Label Sniper (The Rocket)</h3>
-                    <p>Sinyal entri utama. Muncul saat algoritma mendeteksi anomali volume dan makro secara bersamaan.
-                    </p>
-                    <div class="logic-box" style="font-size: 0.8rem; margin-top:10px;">
-                        <b>Respon Taktis:</b> Eksekusi Market Order saat candle ditutup. TP1 di struktur terdekat, TP2
-                        di Target Panel.
-                    </div>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--warning);">
-                    <h3>💀 Label Trap (The Skull)</h3>
-                    <p>Muncul saat terdeteksi VPA 2.0 (Volume Price Discrepancy). Institusi sedang "memancing" ritel
-                        sebelum membanting harga.</p>
-                    <div class="logic-box" style="font-size: 0.8rem; margin-top:10px;">
-                        <b>Respon Taktis:</b> Segera tutup posisi profit Anda. Dilarang menambah posisi searah tren saat
-                        ikon ini muncul.
-                    </div>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--info);">
-                    <h3>🎯 Label Target Reached</h3>
-                    <p>Hanya muncul di history. Memberitahu bahwa level proyeksi algoritma telah tersentuh dengan
-                        presisi.</p>
-                </div>
-                <div class="card" style="border-top: 2px solid var(--text);">
-                    <h3>⚠️ Exhaustion Signal</h3>
-                    <p>Indikasi bahwa momentum mulai melandai. Sering muncul sebelum terjadi koreksi (Pullback).</p>
-                    <div class="logic-box" style="font-size: 0.8rem; margin-top:10px;">
-                        <b>Respon Taktis:</b> Pindahkan SL ke Break-even atau Take Profit sebagian (80%).
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 10. Manajemen Risiko -->
-        <section id="risk-mgmt">
-            <span class="sec-num">10</span>
-            <h2>Protokol Manajemen Risiko (The Institutional Way)</h2>
-            <div class="card" style="width: 100%;">
-                <p>Trading Tanpa MM (Money Management) adalah judi. Gunakan aturan baku berikut:</p>
-                <div
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top:20px;">
-                    <div class="logic-box">
-                        <h4>Aturan 1% (Risk per Trade)</h4>
-                        <p style="font-size: 0.85rem;">Jangan pernah merisikokan lebih dari 1% saldo akun Anda dalam
-                            satu transaksi. Untuk sinyal Grade A+, Anda boleh meningkatkan ke 2%.</p>
-                    </div>
-                    <div class="logic-box">
-                        <h4>Drawdown Management</h4>
-                        <p style="font-size: 0.85rem;">Jika Anda mengalami kekalahan 3x berturut-turut dalam satu hari
-                            (3% Loss), <b>Berhenti Trading!</b> Psikologi Anda sedang terganggu. Pasar mungkin sedang
-                            berubah rezim secara radikal.</p>
-                    </div>
-                </div>
-
-                <table style="margin-top:30px;">
-                    <thead>
-                        <tr>
-                            <th>Kualitas Sinyal</th>
-                            <th>Rekomendasi Lot</th>
-                            <th>Mentalitas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Grade A+ / A</td>
-                            <td>Standard (1-2%)</td>
-                            <td>Agresif & Percaya Diri</td>
-                        </tr>
-                        <tr>
-                            <td>Grade B</td>
-                            <td>setengah Lot (0.5%)</td>
-                            <td>Konservatif</td>
-                        </tr>
-                        <tr>
-                            <td>Grade C / D</td>
-                            <td>Abaikan (0%)</td>
-                            <td>Disiplin Tinggi</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- 11. Positioning & Scaling -->
-        <section id="scaling">
-            <span class="sec-num">11</span>
-            <h2>Institutional Scaling & Positioning</h2>
-            <div class="grid">
-                <div class="card" style="border-top: 4px solid var(--info);">
-                    <h3>📐 Protokol Scaling-In (Adding to Winners)</h3>
-                    <p style="font-size: 0.85rem;">Jangan pernah menambah posisi (Average Down) saat sedang rugi.
-                        Tambahlah posisi saat sinyal menunjukkan **Acceleration** dan status **READY** kembali muncul di
-                        arah yang sama.</p>
-                    <div class="logic-box" style="margin-top:10px;">
-                        <b>Contoh Pyramiding:</b> <br>
-                        Entry 1: Lot 0.10 (M5 Sniper). <br>
-                        Entry 2: Tambah 0.05 saat harga menembus Resistance dan Status Panel masih HIJAU PEKAT.
-                        Pindahkan SL posisi pertama ke BE.
-                    </div>
-                </div>
-                <div class="card" style="border-top: 4px solid var(--warning);">
-                    <h3>📐 Protokol Scaling-Out (Protecting Profit)</h3>
-                    <p style="font-size: 0.85rem;">Saat harga mencapai TP1 (Target Panel), tutup 50% posisi Anda.
-                        Sisanya biarkan berlari (Runner) dengan SL di titik Entry.</p>
-                    <div class="logic-box" style="margin-top:10px;">
-                        <b>Insight:</b> Ini memastikan Anda mendapatkan profit di tangan, sementara masih memiliki
-                        peluang untuk menangkap "Big Move" 100+ pips.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 12. Optimasi Preset -->
-        <section id="presets">
-            <span class="sec-num">12</span>
-            <h2>Optimasi Preset Berbasis Sesi Pasar</h2>
-            <div class="card" style="width: 100%;">
-                <p>Titan Sniper memiliki 3 mode utama. Gunakan sesuai karakteristik jam trading Anda:</p>
-                <div class="grid" style="margin-top:20px;">
-                    <div class="logic-box" style="border-top: 2px solid var(--accent);">
-                        <h4>1. Conservative Mode (Default)</h4>
-                        <p style="font-size: 0.85rem;">Filter paling ketat. Hanya memberikan sinyal dengan probabilitas
-                            tertinggi. Sangat cocok untuk akun besar dan trader yang mengutamakan keamanan.</p>
-                    </div>
-                    <div class="logic-box" style="border-top: 2px solid var(--info);">
-                        <h4>2. XAUUSD M5 Pro Mode</h4>
-                        <p style="font-size: 0.85rem;">Dioptimalkan khusus untuk karakteristik volatilitas emas di
-                            grafik 5 menit. Memberikan keseimbangan antara jumlah sinyal dan akurasi.</p>
-                    </div>
-                    <div class="logic-box" style="border-top: 2px solid var(--warning);">
-                        <h4>3. Aggressive / Scalping Mode</h4>
-                        <p style="font-size: 0.85rem;">Mengurangi threshold filter Bayesian. Memberikan banyak sinyal
-                            entri. Gunakan mode ini <b>HANYA</b> saat Sesi London & New York di mana volume melimpah.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 13. Daily Routine -->
-        <section id="routine">
-            <span class="sec-num">13</span>
-            <h2>Daily Trading Routine (The Sniper Protocol)</h2>
-            <div class="card" style="width: 100%;">
-                <p style="margin-bottom:25px;">Trader profesional bekerja dengan struktur. Ikuti rutinitas harian ini
-                    untuk menghindari keputusan emosional:</p>
-
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-point"></div>
-                        <h4>08:00 - 10:00 (Asia Session Prep)</h4>
-                        <p style="font-size: 0.85rem;">Buka chart, cek warna REGIME. Jika Merah, tandai area-area
-                            Resistance atas. Jika Hijau, tandai Support bawah. Perhatikan High/Low dari hari sebelumnya
-                            sebagai target magnet.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-point"></div>
-                        <h4>14:00 - 15:00 (London Open)</h4>
-                        <p style="font-size: 0.85rem;">Waspadai lonjakan IMPACT di panel. Ini adalah jam-jam krusial di
-                            mana arah tren harian biasanya ditentukan. Cek MTF Confluence H1.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-point"></div>
-                        <h4>20:00 - 21:00 (New York Open)</h4>
-                        <p style="font-size: 0.85rem;">Sesi paling volatil. Pastikan anda menggunakan mode **M5 Pro**.
-                            Pantau berita fundamental AS. Jika IMPACT menjadi "CRITICAL", siapkan jari Anda di tombol
-                            eksekusi.</p>
-                    </div>
-                </div>
-
-                <div class="logic-block" style="margin-top:30px; border: 1px dashed var(--accent);">
-                    <h4 style="color:var(--accent);">⚓ Pre-Session Checklist (BACA SEBELUM KLIK BUY/SELL):</h4>
-                    <ul class="parameter-list" style="margin-top:10px;">
-                        <li>✅ Apakah hari ini ada berita NFP/CPI? (Jika ya, tunggu 15 menit pasca berita).</li>
-                        <li>✅ Apakah warna Regime sinkron dengan arah sinyal Saya?</li>
-                        <li>✅ Apakah Status di Panel menunjukkan "READY"?</li>
-                        <li>✅ Apakah Grade Sinyal minimal B?</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 14. Glosarium Makro -->
-        <section id="glossary">
-            <span class="sec-num">14</span>
-            <h2>Glosarium Cepat (Macro Quick Ref)</h2>
-            <div class="card" style="width: 100%;">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                    <div>
-                        <p><strong>Hawk/Hawkish:</strong> Kebijakan Bank Sentral yang cenderung menaikkan suku bunga
-                            untuk melawan inflasi. (Negatif untuk Emas).</p>
-                        <p style="margin-top:10px;"><strong>Dove/Dovish:</strong> Kebijakan yang longgar dan cenderung
-                            menurunkan suku bunga untuk memacu ekonomi. (Positif untuk Emas).</p>
-                    </div>
-                    <div>
-                        <p><strong>Real Yield:</strong> Suku bunga setelah dikurangi inflasi. Jika Real Yield naik, emas
-                            biasanya jatuh tajam.</p>
-                        <p style="margin-top:10px;"><strong>Basis Points (bps):</strong> Satuan perubahan bunga. 100 bps
-                            = 1.00%.</p>
-                    </div>
-                    <div>
-                        <p><strong>Liquidity:</strong> Ketersediaan uang tunai di pasar. Emas sangat suka saat
-                            likuiditas melimpah.</p>
-                        <p style="margin-top:10px;"><strong>Safe Haven:</strong> Aset yang dianggap aman saat kerusuhan
-                            ekonomi (Emas, JPY, CHF, Obligasi AS).</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 15. FAQ -->
-        <section id="faq">
-            <span class="sec-num">15</span>
-            <h2>FAQ & Troubleshooting</h2>
-            <div class="card" style="width: 100%;">
-                <p><strong>Kenapa label Sniper hilang setelah bar tutup?</strong><br>Ini fitur <i>Repaint Warning</i>.
-                    Jika kondisi makro memburuk seketika, sistem mencabut izin sinyal untuk melindungi Anda dari
-                    jebakan.</p>
-                <p style="margin-top: 20px;"><strong>Apa arti "Missing Live Feeds"?</strong><br>Beberapa data
-                    (RRP/Yield) belum terupdate. Sistem memakai data terakhir, namun akurasi sedikit berkurang.</p>
-            </div>
-        </section>
-    </main>
-
     <footer>
-        <p>Titan Sniper - Complete Command Manual & Historical Encyclopedia</p>
-        <p style="color: #444; margin-top: 10px;">Created for high-precision institutional gold trading.</p>
-        <p style="color: #666; font-size: 0.8rem; margin-top: 15px;">Copyright &copy; 2026 Fembi Isnanto. All rights
-            reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-telegram"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+        <p class="copyright">Copyright &copy; 2026 Fembi Isnanto. All rights reserved.</p>
     </footer>
-
 </body>
 
 </html>

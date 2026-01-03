@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENCYCLOPEDIA: BTC Breakout - Institutional Momentum Manual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #F7931A;
+            /* Bitcoin Orange */
+            --primary-dark: #B86D10;
+            --bg: #050608;
+            --card-bg: #101218;
+            --sidebar-bg: #0A0C10;
+            --accent: #FFD700;
+            /* Gold */
+            --danger: #FF4B5C;
+            --warning: #FFA500;
+            --info: #4FACFE;
+            --text: #E0E0E0;
+            --text-dim: #9499A6;
+            --border: rgba(255, 255, 255, 0.08);
+            --btc-glow: 0 0 20px rgba(247, 147, 26, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            display: block;
+        }
+
+        /* Modern Sticky Header */
+        nav {
+            width: 100%;
+            height: 70px;
+            background: rgba(10, 12, 16, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+        }
+
+        .nav-logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--primary);
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .nav-links-header {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link-h {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-link-h:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Hub Navigation */
+        .hub-container {
+            padding: 100px 5% 60px 5%;
+            background: radial-gradient(circle at top right, rgba(247, 147, 26, 0.05), transparent 40%);
+        }
+
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .hub-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 16px;
+            text-decoration: none;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hub-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), var(--btc-glow);
+        }
+
+        .hub-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .hub-card:hover::before {
+            opacity: 1;
+        }
+
+        .hub-card .num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .hub-card .title {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1.3;
+        }
+
+        /* Main Content Area */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5% 100px 5%;
+        }
+
+        header {
+            margin-bottom: 80px;
+        }
+
+        .badge {
+            background: rgba(247, 147, 26, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 20px 0;
+            line-height: 1.1;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 900px;
+        }
+
+        section {
+            margin-bottom: 120px;
+        }
+
+        .sec-num {
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: rgba(247, 147, 26, 0.3);
+            box-shadow: var(--btc-glow);
+        }
+
+        .logic-block {
+            background: #000;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            border: 1px solid #222;
+        }
+
+        .logic-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .formula {
+            color: var(--info);
+            font-family: 'Fira Code', monospace;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .highlight-text {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            text-align: left;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 18px 15px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .parameter-list {
+            list-style: none;
+        }
+
+        .parameter-list li {
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .param-name {
+            color: var(--primary);
+            font-weight: 700;
+            margin-right: 12px;
+            min-width: 120px;
+            display: inline-block;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-dim);
+            padding: 60px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-logo">BTC BREAKOUT</div>
+        <div class="nav-links-header">
+            <a href="#hub" class="nav-link-h">Directory</a>
+            <a href="#on-chain" class="nav-link-h">On-Chain</a>
+            <a href="#gallery" class="nav-link-h">Scenarios</a>
+            <a href="#faq" class="nav-link-h">Support</a>
+        </div>
+    </nav>
+
+    <div class="hub-container" id="hub">
+        <header id="intro">
+            <span class="badge">Institutional Crypto Edition</span>
+            <h1>The Bitcoin Liquidity Hub</h1>
+            <p class="intro-text" style="max-width: 1000px;">BTC Breakout adalah sistem navigasi presisi tinggi yang
+                mensintesis data likuiditas bursa, anomali volume Whale, dan pola breakout eksplosif. Dirancang untuk
+                trader institusional yang mencari kejelasan di tengah volatilitas kripto ekstrem.</p>
+
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; text-align: left;">
+                <div class="logic-box"
+                    style="margin:0; border-top: 2px solid var(--primary); background: rgba(247, 147, 26, 0.02);">
+                    <h4 style="color:var(--primary); margin-bottom:10px;">🐋 Whale Inflow Engine</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">Memantau aliran BTC ke/dari
+                        bursa secara cerdas. Jika penembusan harga disertai dengan penarikan besar-besaran (Outflow),
+                        algoritma menandai ini sebagai akumulasi Whale sejati.</p>
+                </div>
+                <div class="logic-box"
+                    style="margin:0; border-top: 2px solid var(--info); background: rgba(79, 172, 254, 0.02);">
+                    <h4 style="color:var(--info); margin-bottom:10px;">🌀 Squeeze Intelligence</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">Mesin deteksi fase
+                        konsolidasi "Spring-Load". Menentukan kapan tekanan volatilitas telah mencapai titik kritis
+                        sebelum terjadi ledakan momentum.</p>
+                </div>
+                <div class="logic-box"
+                    style="margin:0; border-top: 2px solid var(--accent); background: rgba(255, 215, 0, 0.02);">
+                    <h4 style="color:var(--accent); margin-bottom:10px;">💎 Liquidity Sniper</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">Dashboard visual yang
+                        memetakan area likuiditas (Stop-Loss Hunting zones). Memberikan peringatan dini sebelum
+                        manipulasi harga terjadi.</p>
+                </div>
+            </div>
+        </header>
+
+        <h3
+            style="font-family:'Outfit'; text-transform:uppercase; letter-spacing:3px; color:var(--text-dim); font-size:0.8rem;">
+            Command Directory</h3>
+        <div class="hub-grid">
+            <a href="#on-chain" class="hub-card"><span class="num">01</span><span class="title">Ensiklopedia
+                    On-Chain</span></a>
+            <a href="#liquidity" class="hub-card"><span class="num">02</span><span class="title">Mesin
+                    Likuiditas</span></a>
+            <a href="#ignition" class="hub-card"><span class="num">03</span><span class="title">Algoritma
+                    Ignition</span></a>
+            <a href="#protocol" class="hub-card"><span class="num">04</span><span class="title">Protokol
+                    Eksekusi</span></a>
+            <a href="#matrix" class="hub-card"><span class="num">05</span><span class="title">Matriks
+                    Manipulasi</span></a>
+            <a href="#gallery" class="hub-card"><span class="num">06</span><span class="title">Galeri Skenario
+                    BTC</span></a>
+            <a href="#dashboard" class="hub-card"><span class="num">07</span><span class="title">Panduan
+                    Dashboard</span></a>
+            <a href="#visual" class="hub-card"><span class="num">08</span><span class="title">Ensiklopedia
+                    Ikon</span></a>
+            <a href="#technical" class="hub-card"><span class="num">09</span><span class="title">Technical
+                    Logic</span></a>
+            <a href="#risk" class="hub-card"><span class="num">10</span><span class="title">Manajemen Risiko
+                    BTC</span></a>
+            <a href="#routine" class="hub-card"><span class="num">11</span><span class="title">Daily Routine</span></a>
+            <a href="#faq" class="hub-card"><span class="num">12</span><span class="title">FAQ & Bantuan</span></a>
+        </div>
+    </div>
+
+    <main>
+        <!-- 01. Ensiklopedia On-Chain -->
+        <section id="on-chain">
+            <span class="sec-num">01</span>
+            <h2>Ensiklopedia On-Chain & Market Drivers</h2>
+            <p class="intro-text" style="font-size: 1.1rem; margin-bottom: 40px;">Sistem ini memantau 3 pilar data
+                fundamental kripto yang paling krusial. Memahami variabel ini adalah kunci untuk membedakan pergerakan
+                riil dari manipulasi bursa.</p>
+
+            <div class="grid">
+                <div class="card" style="border-top: 2px solid var(--primary);">
+                    <h3>Exchange Reserve (Likuiditas)</h3>
+                    <p>Jumlah total BTC yang tersedia di dompet bursa terpusat (CEX).</p>
+                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--primary);">
+                        <b>Institutional Insight:</b> Penurunan cadangan bursa berarti likuiditas jual berkurang. Jika
+                        breakout terjadi saat level cadangan rendah, pergerakan harga cenderung menjadi lebih eksplosif
+                        karena kurangnya hambatan jual.
+                    </div>
+                    <p style="margin-top:10px;"><span class="highlight-text">Logika: Reserve ⬇️ ⮕ Potensi Ledakan
+                            ⬆️</span></p>
+                </div>
+                <div class="card" style="border-top: 2px solid var(--primary);">
+                    <h3>Funding Rates (Sentimen Leveraged)</h3>
+                    <p>Biaya yang dibayarkan antara trader Long dan Short di pasar derivatif.</p>
+                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--primary);">
+                        <b>Sentiment Logic:</b> Funding rates yang sangat positif menunjukkan pasar terlalu optimis
+                        (Overheated). Algoritma akan menandai ini sebagai risiko "Long Squeeze" meskipun harga sedang
+                        naik.
+                    </div>
+                    <p style="margin-top:10px;"><span class="highlight-text">Logika: Funding ⬆️⬆️ ⮕ Risiko Dump
+                            ⬆️</span></p>
+                </div>
+                <div class="card" style="border-top: 2px solid var(--primary);">
+                    <h3>Stablecoin Inflow</h3>
+                    <p>Kecepatan aliran modal masuk (USDT/USDC) ke bursa.</p>
+                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--primary);">
+                        <b>Power Proxy:</b> Inflow stablecoin adalah "Mesin Pembelian" pasar. Lonjakan inflow adalah
+                        indikator utama terjadinya dorongan harga besar dalam 12-24 jam kedepan.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02. Mesin Likuiditas -->
+        <section id="liquidity">
+            <span class="sec-num">02</span>
+            <h2>Mesin Likuiditas & Whale Power Index</h2>
+            <div class="card" style="width: 100%;">
+                <p style="margin-bottom: 25px;">Whale Power Index (WPI) mendeteksi ketidakseimbangan agresif antara
+                    order beli dan jual (Order Flow Imbalance).</p>
+                <div class="logic-block">
+                    <span class="formula">WPI = (Buyer Aggression - Seller Aggression) / 24h Avg Volume</span>
+                </div>
+                <div class="grid" style="margin-top: 40px;">
+                    <div class="card">
+                        <h4 style="color: var(--primary);">🐳 Accumulation Mode</h4>
+                        <p style="font-size: 0.85rem;">Teridentifikasi saat harga bergerak stabil namun WPI naik tajam.
+                            Whale sedang "menyerap" semua supply tanpa menaikkan harga terlalu cepat.</p>
+                    </div>
+                    <div class="card">
+                        <h4 style="color: var(--danger);">🦈 Distribution Mode</h4>
+                        <p style="font-size: 0.85rem;">Harga naik dengan WPI yang menurun. Ini adalah pola "Pump & Dump"
+                            di mana institusi sedang keluar sementara investor retail baru saja masuk.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. Algoritma Ignition -->
+        <section id="ignition">
+            <span class="sec-num">03</span>
+            <h2>Algoritma Ignition (Momentum Flare)</h2>
+            <div class="card" style="width: 100%;">
+                <p>Sinyal **Ignition Flash** (🔥) tidak muncul hanya karena harga naik. Sinyal ini memerlukan 4
+                    konfirmasi teknis simultan:</p>
+                <ul class="parameter-list" style="margin-top:30px;">
+                    <li><span class="param-name">Vol Surge:</span> Volume bar saat ini harus > 150% rata-rata 20 bar.
+                    </li>
+                    <li><span class="param-name">BB Penetration:</span> Harga harus Close di luar Bollinger Band (2.5
+                        std dev).</li>
+                    <li><span class="param-name">RSI Velocity:</span> RSI harus bergerak > 10 poin dalam 1 candle.</li>
+                    <li><span class="param-name">MTF Alignment:</span> Timeframe H1 dan M15 wajib searah.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 04. Protokol Eksekusi -->
+        <section id="protocol">
+            <span class="sec-num">04</span>
+            <h2>Protokol Eksekusi: The Master Routine</h2>
+            <div class="card" style="width: 100%;">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-point"></div>
+                        <h4>1. Squeeze Monitoring</h4>
+                        <p style="font-size: 0.85rem;">Tunggu hingga label **"SQUEEZE"** biru muncul di dashboard. Ini
+                            menandakan volatilitas rendah yang akan meledak.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-point"></div>
+                        <h4>2. Trigger Confirmation</h4>
+                        <p style="font-size: 0.85rem;">Masuk posisi hanya saat muncul ikon **FLARE** (Api). Jangan
+                            mencoba menebak arah ledakan sebelum sinyal tercetak.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-point"></div>
+                        <h4>3. Progressive Invalidation</h4>
+                        <p style="font-size: 0.85rem;">Letakkan SL di level **Invalidation Line** (Garis Merah
+                            Putus-putus). Jika harga kembali ke dalam zona konsolidasi, sinyal dianggap gagal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. Matriks Manipulasi -->
+        <section id="matrix">
+            <span class="sec-num">05</span>
+            <h2>Matriks Manipulasi (Trap Detection)</h2>
+            <div class="grid">
+                <div class="card" style="border-left: 4px solid var(--danger);">
+                    <h3>The Bull Trap Matrix</h3>
+                    <p style="font-size: 0.85rem;">Harga menembus Resistance harian tetapi **Whale Power Index**
+                        menunjukkan angka negatif. Ini adalah jebakan likuiditas.</p>
+                    <div class="logic-box" style="font-size: 0.75rem;"><b>Status:</b> SIGNAL REJECTED.</div>
+                </div>
+                <div class="card" style="border-left: 4px solid var(--info);">
+                    <h3>The Spring-Loaded Matrix</h3>
+                    <p style="font-size: 0.85rem;">Harga turun menembus Support utama (Panic Sell) namun volume
+                        akumulasi Whale melonjak 3x lipat. Ini adalah pola pembalikan besar.</p>
+                    <div class="logic-box" style="font-size: 0.75rem;"><b>Status:</b> PREPARE LONG.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06. Galeri Skenario BTC -->
+        <section id="gallery">
+            <span class="sec-num">06</span>
+            <h2>Galeri Skenario BTC: Institutional Blueprints</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🔥 Skenario: The Ignition Flare</h3>
+                    <p>Penembusan zona konsolidasi 48 jam dengan volume 200% rata-rata.</p>
+                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--primary);">
+                        <b>Tactical Response:</b> Eksekusi agresif. Gunakan Trailing Stop ATR 1.5. Target minimal adalah
+                        3x lebar zona konsolidasi.
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>💀 Skenario: The Liquidity Grab</h3>
+                    <p>Harga menembus Low terakhir lalu memantul keras (V-Shape Recovery).</p>
+                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--info);">
+                        <b>Tactical Response:</b> Masuk pada candle pembalikan. Ini adalah pola "Stop-Loss Hunt" Whale.
+                        Probabilitas kesuksesan sangat tinggi (> 75%).
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>🌊 Skenario: The Short Squeeze Wave</h3>
+                    <p>Lonjakan harga mendadak saat Funding Rates berada di zona negatif ekstrem.</p>
+                    <div class="logic-box" style="font-size: 0.8rem; border-left: 3px solid var(--accent);">
+                        <b>Tactical Response:</b> Tahan posisi selama Funding Rates belum kembali ke netral. Momentum
+                        ini digerakkan oleh penutupan paksa posisi Short.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 08. Ensiklopedia Ikon -->
+        <section id="visual">
+            <span class="sec-num">08</span>
+            <h2>Visual Iconography Encyclopedia</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🔥 Flare Ignition</h3>
+                    <p style="font-size: 0.85rem;">Sinyal momentum utama. Artinya "Start of the Move".</p>
+                    <p class="highlight-text" style="font-size: 0.75rem;">Respon: Entry Instan.</p>
+                </div>
+                <div class="card">
+                    <h3>⚓ Whale Anchor</h3>
+                    <p style="font-size: 0.85rem;">Mendeteksi titik masuk modal besar dalam volume masif.</p>
+                    <p class="highlight-text" style="font-size: 0.75rem;">Respon: Area Pertahanan SL.</p>
+                </div>
+                <div class="card">
+                    <h3>⚠️ Exhaustion Alert</h3>
+                    <p style="font-size: 0.85rem;">Momentum telah mencapai puncak jenuh beli/jual.</p>
+                    <p class="danger-text" style="font-size: 0.75rem; color:var(--danger);">Respon: Take Profit / Move
+                        SL to BE.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 09. Technical Logic -->
+        <section id="technical">
+            <span class="sec-num">09</span>
+            <h2>Technical Logic: The Math Behind BTC Breakout</h2>
+            <div class="card" style="width: 100%;">
+                <p>Algoritma ini menggunakan **Volatility-Adjusted Volume (VAV)**. Kami tidak hanya melihat volume
+                    harian, tapi bagaimana volume tersebut bereaksi terhadap pergerakan ATR.</p>
+                <div class="logic-block">
+                    <span class="formula">Alpha Score = (Price Change % / ATR %) × (Volume / Avg Volume)</span>
+                </div>
+                <p style="font-size: 0.9rem; margin-top:15px;">Jika **Alpha Score > 2.0**, penembusan harga dianggap
+                    sebagai sinyal institusional yang valid.</p>
+            </div>
+        </section>
+
+        <!-- 10. Manajemen Risiko -->
+        <section id="risk">
+            <span class="sec-num">10</span>
+            <h2>Manajemen Risiko BTC: Institutional Protocol</h2>
+            <div class="card" style="width: 100%;">
+                <div class="grid">
+                    <div class="logic-box" style="border-top: 2px solid var(--danger);">
+                        <h4>Max Drawdown Rule</h4>
+                        <p style="font-size: 0.85rem;">Hentikan trading selama 24 jam jika terjadi 3x loss beruntun.
+                            Kripto memiliki fase "Whipsaw" yang dapat menghancurkan modal dalam waktu singkat.</p>
+                    </div>
+                    <div class="logic-box" style="border-top: 2px solid var(--primary);">
+                        <h4>Volatility Size Adjustment</h4>
+                        <p style="font-size: 0.85rem;">Ukuran lot wajib dikurangi 50% jika `Volatility Index`
+                            menunjukkan angka di atas 80 (Overheated mode).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. Daily Routine -->
+        <section id="routine">
+            <span class="sec-num">11</span>
+            <h2>Daily Routine: The BTC Sniper Timeline</h2>
+            <div class="timeline" style="margin-top: 40px;">
+                <div class="timeline-item">
+                    <div class="timeline-point"></div>
+                    <h4>07:00 WIB (Asia Open)</h4>
+                    <p style="font-size:0.85rem;">Cek **Whale Inflow** harian. Tentukan apakah institusi sedang
+                        melakukan akumulasi pagi.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-point"></div>
+                    <h4>15:00 WIB (London Prep)</h4>
+                    <p style="font-size:0.85rem;">Monitor fase **SQUEEZE**. Bitcoin sering kali melakukan penembusan
+                        agresif di jam-jam pembukaan Eropa.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-point"></div>
+                    <h4>21:00 WIB (NY High-Vol)</h4>
+                    <p style="font-size:0.85rem;">Waspadai manipulasi **Liquidity Grab**. Jam ini adalah arena
+                        bertarungnya Whale besar.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+            <span class="sec-num">12</span>
+            <h2>FAQ & Troubleshooting</h2>
+            <div class="card" style="width: 100%;">
+                <p><strong>Kenapa sinyal Ignite tidak muncul saat breakout?</strong><br>Sistem mewajibkan konfirmasi
+                    volume. Jika penembusan harga terjadi dengan volume rendah, sistem akan secara otomatis menolak
+                    sinyal sebagai upaya manipulasi harga.</p>
+                <p style="margin-top: 20px;"><strong>Apakah indikator ini bisa memprediksi kejatuhan besar (Flash
+                        Crash)?</strong><br>Ya, melalui metrik `Whale Distribution`. Jika Whale Power menunjukkan
+                    Outflow masif sementara harga tetap stabil, itu adalah sinyal peringatan dini (Warning) akan
+                    terjadinya dump besar.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>BTC Breakout V1.5 - Master Momentum Encyclopedia</p>
+        <p style="color: #444; margin-top: 10px;">Copyright &copy; 2026 Fembi Isnanto. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
