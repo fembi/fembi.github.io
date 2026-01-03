@@ -107,6 +107,7 @@
             font-weight: 800;
             background: linear-gradient(135deg, #fff 0%, #aaa 100%);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
             letter-spacing: -1px;
@@ -261,8 +262,21 @@
                 font-size: 2.5rem;
             }
 
+            p.subtitle {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+
             .hub-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 5%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
             }
         }
     </style>
