@@ -256,27 +256,69 @@
             color: var(--primary);
         }
 
-        /* Mobile responsiveness */
+        /* Comprehensive Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .container {
+                width: 95%;
+                padding: 30px 10px;
+            }
+
+            .hub-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
+                padding: 0 15px;
             }
 
             p.subtitle {
                 font-size: 1rem;
-                padding: 0 10px;
+                padding: 0 20px;
             }
 
             .hub-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 0 5%;
+                padding: 0 15px;
+            }
+
+            .shortcut-card {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+
+            .icon-box {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            .shortcut-card h3 {
+                font-size: 1.3rem;
             }
         }
 
         @media (max-width: 480px) {
             h1 {
                 font-size: 2rem;
+            }
+
+            .badge {
+                font-size: 0.65rem;
+                padding: 4px 12px;
+            }
+
+            .shortcut-card {
+                padding: 25px 15px;
+            }
+
+            footer {
+                margin-top: 40px;
+                padding: 20px;
             }
         }
     </style>

@@ -353,45 +353,79 @@
             display: inline-block;
         }
 
-        /* Corrected Mobile Media Queries */
+        /* Comprehensive Mobile Optimization */
         @media (max-width: 1024px) {
             nav {
-                flex-direction: column;
                 height: auto;
                 padding: 15px 5%;
+                flex-direction: column;
                 gap: 15px;
             }
 
             .nav-links-header {
-                gap: 10px;
                 flex-wrap: wrap;
                 justify-content: center;
+                gap: 8px 15px;
+            }
+
+            main {
+                padding: 30px 5%;
             }
 
             h1 {
                 font-size: 2.5rem;
             }
 
-            .grid {
-                grid-template-columns: 1fr;
+            h2 {
+                font-size: 2rem;
             }
         }
 
         @media (max-width: 768px) {
+            .hub-container {
+                padding: 60px 4% 40px 4%;
+            }
+
             .hub-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin-top: 30px;
+            }
+
+            .hub-card {
+                padding: 15px;
+            }
+
+            .hub-card .title {
+                font-size: 0.85rem;
             }
 
             h1 {
                 font-size: 2rem;
             }
 
-            .intro-text {
-                font-size: 1rem;
+            .grid {
+                grid-template-columns: 1fr;
             }
 
-            main {
-                padding: 40px 15px;
+            .card {
+                padding: 20px;
+                border-radius: 12px;
+            }
+
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                min-width: 120px;
+                font-size: 0.85rem;
+                padding: 12px 8px;
             }
         }
 
@@ -400,9 +434,16 @@
                 grid-template-columns: 1fr;
             }
 
-            td,
-            th {
-                padding: 10px 5px;
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .badge {
+                font-size: 0.65rem;
+            }
+
+            .logic-block {
+                padding: 15px;
                 font-size: 0.8rem;
             }
         }
