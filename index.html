@@ -23,6 +23,12 @@
             /* Bitcoin Orange */
             --forex: #4CAF50;
             /* Green */
+            --psych: #58a6ff;
+            /* Blue - Psychology */
+            --narrative: #a371f7;
+            /* Purple - Narrative */
+            --macro: #00e5ff;
+            /* Cyan - Fundamental */
             --text: #E0E0E0;
             --text-dim: #9499A6;
             --border: rgba(255, 255, 255, 0.08);
@@ -179,6 +185,18 @@
             --brand: var(--btc);
         }
 
+        .card-psych {
+            --brand: var(--psych);
+        }
+
+        .card-narrative {
+            --brand: var(--narrative);
+        }
+
+        .card-macro {
+            --brand: var(--macro);
+        }
+
         .shortcut-card:hover .icon-box {
             background: var(--brand);
             color: #000;
@@ -228,6 +246,21 @@
         .card-btcbreakout:hover {
             border-color: var(--btc);
             box-shadow: 0 0 20px rgba(247, 147, 26, 0.1);
+        }
+
+        .card-psych:hover {
+            border-color: var(--psych);
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.15);
+        }
+
+        .card-narrative:hover {
+            border-color: var(--narrative);
+            box-shadow: 0 0 20px rgba(163, 113, 247, 0.15);
+        }
+
+        .card-macro:hover {
+            border-color: var(--macro);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
         }
 
         footer {
@@ -334,9 +367,13 @@
         <header>
             <span class="badge">Master Command Dashboard</span>
             <h1>Institutional Trading Hub</h1>
-            <p class="subtitle">Gerbang navigasi utama menuju ekosistem intelijen pasar: mencakup analisis makro
-                institusional, algoritma presisi, serta protokol breakout elit untuk instrumen Forex, Komoditas, Indeks,
-                hingga Kripto.</p>
+            <p class="subtitle">
+                Gerbang navigasi utama menuju ekosistem intelijen pasar: mencakup
+                <span style="color: var(--macro); font-weight: 500;">analisis makro institusional</span>,
+                <span style="color: var(--forex); font-weight: 500;">algoritma presisi</span>, serta
+                <span style="color: var(--btc); font-weight: 500;">protokol breakout elit</span>
+                untuk instrumen Forex, Komoditas, Indeks, hingga Kripto.
+            </p>
         </header>
 
         <div class="hub-grid">
@@ -369,6 +406,39 @@
                 <h3>BTC Breakout</h3>
                 <p>Protokol eksekusi momentum Bitcoin yang dirancang untuk menangkap pergerakan eksplosif aset kripto.
                 </p>
+                <div class="go-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+
+            <!-- TRADING PSYCHOLOGY -->
+            <a href="trading_psychology.html" class="shortcut-card card-psych">
+                <div class="icon-box">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <h3>Trading Psychology</h3>
+                <p>Master the inner game. Eliminate emotional bias, develop iron discipline, and build the mindset of a
+                    professional operator.</p>
+                <div class="go-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+
+            <!-- MARKET NARRATIVE -->
+            <a href="market_narrative.html" class="shortcut-card card-narrative">
+                <div class="icon-box">
+                    <i class="fa-solid fa-earth-americas"></i>
+                </div>
+                <h3>Market Narrative</h3>
+                <p>Decoding the global macro story. Understand Central Bank policies, geopolitical shifts, and
+                    intermarket correlations.</p>
+                <div class="go-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+
+            <!-- MACRO FUNDAMENTAL -->
+            <a href="macro_fundamental.html" class="shortcut-card card-macro">
+                <div class="icon-box">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                </div>
+                <h3>Macro Fundamental</h3>
+                <p>The "Hard Data" behind the moves. Master GDP, Inflation (CPI), Labor Market (NFP), and Interest
+                    Rates.</p>
                 <div class="go-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
         </div>
