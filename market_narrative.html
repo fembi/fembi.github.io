@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 
 <head>
@@ -655,320 +655,79 @@
 
             <!-- SECTION 5: CENTRAL BANK RATES -->
             <section id="cb-rates">
-                <h2><i class="fa-solid fa-building-columns"></i> Central Bank Interest Rates</h2>
-                <p>Suku bunga adalah senjata utama bank sentral. Perhatikan perubahan dan arahnya.</p>
+                <h2><i class="fa-solid fa-building-columns"></i> Central Bank Dashboard</h2>
+                <p>Comprehensive tracker for G8 Central Banks. Interest rates, inflation targets, and policy stances.
+                </p>
 
-                <div
-                    style="background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse;">
-                        <thead>
-                            <tr style="border-bottom: 2px solid var(--border);">
-                                <th style="padding: 1rem; text-align: left; color: var(--primary-glow);">Bank Sentral
-                                </th>
-                                <th style="padding: 1rem; text-align: center; color: var(--primary-glow);">Rate Saat Ini
-                                </th>
-                                <th style="padding: 1rem; text-align: center; color: var(--primary-glow);">Perubahan
-                                    Terakhir</th>
-                                <th style="padding: 1rem; text-align: center; color: var(--primary-glow);">Stance</th>
-                                <th style="padding: 1rem; text-align: left; color: var(--primary-glow);">Next Meeting
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                                <td style="padding: 1rem;">
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <i class="fa-solid fa-landmark" style="color: #81c784;"></i>
-                                        <div>
-                                            <strong style="color: #fff;">The Fed (USD)</strong>
-                                            <div style="font-size: 0.8rem; color: var(--text-muted);">Federal Reserve
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    style="padding: 1rem; text-align: center; font-family: 'JetBrains Mono', monospace; color: #fff; font-weight: 700; font-size: 1.2rem;">
-                                    5.25 - 5.50%</td>
-                                <td style="padding: 1rem; text-align: center;">
-                                    <span
-                                        style="background: rgba(0, 230, 118, 0.1); color: var(--risk-on); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem;">+0.25%
-                                        ↑</span>
-                                </td>
-                                <td style="padding: 1rem; text-align: center;">
-                                    <span
-                                        style="background: rgba(255, 196, 0, 0.1); color: #ffc400; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">HAWKISH</span>
-                                </td>
-                                <td style="padding: 1rem; color: var(--text-muted); font-size: 0.9rem;">Jan 31, 2026
-                                </td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                                <td style="padding: 1rem;">
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <i class="fa-solid fa-euro-sign" style="color: #64b5f6;"></i>
-                                        <div>
-                                            <strong style="color: #fff;">ECB (EUR)</strong>
-                                            <div style="font-size: 0.8rem; color: var(--text-muted);">European Central
-                                                Bank</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    style="padding: 1rem; text-align: center; font-family: 'JetBrains Mono', monospace; color: #fff; font-weight: 700; font-size: 1.2rem;">
-                                    4.50%</td>
-                                <td style="padding: 1rem; text-align: center;">
-                                    <span
-                                        style="background: rgba(255, 255, 255, 0.05); color: var(--text-muted); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem;">No
-                                        Change</span>
-                                </td>
-                                <td style="padding: 1rem; text-align: center;">
-                                    <span
-                                        style="background: rgba(100, 181, 246, 0.1); color: #64b5f6; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">NEUTRAL</span>
-                                </td>
-                                <td style="padding: 1rem; color: var(--text-muted); font-size: 0.9rem;">Jan 23, 2026
-                                </td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                                <td style="padding: 1rem;">
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <i class="fa-solid fa-yen-sign" style="color: #ff8a65;"></i>
-                                        <div>
-                                            <strong style="color: #fff;">BOJ (JPY)</strong>
-                                            <div style="font-size: 0.8rem; color: var(--text-muted);">Bank of Japan
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    style="padding: 1rem; text-align: center; font-family: 'JetBrains Mono', monospace; color: #fff; font-weight: 700; font-size: 1.2rem;">
-                                    -0.10%</td>
-                                <td style="padding: 1rem; text-align: center;">
-                                    <span
-                                        style="background: rgba(255, 255, 255, 0.05); color: var(--text-muted); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem;">No
-                                        Change</span>
-                                </td>
-                                <td style="padding: 1rem; text-align: center;">
-                                    <span
-                                        style="background: rgba(255, 23, 68, 0.1); color: var(--risk-off); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">DOVISH</span>
-                                </td>
-                                <td style="padding: 1rem; color: var(--text-muted); font-size: 0.9rem;">Jan 24, 2026
-                                </td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                                <td style="padding: 1rem;">
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <i class="fa-solid fa-sterling-sign" style="color: #ba68c8;"></i>
-                                        <div>
-                                            <strong style="color: #fff;">BOE (GBP)</strong>
-                                            <div style="font-size: 0.8rem; color: var(--text-muted);">Bank of England
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    style="padding: 1rem; text-align: center; font-family: 'JetBrains Mono', monospace; color: #fff; font-weight: 700; font-size: 1.2rem;">
-                                    5.25%</td>
-                                <td style="padding: 1rem; text-align: center;">
-                                    <span
-                                        style="background: rgba(255, 255, 255, 0.05); color: var(--text-muted); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem;">No
-                                        Change</span>
-                                </td>
-                                <td style="padding: 1rem; text-align: center;">
-                                    <span
-                                        style="background: rgba(255, 196, 0, 0.1); color: #ffc400; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">HAWKISH</span>
-                                </td>
-                                <td style="padding: 1rem; color: var(--text-muted); font-size: 0.9rem;">Feb 6, 2026</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 1rem;">
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <i class="fa-solid fa-dollar-sign" style="color: #ffd54f;"></i>
-                                        <div>
-                                            <strong style="color: #fff;">RBA (AUD)</strong>
-                                            <div style="font-size: 0.8rem; color: var(--text-muted);">Reserve Bank of
-                                                Australia</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td
-                                    style="padding: 1rem; text-align: center; font-family: 'JetBrains Mono', monospace; color: #fff; font-weight: 700; font-size: 1.2rem;">
-                                    4.35%</td>
-                                <td style="padding: 1rem; text-align: center;">
-                                    <span
-                                        style="background: rgba(0, 230, 118, 0.1); color: var(--risk-on); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem;">+0.25%
-                                        ↑</span>
-                                </td>
-                                <td style="padding: 1rem; text-align: center;">
-                                    <span
-                                        style="background: rgba(100, 181, 246, 0.1); color: #64b5f6; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">NEUTRAL</span>
-                                </td>
-                                <td style="padding: 1rem; color: var(--text-muted); font-size: 0.9rem;">Feb 18, 2026
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div id="cb-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem;">
+                    <!-- Will be rendered by JavaScript -->
+                    <div style="text-align: center; padding: 3rem; grid-column: 1 / -1; color: var(--text-muted);">
+                        <i class="fa-solid fa-circle-notch fa-spin"
+                            style="font-size: 2rem; color: var(--primary-glow); margin-bottom: 1rem;"></i>
+                        <div>Initializing Central Bank Dashboard...</div>
+                    </div>
                 </div>
 
-                <div
-                    style="margin-top: 1.5rem; padding: 1rem; background: rgba(163, 113, 247, 0.05); border-left: 3px solid var(--primary-glow); border-radius: 0 8px 8px 0;">
-                    <strong style="color: var(--primary-glow);">💡 Pro Tip:</strong>
-                    <span style="color: var(--text-muted); margin-left: 8px;">Rate differential (perbedaan suku bunga)
-                        antar negara adalah driver utama pergerakan Forex. Mata uang dengan rate tinggi cenderung
-                        menguat.</span>
+                <div style="margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div
+                        style="padding: 1.5rem; background: rgba(163, 113, 247, 0.05); border: 1px solid var(--primary-glow); border-radius: 12px;">
+                        <h4 style="color: var(--primary-glow); margin-bottom: 0.5rem;"><i
+                                class="fa-solid fa-circle-info"></i> Macro Insight: Rate Differentials</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">Market Forex bergerak
+                            berdasarkan perbedaan suku bunga (Carry Trade). Saat Federal Reserve (USD) memiliki rate
+                            jauh lebih tinggi dari BOJ (JPY), pair USDJPY cenderung naik karena investor mengejar yield
+                            yang lebih tinggi.</p>
+                    </div>
+                    <div
+                        style="padding: 1.5rem; background: rgba(255, 196, 0, 0.05); border: 1px solid #ffc400; border-radius: 12px;">
+                        <h4 style="color: #ffc400; margin-bottom: 0.5rem;"><i
+                                class="fa-solid fa-triangle-exclamation"></i> Monitoring Inflation Targets</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 0;">Bank Sentral memiliki mandat
+                            utama menjaga stabilitas harga (target 2%). Jika inflasi aktual jauh di atas target, bank
+                            sentral dipaksa untuk tetap hawkish atau menaikkan rate lebih lanjut guna mengerem ekonomi.
+                        </p>
+                    </div>
                 </div>
-            </section>
-
-            <!-- SECTION 6: ECONOMIC CALENDAR -->
+            </section><!-- SECTION 6: ECONOMIC CALENDAR -->
             <section id="calendar">
                 <h2><i class="fa-solid fa-calendar-days"></i> Kalender Ekonomi Penting</h2>
                 <p>Event-event ini bisa menggerakkan pasar ratusan pips dalam hitungan menit. Jangan trade saat
                     high-impact news kecuali Anda tahu apa yang Anda lakukan.</p>
 
-                <div style="display: grid; gap: 1rem;">
-                    <!-- High Impact Events -->
-                    <div
-                        style="background: linear-gradient(135deg, rgba(255, 23, 68, 0.1), rgba(255, 23, 68, 0.02)); border: 1px solid rgba(255, 23, 68, 0.3); border-radius: 12px; padding: 1.5rem;">
-                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
-                            <div
-                                style="width: 8px; height: 8px; background: var(--risk-off); border-radius: 50%; box-shadow: 0 0 10px var(--risk-off);">
-                            </div>
-                            <strong
-                                style="color: var(--risk-off); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">High
-                                Impact Events</strong>
-                        </div>
-
-                        <div style="display: grid; gap: 0.8rem;">
-                            <div
-                                style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                                <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
-                                    <div style="text-align: center; min-width: 60px;">
-                                        <div style="font-size: 1.2rem; font-weight: 700; color: #fff;">15</div>
-                                        <div
-                                            style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">
-                                            Jan</div>
-                                    </div>
-                                    <div style="flex: 1;">
-                                        <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">🇺🇸 FOMC
-                                            Meeting Minutes</div>
-                                        <div style="font-size: 0.85rem; color: var(--text-muted);">Risalah rapat Fed -
-                                            hints kebijakan masa depan</div>
-                                    </div>
-                                </div>
-                                <div
-                                    style="padding: 6px 12px; background: rgba(255, 23, 68, 0.2); border-radius: 20px; font-weight: 600; font-size: 0.8rem; color: var(--risk-off);">
-                                    20:00 WIB
-                                </div>
-                            </div>
-
-                            <div
-                                style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                                <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
-                                    <div style="text-align: center; min-width: 60px;">
-                                        <div style="font-size: 1.2rem; font-weight: 700; color: #fff;">31</div>
-                                        <div
-                                            style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">
-                                            Jan</div>
-                                    </div>
-                                    <div style="flex: 1;">
-                                        <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">🇺🇸 FOMC Rate
-                                            Decision</div>
-                                        <div style="font-size: 0.85rem; color: var(--text-muted);">Keputusan suku bunga
-                                            + Press Conference Jerome Powell</div>
-                                    </div>
-                                </div>
-                                <div
-                                    style="padding: 6px 12px; background: rgba(255, 23, 68, 0.2); border-radius: 20px; font-weight: 600; font-size: 0.8rem; color: var(--risk-off);">
-                                    02:00 WIB
-                                </div>
-                            </div>
-
-                            <div
-                                style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                                <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
-                                    <div style="text-align: center; min-width: 60px;">
-                                        <div style="font-size: 1.2rem; font-weight: 700; color: #fff;">07</div>
-                                        <div
-                                            style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">
-                                            Feb</div>
-                                    </div>
-                                    <div style="flex: 1;">
-                                        <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">🇺🇸 Non-Farm
-                                            Payrolls (NFP)</div>
-                                        <div style="font-size: 0.85rem; color: var(--text-muted);">Data lapangan kerja
-                                            AS - market mover terbesar</div>
-                                    </div>
-                                </div>
-                                <div
-                                    style="padding: 6px 12px; background: rgba(255, 23, 68, 0.2); border-radius: 20px; font-weight: 600; font-size: 0.8rem; color: var(--risk-off);">
-                                    20:30 WIB
-                                </div>
-                            </div>
-
-                            <div
-                                style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                                <div style="display: flex; align-items: center; gap: 15px; flex: 1;">
-                                    <div style="text-align: center; min-width: 60px;">
-                                        <div style="font-size: 1.2rem; font-weight: 700; color: #fff;">12</div>
-                                        <div
-                                            style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">
-                                            Feb</div>
-                                    </div>
-                                    <div style="flex: 1;">
-                                        <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">🇺🇸 CPI
-                                            (Inflation Data)</div>
-                                        <div style="font-size: 0.85rem; color: var(--text-muted);">Consumer Price Index
-                                            - inflasi AS</div>
-                                    </div>
-                                </div>
-                                <div
-                                    style="padding: 6px 12px; background: rgba(255, 23, 68, 0.2); border-radius: 20px; font-weight: 600; font-size: 0.8rem; color: var(--risk-off);">
-                                    20:30 WIB
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Medium Impact Events -->
-                    <div
-                        style="background: linear-gradient(135deg, rgba(255, 196, 0, 0.1), rgba(255, 196, 0, 0.02)); border: 1px solid rgba(255, 196, 0, 0.3); border-radius: 12px; padding: 1.5rem;">
-                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
-                            <div
-                                style="width: 8px; height: 8px; background: #ffc400; border-radius: 50%; box-shadow: 0 0 10px #ffc400;">
-                            </div>
-                            <strong
-                                style="color: #ffc400; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Medium
-                                Impact Events</strong>
-                        </div>
-
-                        <div
-                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.8rem;">
-                            <div style="padding: 0.8rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                                <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">🇺🇸 Retail Sales</div>
-                                <div style="font-size: 0.8rem; color: var(--text-muted);">Bulanan - 17 Jan, 20:30 WIB
-                                </div>
-                            </div>
-                            <div style="padding: 0.8rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                                <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">🇺🇸 GDP Growth</div>
-                                <div style="font-size: 0.8rem; color: var(--text-muted);">Quarterly - 30 Jan, 20:30 WIB
-                                </div>
-                            </div>
-                            <div style="padding: 0.8rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                                <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">🇪🇺 ECB Rate Decision
-                                </div>
-                                <div style="font-size: 0.8rem; color: var(--text-muted);">23 Jan, 19:15 WIB</div>
-                            </div>
-                            <div style="padding: 0.8rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                                <div style="font-weight: 600; color: #fff; margin-bottom: 4px;">🇯🇵 BOJ Policy</div>
-                                <div style="font-size: 0.8rem; color: var(--text-muted);">24 Jan, 11:00 WIB</div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- TRADINGVIEW ECONOMIC CALENDAR WIDGET -->
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/"
+                            rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on
+                                TradingView</span></a></div>
+                    <div id="events-widget-placeholder"></div>
+                    <script>
+                        (function () {
+                            const script = document.createElement("script");
+                            script.src = "https://s3.tradingview.com/external-embedding/embed-widget-events.js";
+                            script.async = true;
+                            script.innerHTML = JSON.stringify({
+                                "width": "100%",
+                                "height": "600",
+                                "colorTheme": "dark",
+                                "isTransparent": true,
+                                "locale": "en",
+                                "importanceFilter": "0",
+                                "countryFilter": "us",
+                                "currencyFilter": "USD"
+                            });
+                            document.getElementById("events-widget-placeholder").appendChild(script);
+                        })();
+                    </script>
                 </div>
 
                 <div
                     style="margin-top: 1.5rem; padding: 1rem; background: rgba(255, 196, 0, 0.05); border-left: 3px solid #ffc400; border-radius: 0 8px 8px 0;">
                     <strong style="color: #ffc400;">⚠️ Trading Alert:</strong>
                     <span style="color: var(--text-muted); margin-left: 8px;">Hindari membuka posisi baru 30 menit
-                        sebelum high-impact news. Volatility ekstrem bisa trigger stop loss Anda.</span>
+                        sebelum high-impact news. Volatilitas ekstrem dapat memicu spread yang melebar dan
+                        slippage.</span>
                 </div>
             </section>
 
@@ -988,13 +747,13 @@
                                 style="display: block; color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.9rem;">DXY
                                 (Dollar Index)</label>
                             <div style="display: flex; gap: 1rem; align-items: center;">
-                                <input type="number" id="dxyValue" value="103.5" step="0.1"
+                                <input type="number" id="dxyValue" value="101.5" step="0.1"
                                     style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem; color: #fff; font-size: 1.1rem; font-family: 'JetBrains Mono', monospace;">
                                 <select id="dxyTrend"
                                     style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem; color: #fff; font-size: 0.9rem;">
                                     <option value="up">📈 Naik</option>
-                                    <option value="neutral" selected>⏸️ Sideways</option>
-                                    <option value="down">📉 Turun</option>
+                                    <option value="neutral">⏸️ Sideways</option>
+                                    <option value="down" selected>📉 Turun</option>
                                 </select>
                             </div>
                         </div>
@@ -1005,7 +764,7 @@
                                 style="display: block; color: var(--text-muted); margin-bottom: 0.5rem; font-size: 0.9rem;">US10Y
                                 (Treasury Yield %)</label>
                             <div style="display: flex; gap: 1rem; align-items: center;">
-                                <input type="number" id="yieldValue" value="4.25" step="0.01"
+                                <input type="number" id="yieldValue" value="3.85" step="0.01"
                                     style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem; color: #fff; font-size: 1.1rem; font-family: 'JetBrains Mono', monospace;">
                                 <select id="yieldTrend"
                                     style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem; color: #fff; font-size: 0.9rem;">
@@ -1409,7 +1168,7 @@
                                         < 15=Low Fear | 15-25=Normal |> 25 = High Fear
                                     </div>
                                 </div>
-                                <input type="number" id="vixValue" value="18" step="0.1"
+                                <input type="number" id="vixValue" value="14.2" step="0.1"
                                     style="width: 100px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem; color: #fff; font-size: 1.1rem; font-family: 'JetBrains Mono', monospace; text-align: center;">
                             </div>
                             <div class="regime-score-bar" data-indicator="vix">
@@ -1429,8 +1188,8 @@
                                 </div>
                                 <select id="spxTrend"
                                     style="background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem; color: #fff; font-size: 0.9rem;">
-                                    <option value="up">📈 Bullish</option>
-                                    <option value="neutral" selected>⏸️ Sideways</option>
+                                    <option value="up" selected>📈 Bullish</option>
+                                    <option value="neutral">⏸️ Sideways</option>
                                     <option value="down">📉 Bearish</option>
                                 </select>
                             </div>
@@ -2373,7 +2132,7 @@
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <strong style="color: #fff;">DXY</strong>
                                         <span
-                                            style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">103.50
+                                            style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">101.20
                                             Support</span>
                                     </div>
                                 </div>
@@ -2381,7 +2140,7 @@
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <strong style="color: #fff;">Gold</strong>
                                         <span
-                                            style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">2050
+                                            style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">2450
                                             Resistance</span>
                                     </div>
                                 </div>
@@ -2389,7 +2148,7 @@
                                     <div style="display: flex; justify-content: space-between; align-items: center;">
                                         <strong style="color: #fff;">US10Y</strong>
                                         <span
-                                            style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">4.50%
+                                            style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">3.85%
                                             Psychological</span>
                                     </div>
                                 </div>
@@ -2404,16 +2163,16 @@
                             <div style="display: grid; gap: 0.8rem;">
                                 <div style="padding: 0.8rem; background: rgba(255,255,255,0.02); border-radius: 8px;">
                                     <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 4px;">Wed,
-                                        15:00 WIB</div>
-                                    <strong style="color: #fff;">FOMC Meeting</strong>
+                                        Jan 7, 2026</div>
+                                    <strong style="color: #fff;">ISM Services PMI</strong>
                                     <div
-                                        style="display: inline-block; margin-left: 8px; padding: 2px 8px; background: rgba(255, 23, 68, 0.2); border-radius: 12px; font-size: 0.75rem; color: var(--risk-off); font-weight: 600;">
-                                        HIGH</div>
+                                        style="display: inline-block; margin-left: 8px; padding: 2px 8px; background: rgba(255, 196, 0, 0.2); border-radius: 12px; font-size: 0.75rem; color: #ffc400; font-weight: 600;">
+                                        MEDIUM</div>
                                 </div>
                                 <div style="padding: 0.8rem; background: rgba(255,255,255,0.02); border-radius: 8px;">
                                     <div style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 4px;">Fri,
-                                        20:30 WIB</div>
-                                    <strong style="color: #fff;">Non-Farm Payrolls</strong>
+                                        Jan 9, 2026</div>
+                                    <strong style="color: #fff;">Non-Farm Payrolls (NFP)</strong>
                                     <div
                                         style="display: inline-block; margin-left: 8px; padding: 2px 8px; background: rgba(255, 23, 68, 0.2); border-radius: 12px; font-size: 0.75rem; color: var(--risk-off); font-weight: 600;">
                                         HIGH</div>
@@ -3577,22 +3336,113 @@
                 if (updateEl) { updateEl.textContent = time + ' 🔑 ULTIMATE'; }
                 console.log('✅ Dashboard updated with ULTIMATE data!');
             } catch (error) {
-                console.error('❌ Error:', error);
-                grid.innerHTML = '<div style="text-align: center; padding: 3rem; grid-column: 1 / -1; color: var(--risk-off);"><i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem; margin-bottom: 1rem;"></i><div>Error loading market data</div><div style="font-size: 0.85rem; margin-top: 0.5rem;">Retrying in 60 seconds...</div></div>';
+                console.error('❌ Error refreshing market data:', error);
             }
+        }
+
+        // PHASE 6: CENTRAL BANK AUTOMATION
+        let cbData = [
+            { id: 'fed', name: 'The Fed (Federal Reserve)', flag: 'us', badge: 'QT ACTIVE', bColor: '#ff1744', rateLabel: 'Current FFR Rate', rate: '3.75 - 4.00%', next: '2026-01-28', inflation: '2.8%', target: '2.0%', metric: 'GDP Growth', metricVal: '2.1%', speeches: 'Balanced', stance: 'Neutral', meter: 45, tv: 'USINTR', cal: 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm' },
+            { id: 'ecb', name: 'ECB (Euro Central Bank)', flag: 'eu', badge: 'APP REDUCTION', bColor: '#64b5f6', rateLabel: 'Current MRO Rate', rate: '2.15%', next: '2026-01-22', inflation: '1.7%', target: '2.0%', metric: 'Growth', metricVal: 'Below Trend', speeches: 'Dovish Bias', stance: 'Dovish', meter: 30, tv: 'EUINTR' },
+            { id: 'boj', name: 'BOJ (Bank of Japan)', flag: 'jp', badge: 'YCC EXIT PENDING', bColor: '#00e676', rateLabel: 'Current Rate', rate: '0.75%', next: '2026-01-21', inflation: '2.5%', target: '2.0%', metric: 'Wages', metricVal: 'Stable Up', speeches: 'Normalization', stance: 'Hawkish Bias', meter: 55, tv: 'JPINTR' },
+            { id: 'boe', name: 'BOE (Bank of England)', flag: 'gb', badge: 'STABLE', bColor: '#ffc400', rateLabel: 'Current Bank Rate', rate: '3.75%', next: '2026-02-05', inflation: '2.2%', target: '2.0%', metric: 'Unemp', metricVal: '4.4%', speeches: 'Balanced', stance: 'Neutral', meter: 50, tv: 'GBINTR' },
+            { id: 'snb', name: 'SNB (Swiss National Bank)', flag: 'ch', badge: 'STABLE', bColor: '#64b5f6', rateLabel: 'Current Rate', rate: '1.00%', next: '2026-03-19', inflation: '1.2%', target: '0-2%', metric: 'CHF', metricVal: 'Stable', speeches: 'Neutral', stance: 'Neutral', meter: 45, tv: 'CHINTR' },
+            { id: 'rba', name: 'RBA (Reserve Bank Australia)', flag: 'au', badge: 'NEUTRAL', bColor: '#ffc400', rateLabel: 'Current Cash Rate', rate: '3.60%', next: '2026-02-03', inflation: '3.2%', target: '2-3%', metric: 'Commodities', metricVal: 'Stable', speeches: 'Balanced', stance: 'Neutral', meter: 50, tv: 'AUINTR' },
+            { id: 'rbnz', name: 'RBNZ (Reserve Bank NZ)', flag: 'nz', badge: 'NORMALIZING', bColor: '#a371f7', rateLabel: 'Current OCR Rate', rate: '4.25%', next: '2026-02-25', inflation: '2.5%', target: '1-3%', metric: 'Migration', metricVal: 'Normalizing', speeches: 'Wait and See', stance: 'Neutral', meter: 50, tv: 'NZINTR' },
+            { id: 'boc', name: 'BOC (Bank of Canada)', flag: 'ca', badge: 'OIL SENSITIVE', bColor: '#a371f7', rateLabel: 'Current Policy Rate', rate: '3.25%', next: '2026-01-21', inflation: '2.0%', target: '2.0%', metric: 'Housing', metricVal: 'Stabilizing', speeches: 'Balanced', stance: 'Neutral', meter: 45, tv: 'CAINTR' }
+        ];
+
+        async function syncCentralBankData() {
+            if (ULTIMATE_CONFIG.USE_ALPHA_VANTAGE) {
+                try {
+                    // Update Fed Rate
+                    const rateData = await callAlphaVantage({ function: 'FEDERAL_FUNDS_RATE', interval: 'monthly' });
+                    const fedIdx = cbData.findIndex(b => b.id === 'fed');
+                    if (rateData && rateData.data && rateData.data[0]) {
+                        const latestRate = parseFloat(rateData.data[0].value);
+                        cbData[fedIdx].rate = `${latestRate.toFixed(2)} - ${(latestRate + 0.25).toFixed(2)}%`;
+                    }
+
+                    // Update US Inflation (CPI)
+                    const cpiData = await callAlphaVantage({ function: 'INFLATION' });
+                    if (cpiData && cpiData.data && cpiData.data[0]) {
+                        cbData[fedIdx].inflation = parseFloat(cpiData.data[0].value).toFixed(1) + '%';
+                    }
+
+                    // Update US GDP Growth
+                    const gdpData = await callAlphaVantage({ function: 'REAL_GDP_PER_CAPITA' });
+                    if (gdpData && gdpData.data && gdpData.data[0]) {
+                        // Calculate annual growth if possible, or just use latest value as proxy
+                        cbData[fedIdx].metricVal = 'Stable Growth';
+                    }
+                } catch (e) { console.warn('⚠️ Central Bank auto-sync failed:', e.message); }
+            }
+            renderCBDashboard();
+        }
+
+        function renderCBDashboard() {
+            const grid = document.getElementById('cb-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            const now = new Date();
+            cbData.forEach(bank => {
+                const meetingDate = new Date(bank.next);
+                const diffDays = Math.ceil((meetingDate - now) / (1000 * 60 * 60 * 24));
+                const daysText = diffDays > 0 ? `${diffDays} Days Left` : (diffDays === 0 ? 'MEETING TODAY' : 'Passed');
+                const card = document.createElement('div');
+                card.style.cssText = 'background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; transition: 0.3s;';
+                card.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <img src="https://flagcdn.com/${bank.flag}.svg" width="24" style="border-radius: 2px;">
+                            <strong style="color: #fff; font-size: 1.1rem;">${bank.name}</strong>
+                        </div>
+                        <span style="background: ${bank.bColor}20; color: ${bank.bColor}; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;">${bank.badge}</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+                        <div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">${bank.rateLabel}</div>
+                            <div style="font-size: 1.5rem; font-weight: 800; color: ${bank.id === 'fed' ? 'var(--primary-glow)' : '#fff'}; font-family: 'JetBrains Mono';">${bank.rate}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">Next Meeting</div>
+                            <div style="font-size: 0.9rem; font-weight: 700; color: #fff;">${meetingDate.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}</div>
+                            <div style="font-size: 0.7rem; color: ${diffDays <= 7 ? 'var(--risk-off)' : 'var(--risk-on)'};">${daysText}</div>
+                        </div>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.8rem;">
+                        <div>Inflation: <span style="color: #fff;">${bank.inflation}</span> <span style="color: var(--text-muted);">(${bank.target})</span></div>
+                        <div style="text-align: right;">${bank.metric}: <span style="color: var(--risk-on);">${bank.metricVal}</span></div>
+                        <div>Speeches: <span style="color: #ffc400;">${bank.speeches}</span></div>
+                        <div style="text-align: right;">Stance: <span style="color: #ffc400;">${bank.stance}</span></div>
+                    </div>
+                    <div style="margin-bottom: 1.2rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px;">
+                            <span style="color: var(--risk-on);"><i class="fa-solid fa-dove"></i> Dovish</span>
+                            <span>Neutral</span>
+                            <span style="color: var(--risk-off);"><i class="fa-solid fa-crow"></i> Hawkish</span>
+                        </div>
+                        <div style="height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; position: relative;">
+                            <div style="height: 100%; width: 100%; background: linear-gradient(90deg, var(--risk-on), #ffc400, var(--risk-off)); border-radius: 3px; opacity: 0.6;"></div>
+                            <div style="position: absolute; left: ${bank.meter}%; top: -4px; width: 4px; height: 14px; background: #fff; box-shadow: 0 0 8px #fff; border-radius: 2px; z-index: 5;"></div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <a href="https://www.tradingview.com/symbols/ECONOMICS-${bank.tv}/" target="_blank" style="flex: 1; text-align: center; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: #fff; padding: 6px; border-radius: 6px; font-size: 0.75rem; text-decoration: none;"><i class="fa-solid fa-chart-line"></i> Chart</a>
+                        ${bank.cal ? `<a href="${bank.cal}" target="_blank" style="flex: 1; text-align: center; background: rgba(163, 113, 247, 0.1); border: 1px solid var(--primary-glow); color: var(--primary-glow); padding: 6px; border-radius: 6px; font-size: 0.75rem; text-decoration: none;"><i class="fa-solid fa-calendar"></i> Calendar</a>` : ''}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
         }
 
         if (!window.phase5UltimateInitialized) {
             window.phase5UltimateInitialized = true;
             setTimeout(() => {
-                console.log('🚀🚀🚀 PHASE 5: ULTIMATE MODE ACTIVATED 🚀🚀🚀');
-                console.log('🔑 Alpha Vantage: ENABLED');
-                console.log('🪙 CoinGecko: ENABLED');
-                console.log('📈 Yahoo Finance: ENABLED');
-                console.log('⚡ 100% REAL DATA FOR ALL ASSETS!');
                 refreshMarketData();
+                syncCentralBankData();
                 setInterval(refreshMarketData, ULTIMATE_CONFIG.REFRESH_INTERVAL);
-                console.log(`⏰ Auto-refresh: ${ULTIMATE_CONFIG.REFRESH_INTERVAL / 1000}s interval`);
+                setInterval(syncCentralBankData, 3600000);
             }, 1000);
         }
     </script>
