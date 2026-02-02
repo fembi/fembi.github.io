@@ -29,6 +29,8 @@
             /* Purple - Narrative */
             --macro: #00e5ff;
             /* Cyan - Fundamental */
+            --blueprint: #4db8ff;
+            /* Blueprint Blue */
             --text: #E0E0E0;
             --text-dim: #9499A6;
             --border: rgba(255, 255, 255, 0.08);
@@ -197,6 +199,10 @@
             --brand: var(--macro);
         }
 
+        .card-blueprint {
+            --brand: var(--blueprint);
+        }
+
         .shortcut-card:hover .icon-box {
             background: var(--brand);
             color: #000;
@@ -261,6 +267,11 @@
         .card-macro:hover {
             border-color: var(--macro);
             box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+        }
+
+        .card-blueprint:hover {
+            border-color: var(--blueprint);
+            box-shadow: 0 0 20px rgba(77, 184, 255, 0.15);
         }
 
         footer {
@@ -384,6 +395,16 @@
                 </div>
                 <h3>Titan Sniper</h3>
                 <p>Ensiklopedia makro dan sistem navigasi emas berbasis intelijen Bayesian & anomali institusional.</p>
+                <div class="go-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+
+            <!-- TITAN BLUEPRINT -->
+            <a href="titan_command_blueprint.html" class="shortcut-card card-blueprint">
+                <div class="icon-box">
+                    <i class="fa-solid fa-map"></i>
+                </div>
+                <h3>Titan Blueprint</h3>
+                <p>Arsitektur institusional lengkap. Pahami logika Macro, Quant, Risk, & Sniper dalam satu komando.</p>
                 <div class="go-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
 
