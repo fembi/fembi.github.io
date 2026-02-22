@@ -29,6 +29,8 @@
             /* Purple - Narrative */
             --macro: #00e5ff;
             /* Cyan - Fundamental */
+            --vwap: #FFD700;
+            /* Gold - VWAP Pro */
             --blueprint: #4db8ff;
             /* Blueprint Blue */
             --text: #E0E0E0;
@@ -203,6 +205,10 @@
             --brand: var(--blueprint);
         }
 
+        .card-vwap {
+            --brand: var(--vwap);
+        }
+
         .shortcut-card:hover .icon-box {
             background: var(--brand);
             color: #000;
@@ -272,6 +278,11 @@
         .card-blueprint:hover {
             border-color: var(--blueprint);
             box-shadow: 0 0 20px rgba(77, 184, 255, 0.15);
+        }
+
+        .card-vwap:hover {
+            border-color: var(--vwap);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
         }
 
         footer {
@@ -460,6 +471,17 @@
                 <h3>Macro Fundamental</h3>
                 <p>The "Hard Data" behind the moves. Master GDP, Inflation (CPI), Labor Market (NFP), and Interest
                     Rates.</p>
+                <div class="go-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+
+            <!-- VWAP INSTITUTIONAL PRO -->
+            <a href="VWAP_Pro_Tutorial.html" class="shortcut-card card-vwap">
+                <div class="icon-box">
+                    <i class="fa-solid fa-chart-area"></i>
+                </div>
+                <h3>VWAP Institutional Pro</h3>
+                <p>Panduan lengkap indikator VWAP multi-timeframe institusional: alignment 6-TF, Smart Money engine,
+                    sinyal, dan strategi entry.</p>
                 <div class="go-icon"><i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
         </div>

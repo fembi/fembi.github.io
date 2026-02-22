@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VWAP Institutional Pro — Tutorial Lengkap</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #0f1526;
+    --bg3: #141c30;
+    --card: #111827;
+    --border: rgba(255,215,0,0.15);
+    --gold: #FFD700;
+    --gold2: #FFC107;
+    --green: #00E676;
+    --red: #FF1744;
+    --blue: #40C4FF;
+    --purple: #E040FB;
+    --orange: #FF6E40;
+    --teal: #00BCD4;
+    --text: #E2E8F0;
+    --muted: #8892A4;
+    --accent: rgba(255,215,0,0.08);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-size:15px; line-height:1.7; }
+
+  /* ── NAV ── */
+  nav { position:sticky; top:0; z-index:100; background:rgba(10,14,26,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:12px 0; }
+  .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo { font-size:17px; font-weight:700; color:var(--gold); letter-spacing:.5px; }
+  .nav-logo span { color:var(--text); font-weight:300; }
+  .nav-links { display:flex; gap:20px; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:13px; font-weight:500; transition:.2s; }
+  .nav-links a:hover { color:var(--gold); }
+
+  /* ── HERO ── */
+  .hero { background:linear-gradient(135deg,#0a0e1a 0%,#0f1825 50%,#0a1020 100%); border-bottom:1px solid var(--border); padding:80px 24px 60px; text-align:center; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:-50%; left:50%; transform:translateX(-50%); width:600px; height:600px; background:radial-gradient(circle,rgba(255,215,0,0.06) 0%,transparent 70%); pointer-events:none; }
+  .hero-badge { display:inline-block; background:rgba(255,215,0,0.12); border:1px solid rgba(255,215,0,0.3); color:var(--gold); font-size:12px; font-weight:600; padding:4px 14px; border-radius:20px; letter-spacing:1px; margin-bottom:20px; text-transform:uppercase; }
+  .hero h1 { font-size:clamp(28px,5vw,52px); font-weight:800; line-height:1.15; color:#fff; margin-bottom:16px; }
+  .hero h1 span { color:var(--gold); }
+  .hero p { font-size:17px; color:var(--muted); max-width:600px; margin:0 auto 32px; }
+  .tier-badges { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .tier-badge { background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:6px 16px; font-size:12px; font-weight:600; color:var(--muted); }
+  .tier-badge.t1 { color:var(--blue); border-color:rgba(64,196,255,.3); }
+  .tier-badge.t2 { color:var(--gold); border-color:rgba(255,215,0,.3); }
+  .tier-badge.t3 { color:var(--purple); border-color:rgba(224,64,251,.3); }
+
+  /* ── LAYOUT ── */
+  .wrapper { max-width:1100px; margin:0 auto; padding:0 24px; }
+  section { padding:64px 0; border-bottom:1px solid rgba(255,255,255,.05); }
+  section:last-child { border-bottom:none; }
+
+  /* ── SECTION HEADER ── */
+  .sec-label { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+  .sec-title { font-size:clamp(22px,3vw,32px); font-weight:700; color:#fff; margin-bottom:12px; }
+  .sec-desc { color:var(--muted); font-size:15px; max-width:680px; margin-bottom:40px; }
+
+  /* ── CARDS ── */
+  .grid { display:grid; gap:16px; }
+  .grid-2 { grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+  .grid-3 { grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; transition:.25s; }
+  .card:hover { border-color:rgba(255,215,0,.35); transform:translateY(-2px); }
+  .card-icon { font-size:24px; margin-bottom:12px; }
+  .card h3 { font-size:16px; font-weight:700; color:#fff; margin-bottom:8px; }
+  .card p { font-size:14px; color:var(--muted); line-height:1.6; }
+  .card .tag { display:inline-block; font-size:11px; font-weight:600; padding:2px 10px; border-radius:10px; margin-bottom:10px; }
+  .tag-t1 { background:rgba(64,196,255,.12); color:var(--blue); }
+  .tag-t2 { background:rgba(255,215,0,.1); color:var(--gold); }
+  .tag-t3 { background:rgba(224,64,251,.12); color:var(--purple); }
+
+  /* ── FEATURE BLOCKS ── */
+  .feature { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; margin-bottom:48px; }
+  .feature.rev { direction:rtl; }
+  .feature.rev > * { direction:ltr; }
+  @media(max-width:720px){ .feature,.feature.rev { grid-template-columns:1fr; } }
+  .feature-img { background:var(--bg3); border:1px solid var(--border); border-radius:14px; padding:24px; font-family:'JetBrains Mono',monospace; font-size:13px; line-height:1.8; }
+  .feature-img .label { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px; }
+  .feature-body h3 { font-size:20px; font-weight:700; color:#fff; margin-bottom:12px; }
+  .feature-body p { color:var(--muted); margin-bottom:12px; font-size:14px; }
+  .feature-body ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .feature-body li { font-size:14px; color:var(--muted); display:flex; gap:10px; }
+  .feature-body li::before { content:'›'; color:var(--gold); font-weight:700; }
+
+  /* ── PANEL DIAGRAM ── */
+  .panel-demo { background:var(--bg3); border:1px solid var(--border); border-radius:14px; padding:20px; font-family:'JetBrains Mono',monospace; font-size:12.5px; line-height:2; max-width:480px; }
+  .panel-demo .ph { color:var(--gold); font-weight:700; }
+  .panel-demo .pg { color:var(--green); }
+  .panel-demo .pr { color:var(--red); }
+  .panel-demo .pp { color:var(--purple); }
+  .panel-demo .pb { color:var(--blue); }
+  .panel-demo .po { color:var(--orange); }
+  .panel-demo .pm { color:var(--muted); }
+  .panel-demo hr { border:none; border-top:1px solid rgba(255,215,0,.2); margin:4px 0; }
+
+  /* ── TABLE ── */
+  .tbl-wrap { overflow-x:auto; border-radius:12px; border:1px solid var(--border); }
+  table { width:100%; border-collapse:collapse; font-size:13.5px; }
+  thead { background:rgba(255,215,0,.08); }
+  th { padding:12px 16px; text-align:left; font-weight:600; color:var(--gold); font-size:12px; letter-spacing:.5px; text-transform:uppercase; border-bottom:1px solid var(--border); }
+  td { padding:11px 16px; color:var(--muted); border-bottom:1px solid rgba(255,255,255,.04); vertical-align:top; }
+  td:first-child { color:var(--text); font-weight:600; font-family:'JetBrains Mono',monospace; font-size:13px; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:rgba(255,215,0,.03); }
+
+  /* ── SIGNAL BOXES ── */
+  .signal-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+  .signal-box { border-radius:12px; padding:20px; border:1px solid; }
+  .sig-buy { background:rgba(0,230,118,.06); border-color:rgba(0,230,118,.25); }
+  .sig-sell { background:rgba(255,23,68,.06); border-color:rgba(255,23,68,.25); }
+  .sig-hunt { background:rgba(255,152,0,.06); border-color:rgba(255,152,0,.25); }
+  .sig-div { background:rgba(224,64,251,.06); border-color:rgba(224,64,251,.25); }
+  .signal-box h4 { font-size:14px; font-weight:700; margin-bottom:8px; }
+  .signal-box p { font-size:13px; line-height:1.6; }
+  .col-g { color:var(--green); }
+  .col-r { color:var(--red); }
+  .col-o { color:#FF9800; }
+  .col-p { color:var(--purple); }
+
+  /* ── STEP ── */
+  .steps { display:flex; flex-direction:column; gap:0; }
+  .step { display:flex; gap:20px; position:relative; padding-bottom:32px; }
+  .step:last-child { padding-bottom:0; }
+  .step:not(:last-child)::before { content:''; position:absolute; left:19px; top:44px; bottom:0; width:2px; background:var(--border); }
+  .step-num { flex-shrink:0; width:40px; height:40px; border-radius:50%; background:rgba(255,215,0,.12); border:2px solid rgba(255,215,0,.4); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; color:var(--gold); }
+  .step-content h4 { font-size:16px; font-weight:700; color:#fff; margin-bottom:6px; padding-top:6px; }
+  .step-content p { font-size:14px; color:var(--muted); }
+
+  /* ── WEIGHT TABLE ── */
+  .weight-bar { height:8px; border-radius:4px; background:linear-gradient(90deg,var(--gold),var(--gold2)); margin-top:6px; }
+
+  /* ── TIP BOX ── */
+  .tip { background:rgba(0,230,118,.07); border:1px solid rgba(0,230,118,.2); border-left:4px solid var(--green); border-radius:10px; padding:16px 20px; margin:16px 0; }
+  .tip strong { color:var(--green); display:block; margin-bottom:4px; font-size:13px; }
+  .tip p { font-size:13.5px; color:var(--muted); }
+  .warn { background:rgba(255,152,0,.07); border:1px solid rgba(255,152,0,.2); border-left:4px solid #FF9800; border-radius:10px; padding:16px 20px; margin:16px 0; }
+  .warn strong { color:#FF9800; display:block; margin-bottom:4px; font-size:13px; }
+  .warn p { font-size:13.5px; color:var(--muted); }
+
+  /* ── FOOTER ── */
+  footer { background:var(--bg2); border-top:1px solid var(--border); padding:40px 24px; text-align:center; }
+  footer p { color:var(--muted); font-size:13px; }
+  footer strong { color:var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">VWAP·PRO <span>Tutorial</span></div>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#fitur">Fitur</a>
+      <a href="#panel">Panel</a>
+      <a href="#sinyal">Sinyal</a>
+      <a href="#strategi">Strategi</a>
+      <a href="#settings">Settings</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Pine Script v6 · TradingView</div>
+  <h1>VWAP <span>Institutional Pro</span><br>Tutorial Lengkap</h1>
+  <p>Indikator institusional all-in-one dengan 3 tier analisis: VWAP Core, Multi-Timeframe Alignment, dan Smart Money Detection.</p>
+  <div class="tier-badges">
+    <div class="tier-badge t1">⬤ Tier 1 — VWAP Core</div>
+    <div class="tier-badge t2">⬤ Tier 2 — HTF &amp; Slope</div>
+    <div class="tier-badge t3">⬤ Tier 3 — Smart Money</div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="wrapper">
+    <div class="sec-label">Pendahuluan</div>
+    <div class="sec-title">Apa itu VWAP Institutional Pro?</div>
+    <div class="sec-desc">Indikator ini dirancang mengikuti cara institusi besar (bank, hedge fund, prop firm) membaca market — menggunakan VWAP multi-timeframe sebagai anchor bias dan level harga kritis.</div>
+
+    <div class="grid grid-3">
+      <div class="card"><div class="card-icon">🏛️</div><h3>Institutional Grade</h3><p>Kalkulasi VWAP identik dengan desk trading institusi: Volume-Weighted, bukan price-weighted. Setiap level punya bobot berbeda.</p></div>
+      <div class="card"><div class="card-icon">⏱️</div><h3>6 Timeframe Sekaligus</h3><p>30m, 1H, 4H, Daily, Weekly, Monthly dikalkulasi secara independen dan ditampilkan dalam satu panel alignment.</p></div>
+      <div class="card"><div class="card-icon">🤖</div><h3>Trade Recommendation</h3><p>Engine otomatis menganalisis alignment + order flow + divergence untuk menghasilkan rekomendasi Long/Short/Wait.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR -->
+<section id="fitur">
+  <div class="wrapper">
+    <div class="sec-label">Komponen Utama</div>
+    <div class="sec-title">Semua Fitur dalam Satu Indikator</div>
+
+    <!-- Tier 1 -->
+    <div style="margin-bottom:12px"><span class="tag tag-t1" style="border-radius:6px;padding:4px 14px;font-size:12px;">TIER 1 — VWAP CORE</span></div>
+    <div class="grid grid-2" style="margin-bottom:40px">
+      <div class="card">
+        <div class="tag tag-t1">Daily VWAP</div>
+        <h3>VWAP + Standard Deviation Bands</h3>
+        <p>VWAP harian dikalkulasi dari sumber HLC3 (High+Low+Close ÷ 3). Tiga level SD ditampilkan sebagai zona support/resistance dinamis.</p>
+        <ul style="list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:13px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--blue)">±1SD</span> — Mean reversion zone (60% waktu harga ada di sini)</li>
+          <li style="font-size:13px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--orange)">±2SD</span> — Extreme zone, area bounce/rejection</li>
+          <li style="font-size:13px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--red)">±3SD</span> — Institutional hunt zone, sangat jarang</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="tag tag-t1">Session VWAP</div>
+        <h3>Asia · London · New York VWAP</h3>
+        <p>Setiap sesi trading memiliki VWAP independen. Persilangan antar session VWAP menandai momentum bias jangka pendek.</p>
+        <ul style="list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:13px;color:var(--muted)">🟣 Asia: 07:00–16:00 WIB</li>
+          <li style="font-size:13px;color:var(--muted)">🔵 London: 14:00–23:00 WIB</li>
+          <li style="font-size:13px;color:var(--muted)">🟢 New York: 20:00–05:00 WIB</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="tag tag-t1">Anchored VWAP</div>
+        <h3>AVWAP Swing High / Low / Volume</h3>
+        <p>VWAP yang di-anchor dari titik pivot penting — swing high, swing low, dan volume node tertinggi. Menunjukkan level teknikal arah institusi.</p>
+      </div>
+      <div class="card">
+        <div class="tag tag-t1">Volume Profile</div>
+        <h3>POC · VAH · VAL</h3>
+        <p>Point of Control (harga dengan volume terbesar), Value Area High, dan Value Area Low dari N bar terakhir.</p>
+        <ul style="list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:13px;color:#FF6D00;display:flex;gap:8px">■ POC — Magnetic price, sering beraksi sebagai support/resistance</li>
+          <li style="font-size:13px;color:var(--red);display:flex;gap:8px">■ VAH — Batas atas value area (70% volume)</li>
+          <li style="font-size:13px;color:var(--green);display:flex;gap:8px">■ VAL — Batas bawah value area</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Tier 2 -->
+    <div style="margin-bottom:12px"><span class="tag tag-t2" style="border-radius:6px;padding:4px 14px;font-size:12px;">TIER 2 — HTF &amp; MOMENTUM</span></div>
+    <div class="grid grid-2" style="margin-bottom:40px">
+      <div class="card">
+        <div class="tag tag-t2">HTF VWAP</div>
+        <h3>Weekly &amp; Monthly VWAP</h3>
+        <p>Weekly VWAP dengan ±1SD bands dan Monthly VWAP sebagai level makro jangka panjang. Digunakan institusi untuk menentukan bias mingguan dan bulanan.</p>
+      </div>
+      <div class="card">
+        <div class="tag tag-t2">VWAP Slope</div>
+        <h3>Momentum &amp; Arah Tren VWAP</h3>
+        <p>Mengukur kecepatan (bps/bar) dan arah VWAP dalam N bar terakhir. Membantu mengidentifikasi apakah VWAP sedang trending kuat atau flat/choppy.</p>
+      </div>
+      <div class="card">
+        <div class="tag tag-t2">Fair Value Gap</div>
+        <h3>FVG Near VWAP Filter</h3>
+        <p>Mendeteksi gap inefficiency (candle 3-bar) yang berada dalam zona ±1SD VWAP. FVG dekat VWAP lebih probable untuk diisi kembali.</p>
+      </div>
+      <div class="card">
+        <div class="tag tag-t2">VWAP Cross Counter</div>
+        <h3>Choppy Market Detection</h3>
+        <p>Menghitung berapa kali harga melintasi Daily dan Weekly VWAP dalam periode berjalan. Lebih dari 3x crossing = pasar choppy, hindari breakout.</p>
+      </div>
+    </div>
+
+    <!-- Tier 3 -->
+    <div style="margin-bottom:12px"><span class="tag tag-t3" style="border-radius:6px;padding:4px 14px;font-size:12px;">TIER 3 — SMART MONEY</span></div>
+    <div class="grid grid-3">
+      <div class="card">
+        <div class="tag tag-t3">SM Divergence</div>
+        <h3>Smart Money Divergence</h3>
+        <p>Harga membuat high/low baru tapi volume tidak mengkonfirmasi — tanda distribusi/akumulasi institusi. Counter harian &amp; mingguan ditampilkan di panel.</p>
+      </div>
+      <div class="card">
+        <div class="tag tag-t3">Order Flow</div>
+        <h3>Institutional Order Flow Proxy</h3>
+        <p>Estimasi dominasi buyer vs seller dalam N bar terakhir berdasarkan body-to-wick ratio dan posisi close. Ditampilkan sebagai persentase 0–100%.</p>
+      </div>
+      <div class="card">
+        <div class="tag tag-t3">MTF Alignment</div>
+        <h3>6-TF VWAP Alignment Score</h3>
+        <p>Skor 0–6 menunjukkan berapa timeframe yang aligned (harga di atas VWAP). 5–6 = FULL BULL, 0–1 = FULL BEAR, 2-4 = MIXED.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MTF PANEL -->
+<section id="panel">
+  <div class="wrapper">
+    <div class="sec-label">MTF Panel</div>
+    <div class="sec-title">Membaca MTF VWAP Alignment Panel</div>
+    <div class="sec-desc">Panel utama yang menampilkan semua informasi dalam satu tampilan. Warna panel berubah dinamis sesuai kondisi market.</div>
+
+    <div class="feature">
+      <div class="feature-img">
+        <div class="label pm">▶ MTF VWAP ALIGNMENT PANEL</div>
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <tr><td class="pm" style="padding:2px 6px">TF</td><td class="pm" style="padding:2px 6px">VWAP</td><td class="pm" style="padding:2px 6px">ZONE</td><td class="pm" style="padding:2px 6px">BIAS</td><td class="pm" style="padding:2px 6px">CROSS</td></tr>
+          <tr><td class="po">30m</td><td>2651.80</td><td class="pg">ABOVE</td><td class="pg">BULL</td><td class="pm">--</td></tr>
+          <tr><td class="pb">1H</td><td>2650.80</td><td class="pg">ABOVE</td><td class="pg">BULL</td><td class="pm">--</td></tr>
+          <tr><td style="color:#B2FF59">4H</td><td>2650.20</td><td class="pg">ABOVE</td><td class="pg">BULL</td><td class="pm">--</td></tr>
+          <tr><td class="ph">Daily</td><td>2649.50</td><td class="pg">+1SD</td><td class="pg">BULL</td><td style="color:#FF9800">3x</td></tr>
+          <tr><td class="pp">Weekly</td><td>2640.20</td><td class="pg">ABOVE</td><td class="pg">BULL</td><td class="pm">1x</td></tr>
+          <tr><td class="po">Monthly</td><td>2620.00</td><td class="pg">ABOVE</td><td class="pg">BULL</td><td class="pm">--</td></tr>
+          <tr><td colspan="5" style="color:var(--green);text-align:center;padding:2px 0">━━━━━━━━━━━━━━━━━━━━━━━━━</td></tr>
+          <tr><td colspan="3" class="pg" style="padding:2px 6px"><b>★★★★★☆  5/6</b></td><td colspan="2" class="pg"><b>LEAN BULL</b></td></tr>
+          <tr><td class="pm">FLOW</td><td colspan="4" class="pg">STRONG BUY  72%</td></tr>
+          <tr><td class="pm">SM DIV</td><td colspan="2" class="pg">↑2 Bull</td><td colspan="2" class="pm">↓1/↑3 (Wk)</td></tr>
+          <tr><td class="pm">INST BIAS</td><td colspan="4" class="pg">LEAN BULL  67%</td></tr>
+          <tr><td class="pm">WIN RATE</td><td colspan="2" class="pg">68% BULL</td><td colspan="2" class="pr">53% BEAR</td></tr>
+          <tr><td colspan="5" class="pg" style="text-align:center;padding:2px 0">── TRADE SIGNAL ──</td></tr>
+          <tr><td class="pm">ACTION</td><td colspan="4" class="pg"><b>LONG BIAS</b></td></tr>
+          <tr><td class="pm">ENTRY/SL</td><td colspan="4">Near D-VWAP / +1SD</td></tr>
+          <tr><td class="pm">TP</td><td colspan="4">+2SD / W-VWAP</td></tr>
+        </table>
+      </div>
+      <div class="feature-body">
+        <h3>Struktur Panel (Row by Row)</h3>
+        <p>Panel terdiri dari <strong>19 baris</strong> yang menampilkan seluruh analisis dari atas ke bawah.</p>
+        <ul>
+          <li><strong>Header Row:</strong> TF, VWAP price, Zone SD, Bias, Cross count</li>
+          <li><strong>TF Rows (30m–Monthly):</strong> Setiap TF dengan warna uniknya</li>
+          <li><strong>Separator:</strong> Berubah warna — hijau (bull), merah (bear), ungu (mixed)</li>
+          <li><strong>Stars + Score:</strong> ★★★★★☆ dengan label FULL BULL / LEAN BULL / MIXED / LEAN BEAR / FULL BEAR</li>
+          <li><strong>FLOW:</strong> Order flow proxy 0–100%</li>
+          <li><strong>SM DIV:</strong> Jumlah divergence hari ini dan minggu ini</li>
+          <li><strong>INST BIAS:</strong> Institutional Time-Weighted Bias score</li>
+          <li><strong>WIN RATE:</strong> Probabilitas historis bull/bear signal</li>
+          <li><strong>TRADE SIGNAL:</strong> Rekomendasi action, entry, SL, TP target</li>
+          <li><strong>ITW Bar:</strong> Progress bar visual bias institusional</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Dynamic Theme -->
+    <h3 style="color:#fff;font-size:18px;margin-bottom:16px">Dynamic Color Theme</h3>
+    <div class="grid grid-3">
+      <div class="card" style="border-color:rgba(0,230,118,.3)">
+        <div style="color:var(--green);font-size:22px;margin-bottom:8px">🟢</div>
+        <h3 style="color:var(--green)">BULLISH (5–6/6)</h3>
+        <p>Panel berubah hijau gelap. Header, separator, dan text header semua bernuansa hijau. Menandakan bias institusional ke atas.</p>
+      </div>
+      <div class="card" style="border-color:rgba(90,90,200,.3)">
+        <div style="font-size:22px;margin-bottom:8px">🔵</div>
+        <h3 style="color:var(--blue)">MIXED (2–4/6)</h3>
+        <p>Panel biru gelap/navy. Kondisi pasar belum jelas. Tunggu konfirmasi sebelum entry.</p>
+      </div>
+      <div class="card" style="border-color:rgba(255,23,68,.3)">
+        <div style="color:var(--red);font-size:22px;margin-bottom:8px">🔴</div>
+        <h3 style="color:var(--red)">BEARISH (0–1/6)</h3>
+        <p>Panel berubah merah gelap. Bahaya/waspada. Bias institusional ke bawah kuat.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:40px">
+      <h3 style="color:#fff;font-size:18px;margin-bottom:16px">Institutional Time-Weighted Bias (INST BIAS)</h3>
+      <p style="color:var(--muted);max-width:680px;margin-bottom:20px;font-size:14px">
+        Skornya berbeda dari alignment score biasa — setiap TF diberi bobot berbeda sesuai "berat" institusional. Monthly VWAP jauh lebih penting dari 30m VWAP.
+      </p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Timeframe</th><th>Bobot</th><th>Progress</th><th>Alasan</th></tr></thead>
+          <tbody>
+            <tr><td>Monthly VWAP</td><td style="color:var(--gold)">32%</td><td><div class="weight-bar" style="width:100%"></div></td><td>Fund manager, long-term bias</td></tr>
+            <tr><td>Weekly VWAP</td><td style="color:var(--gold)">26%</td><td><div class="weight-bar" style="width:81%"></div></td><td>Swing institution, weekly flow</td></tr>
+            <tr><td>Daily VWAP</td><td style="color:var(--gold)">21%</td><td><div class="weight-bar" style="width:66%"></div></td><td>Prop trader &amp; bank treasury</td></tr>
+            <tr><td>4H VWAP</td><td style="color:var(--gold)">11%</td><td><div class="weight-bar" style="width:34%"></div></td><td>Intraday institutional desk</td></tr>
+            <tr><td>1H VWAP</td><td style="color:var(--gold)">7%</td><td><div class="weight-bar" style="width:22%"></div></td><td>Active trading desk</td></tr>
+            <tr><td>30m VWAP</td><td style="color:var(--gold)">3%</td><td><div class="weight-bar" style="width:9%"></div></td><td>Scalp / algo desk</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip"><strong>💡 Interpretasi INST BIAS</strong><p>≥80% = STRONG BULL | 62–80% = LEAN BULL | 38–62% = NEUTRAL | 20–38% = LEAN BEAR | &lt;20% = STRONG BEAR. Score ini lebih akurat dari alignment biasa karena mempertimbangkan "bobot" masing-masing TF.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SINYAL -->
+<section id="sinyal">
+  <div class="wrapper">
+    <div class="sec-label">Trading Signals</div>
+    <div class="sec-title">4 Jenis Sinyal Otomatis</div>
+
+    <div class="signal-grid" style="margin-bottom:32px">
+      <div class="signal-box sig-buy">
+        <h4 class="col-g">📗 BUY REV — Mean Reversion Long</h4>
+        <p style="font-size:13px;color:var(--muted)"><strong>Kondisi:</strong> Harga menyentuh -2SD, candle bullish engulfing, volume ≥1.5× rata-rata.<br><br><strong>Logika:</strong> Di -2SD, probabilitas rebound ke VWAP sangat tinggi. Institusi sering accumulate di area ini.<br><br><strong>Target:</strong> VWAP, kemudian +1SD</p>
+      </div>
+      <div class="signal-box sig-sell">
+        <h4 class="col-r">📕 SELL REV — Mean Reversion Short</h4>
+        <p style="font-size:13px;color:var(--muted)"><strong>Kondisi:</strong> Harga menyentuh +2SD, candle bearish, volume tinggi.<br><br><strong>Logika:</strong> Di +2SD, pasar terlalu stretched dari mean. Institusi cenderung distribute/sell di area extreme ini.<br><br><strong>Target:</strong> VWAP, kemudian -1SD</p>
+      </div>
+      <div class="signal-box sig-buy">
+        <h4 class="col-g">📗 BULL BREAK — Breakout Long</h4>
+        <p style="font-size:13px;color:var(--muted)"><strong>Kondisi:</strong> Close di atas VWAP setelah sebelumnya di bawah, volume confirmasi tinggi.<br><br><strong>Logika:</strong> VWAP crossover dengan volume mensignalkan demand nyata dari institusi, bukan noise.<br><br><strong>Target:</strong> +1SD → +2SD</p>
+      </div>
+      <div class="signal-box sig-sell">
+        <h4 class="col-r">📕 BEAR BREAK — Breakdown Short</h4>
+        <p style="font-size:13px;color:var(--muted)"><strong>Kondisi:</strong> Close di bawah VWAP dari atas, dengan volume konfirmasi.<br><br><strong>Logika:</strong> VWAP breakdown menunjukkan supply dominance — institusi sudah tidak mau defend level VWAP.<br><br><strong>Target:</strong> -1SD → -2SD</p>
+      </div>
+      <div class="signal-box sig-hunt">
+        <h4 class="col-o">⚡ HUNT UP / DOWN — Liquidity Hunt</h4>
+        <p style="font-size:13px;color:var(--muted)"><strong>Kondisi:</strong> Harga spike menembus ±3SD tapi close kembali ke dalam range.<br><br><strong>Logika:</strong> Institusi "sweep" stop-loss retail sebelum reversal. Sinyal ini sangat high-probability untuk reverse trade.<br><br><strong>Action:</strong> Fade the spike segera setelah close kembali</p>
+      </div>
+      <div class="signal-box sig-div">
+        <h4 class="col-p">🔮 SM DIVERGENCE — Smart Money Signal</h4>
+        <p style="font-size:13px;color:var(--muted)"><strong>Kondisi:</strong> Harga cetak High/Low baru tapi volume TURUN (diverges).<br><br><strong>Logika:</strong> Tanpa volume konfirmasi, breakout harga adalah "fake". Institusi tidak ikut — kemungkinan trap retail.<br><br><strong>Action:</strong> Berlawanan dengan arah pergerakan harga terakhir</p>
+      </div>
+    </div>
+
+    <div class="warn"><strong>⚠️ Volume Filter</strong><p>Aktifkan Volume Filter (default ON) dengan multiplier 1.5×. Sinyal tanpa konfirmasi volume jauh lebih sering menghasilkan false signal. Naikkan multiplier ke 2.0× jika pasar terlalu banyak sinyal.</p></div>
+  </div>
+</section>
+
+<!-- INFO PANEL -->
+<section>
+  <div class="wrapper">
+    <div class="sec-label">Info Panel</div>
+    <div class="sec-title">Panel Informasi Utama (Kanan Atas)</div>
+    <div class="sec-desc">Panel ringkas yang menampilkan kondisi market saat ini — trend, zone, slope, order flow, dan confluence score.</div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Row</th><th>Info</th><th>Cara Baca</th></tr></thead>
+        <tbody>
+          <tr><td>Header</td><td>Dynamic color (hijau/biru/merah)</td><td>Warna sesuai alignment score keseluruhan</td></tr>
+          <tr><td>Trend</td><td>BULLISH / BEARISH</td><td>Posisi close vs Daily VWAP</td></tr>
+          <tr><td>SD Zone</td><td>+3SD / +2SD / +1SD / VWAP / -1SD / ...</td><td>Zone harga saat ini relatif terhadap Daily VWAP</td></tr>
+          <tr><td>VWAP</td><td>Harga VWAP + selisih dari close</td><td>Jarak harga ke VWAP dalam angka absolut</td></tr>
+          <tr><td>Slope</td><td>TRENDING UP / DOWN / FLAT + bps/bar</td><td>Arah dan kecepatan VWAP. Semakin kencang = tren kuat</td></tr>
+          <tr><td>Weekly</td><td>Harga W-VWAP + posisi vs W+1SD/-1SD</td><td>Bias mingguan</td></tr>
+          <tr><td>Monthly</td><td>Harga M-VWAP + posisi</td><td>Bias makro bulanan</td></tr>
+          <tr><td>Order Flow</td><td>STRONG BUY / BUY / NEUTRAL / SELL / STRONG SELL</td><td>Beli jika ≥55%, jual jika ≤45%</td></tr>
+          <tr><td>Confluence</td><td>X/10 + progress bar + grade</td><td>Kekuatan zona harga saat ini — semakin tinggi, semakin kuat level</td></tr>
+          <tr><td>POC</td><td>Harga POC + status INSIDE/ABOVE/BELOW VA</td><td>Posisi harga relatif terhadap Value Area volume profile</td></tr>
+          <tr><td>FVG</td><td>BULL FVG / BEAR FVG / NO FVG</td><td>Apakah ada Fair Value Gap aktif dekat VWAP</td></tr>
+          <tr><td>SM Div</td><td>BULL / BEAR / None</td><td>Sinyal divergence aktif saat ini</td></tr>
+          <tr><td>Signal</td><td>BUY REV / SELL REV / BULL BREAK / dll</td><td>Sinyal terakhir yang terpicu</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORICAL WIN RATE -->
+<section>
+  <div class="wrapper">
+    <div class="sec-label">Win Rate</div>
+    <div class="sec-title">Historical Win Rate Display</div>
+    <div class="sec-desc">Indikator menghitung secara rolling win rate dari 100 bar terakhir untuk sinyal bull dan bear.</div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>🔬 Metodologi</h3>
+        <p style="color:var(--muted);font-size:14px;margin-bottom:12px">Untuk setiap bar saat ini, indikator melihat ke <strong>5 bar yang lalu</strong>:</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:14px;color:var(--muted)">1. Apakah 5 bar lalu ada sinyal bull (align ≥4)?</li>
+          <li style="font-size:14px;color:var(--muted)">2. Jika ya, apakah harga sekarang lebih tinggi dari 5 bar lalu? → <span style="color:var(--green)">WIN</span></li>
+          <li style="font-size:14px;color:var(--muted)">3. Dihitung dari 100 bar terakhir → win rate %</li>
+          <li style="font-size:14px;color:var(--muted)">4. Butuh minimal 3 sinyal untuk tampil (jika tidak: "Collecting...")</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>📊 Interpretasi</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px">
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:12px;height:12px;border-radius:50%;background:var(--green)"></div><span style="font-size:14px;color:var(--muted)">≥60% — Edge positif, sinyal reliable pada kondisi ini</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:12px;height:12px;border-radius:50%;background:#69F0AE"></div><span style="font-size:14px;color:var(--muted)">50–60% — Edge tipis, perlu konfirmasi tambahan</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:12px;height:12px;border-radius:50%;background:#FF9800"></div><span style="font-size:14px;color:var(--muted)">&lt;50% — Edge negatif, kondisi market tidak favorable</span></div>
+        </div>
+        <div class="warn" style="margin-top:16px"><strong>⚠️ Penting</strong><p>Win rate bersifat historis dan berubah terus. Gunakan sebagai filter tambahan, bukan patokan utama entry.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRATEGI -->
+<section id="strategi">
+  <div class="wrapper">
+    <div class="sec-label">Strategi Trading</div>
+    <div class="sec-title">Setup Terbaik dengan VWAP Pro</div>
+
+    <div style="margin-bottom:48px">
+      <h3 style="color:#fff;font-size:20px;margin-bottom:24px">🏆 Setup 1: Full Alignment Long</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Cek MTF Panel</h4><p>Alignment score harus ≥5/6 (★★★★★☆). Panel harus berwarna hijau. INST BIAS ≥62%.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Konfirmasi Order Flow</h4><p>Flow ≥55% (BUY atau STRONG BUY). Ini memastikan demand nyata dari institusi.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Tunggu Retest VWAP</h4><p>Biarkan harga pull back ke Daily VWAP atau +1SD. Jangan chase, entry di level.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Cek Confluence Score</h4><p>Idealnya confluence ≥5/10 di area entry. Lebih banyak level berarti level lebih kuat.</p></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-content"><h4>Entry + SL + TP</h4><p>Entry: Bounce dari VWAP. SL: Di bawah -1SD. TP1: +1SD. TP2: +2SD. TP3: Weekly VWAP jika tidak aligned.</p></div></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:48px">
+      <h3 style="color:#fff;font-size:20px;margin-bottom:24px">⚡ Setup 2: Institutional Hunt Reversal</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-content"><h4>Tunggu HUNT Signal</h4><p>Harga spike ke ±3SD. Sinyal "HUNT UP" atau "HUNT DN" muncul di chart.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><h4>Konfirmasi Volume</h4><p>Volume pada candle spike harus sangat tinggi (≥2× rata-rata). Ini adalah stop-hunt oleh institusi.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><h4>Tunggu Rejection Candle</h4><p>Candle berikutnya harus close kembali di dalam ±2SD. Ini yang mengkonfirmasi reversal.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><h4>Entry Kontra Trend</h4><p>Masuk berlawanan arah spike. SL: di luar level 3SD. TP: VWAP, minimal +1SD ke arah reversal.</p></div></div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="color:#fff;font-size:20px;margin-bottom:24px">🚫 Kondisi yang Harus Dihindari</h3>
+      <div class="grid grid-2">
+        <div class="card" style="border-color:rgba(255,23,68,.2)">
+          <h3 style="color:var(--red)">Daily Cross Count &gt; 3x</h3>
+          <p>Jika harga sudah 3+ kali memotong VWAP hari ini → pasar choppy. Probabilitas breakout rendah, jangan entry directional.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,23,68,.2)">
+          <h3 style="color:var(--red)">Alignment 2–4/6 (MIXED)</h3>
+          <p>Panel biru = pasar belum decide. Menunggu lebih baik daripada entry di kondisi mixed alignment yang sering berujung whipsaw.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,23,68,.2)">
+          <h3 style="color:var(--red)">Flow &lt; 45% (Berlawanan Bias)</h3>
+          <p>Jika bias bullish tapi flow bearish (&lt;45%), kemungkinan besar sinyal bull adalah false. Tunggu flow konfirmasi dulu.</p>
+        </div>
+        <div class="card" style="border-color:rgba(255,23,68,.2)">
+          <h3 style="color:var(--red)">SM Div Bear ≥2 dalam sehari</h3>
+          <p>Jika SM DIV counter menunjukkan 2+ bearish divergence hari ini dalam kondisi bullish → distribusi institusi sedang terjadi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SETTINGS -->
+<section id="settings">
+  <div class="wrapper">
+    <div class="sec-label">Konfigurasi</div>
+    <div class="sec-title">Panduan Setting Input</div>
+
+    <div class="tbl-wrap" style="margin-bottom:32px">
+      <table>
+        <thead><tr><th>Group</th><th>Setting</th><th>Default</th><th>Rekomendasi</th></tr></thead>
+        <tbody>
+          <tr><td>VWAP Core</td><td>VWAP Source</td><td>HLC3</td><td>Biarkan HLC3 (standar institusi). Jangan ganti ke Close.</td></tr>
+          <tr><td>SD Bands</td><td>Show +/-3 SD</td><td>ON</td><td>Pertahankan ON — level +3SD/-3SD penting untuk hunt signal.</td></tr>
+          <tr><td>Session</td><td>Asia / London / NY</td><td>UTC+7</td><td>Sesuaikan zona waktu jika tidak di WIB (GMT+7).</td></tr>
+          <tr><td>AVWAP</td><td>Pivot Lookback</td><td>10</td><td>Naikkan ke 15-20 untuk AVWAP yang lebih signifikan di chart H1+.</td></tr>
+          <tr><td>Vol Profile</td><td>Value Area %</td><td>70%</td><td>Gunakan 68-70% (1 standard deviation statistik).</td></tr>
+          <tr><td>Signals</td><td>Vol Multiplier</td><td>1.5×</td><td>Naikkan ke 2.0× di market dengan volume tidak stabil.</td></tr>
+          <tr><td>MTF Panel</td><td>Position</td><td>Bottom Right</td><td>Bottom Right atau Top Right tergantung layout chart.</td></tr>
+          <tr><td>SM Div</td><td>Divergence Lookback</td><td>10</td><td>5–8 untuk scalping, 10–15 untuk swing trading.</td></tr>
+          <tr><td>Order Flow</td><td>Flow Lookback</td><td>14</td><td>7–10 untuk scalp, 14–21 untuk swing.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip"><strong>💡 Setup untuk Gold (XAUUSD)</strong><p>Gunakan chart 1H atau 4H sebagai base. Aktifkan semua 6 TF alignment. Volume Multiplier 1.8×. Divergence Lookback 12. Session timezone UTC+7. VWAP Slope Length 5 bars.</p></div>
+    <div class="tip"><strong>💡 Setup untuk Forex Major</strong><p>Chart 15m atau 1H. Volume Filter OFF (forex tidak ada volume nyata, gunakan tick volume). Flow Lookback 7. Fokus pada alignment 30m–4H saja.</p></div>
+  </div>
+</section>
+
+<!-- QUICK REF -->
+<section>
+  <div class="wrapper">
+    <div class="sec-label">Quick Reference</div>
+    <div class="sec-title">Panduan Cepat Membaca Panel</div>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>Alignment Score</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--green)">★★★★★★ 6/6</span><span style="font-size:13px;color:var(--muted)">FULL BULL</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#69F0AE">★★★★★☆ 5/6</span><span style="font-size:13px;color:var(--muted)">LEAN BULL</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--gold)">★★★★☆☆ 4/6</span><span style="font-size:13px;color:var(--muted)">LEAN BULL</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--gold)">★★★☆☆☆ 3/6</span><span style="font-size:13px;color:var(--muted)">MIXED</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#FF9800">★★☆☆☆☆ 2/6</span><span style="font-size:13px;color:var(--muted)">LEAN BEAR</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--red)">★☆☆☆☆☆ 1/6</span><span style="font-size:13px;color:var(--muted)">LEAN BEAR</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#FF1744">☆☆☆☆☆☆ 0/6</span><span style="font-size:13px;color:var(--muted)">FULL BEAR</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Order Flow</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--green)">≥70%</span><span style="font-size:13px;color:var(--muted)">STRONG BUY</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#69F0AE">55–70%</span><span style="font-size:13px;color:var(--muted)">BUY</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--gold)">45–55%</span><span style="font-size:13px;color:var(--muted)">NEUTRAL</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#FF9800">30–45%</span><span style="font-size:13px;color:var(--muted)">SELL</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:var(--red)">≤30%</span><span style="font-size:13px;color:var(--muted)">STRONG SELL</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Trade Recommendation</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <div><span style="color:var(--green);font-weight:700">LONG BIAS</span><p style="font-size:13px;color:var(--muted)">Align ≥4 + Flow ≥55% + Cross ≤2</p></div>
+          <div><span style="color:var(--red);font-weight:700">SHORT BIAS</span><p style="font-size:13px;color:var(--muted)">Align ≤1 + Flow ≤45% + Cross ≤2</p></div>
+          <div><span style="color:#FF9800;font-weight:700">RANGE / WAIT</span><p style="font-size:13px;color:var(--muted)">Daily cross &gt;3x (choppy)</p></div>
+          <div><span style="color:var(--muted);font-weight:700">NEUTRAL</span><p style="font-size:13px;color:var(--muted)">Alignment mixed, tunggu konfirmasi</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>VWAP Institutional Pro</strong> · Pine Script v6 · TradingView<br>
+  <span style="font-size:12px">Tutorial ini dibuat berdasarkan dokumentasi internal indikator. Selalu gunakan money management yang proper.</span></p>
+</footer>
+
+</body>
+</html>
