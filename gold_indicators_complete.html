@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panduan Lengkap Indikator Makro Gold</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0b;--bg2:#111114;--bg3:#18181c;--bg4:#1e1e24;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--text:#e8e6e0;--muted:#7a7870;--gold:#c9a84c;--gold2:#f0c96e;--gold3:#7a5c1e;--up:#4caf85;--up2:#1a3d2e;--down:#e05a5a;--down2:#3d1a1a;--blue:#5a9de0;--blue2:#1a2e3d;--purple:#9b7de0;--purple2:#221a3d;--teal:#4cc9c9;--teal2:#1a3333;--amber:#e0a84c;--amber2:#3d2a1a;--sidebar-w:260px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh;font-size:15px;line-height:1.7}
+aside{width:var(--sidebar-w);min-width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:100;display:flex;flex-direction:column}
+.sidebar-logo{padding:28px 24px 20px;border-bottom:1px solid var(--border)}
+.sidebar-logo .mark{font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.sidebar-logo h2{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--text);line-height:1.3}
+nav{padding:16px 0;flex:1}
+.nav-group{margin-bottom:4px}
+.nav-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:10px 24px 6px}
+nav a{display:flex;align-items:center;gap:10px;padding:8px 24px;color:var(--muted);text-decoration:none;font-size:13.5px;transition:all .15s;border-left:2px solid transparent}
+nav a:hover,nav a.active{color:var(--text);background:rgba(255,255,255,.04);border-left-color:var(--gold)}
+nav a .star{font-size:10px;color:var(--gold);margin-left:auto}
+.sidebar-footer{padding:16px 24px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
+main{margin-left:var(--sidebar-w);flex:1;max-width:920px;padding:60px 56px}
+.hero{margin-bottom:64px;padding-bottom:48px;border-bottom:1px solid var(--border)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--amber2);border:1px solid var(--gold3);border-radius:40px;padding:5px 14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--gold2);margin-bottom:24px;letter-spacing:.05em}
+.hero-badge::before{content:'●';font-size:8px;color:var(--gold)}
+.hero h1{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:20px;color:#fff}
+.hero h1 span{color:var(--gold2)}
+.hero p{font-size:16px;color:var(--muted);max-width:560px;line-height:1.8;margin-bottom:28px}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap}
+.hero-stat .num{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:var(--gold2)}
+.hero-stat .label{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.05em}
+section{margin-bottom:72px}
+.section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.section-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);background:var(--amber2);border:1px solid var(--gold3);border-radius:6px;padding:4px 8px;margin-top:4px;white-space:nowrap}
+.section-title-block h2{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:#fff;letter-spacing:-.01em;margin-bottom:4px}
+.section-title-block .sub{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.05em}
+.strength-badge{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.strength-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.stars{color:var(--gold2);font-size:14px;letter-spacing:2px}
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.impact-card{border-radius:12px;padding:24px;border:1px solid}
+.impact-card.up{background:var(--up2);border-color:rgba(76,175,133,.25)}
+.impact-card.down{background:var(--down2);border-color:rgba(224,90,90,.25)}
+.impact-card-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.impact-arrow{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700}
+.up .impact-arrow{background:rgba(76,175,133,.2);color:var(--up)}
+.down .impact-arrow{background:rgba(224,90,90,.2);color:var(--down)}
+.impact-card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em}
+.up .impact-card-title{color:var(--up)}
+.down .impact-card-title{color:var(--down)}
+.impact-result{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:6px;display:inline-block;margin-bottom:16px;font-weight:500}
+.up .impact-result{background:rgba(76,175,133,.15);color:var(--up);border:1px solid rgba(76,175,133,.3)}
+.down .impact-result{background:rgba(224,90,90,.15);color:var(--down);border:1px solid rgba(224,90,90,.3)}
+.flow-steps{display:flex;flex-direction:column;gap:8px}
+.flow-step{display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5}
+.flow-dot{width:6px;height:6px;border-radius:50%;margin-top:7px;flex-shrink:0}
+.up .flow-dot{background:var(--up)}
+.down .flow-dot{background:var(--down)}
+.flow-step span{color:var(--muted)}
+.prose{margin-bottom:24px}
+.prose h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;margin:28px 0 10px}
+.prose h3:first-child{margin-top:0}
+.prose p{color:var(--muted);margin-bottom:12px;font-size:14px;line-height:1.8}
+.prose strong{color:var(--text);font-weight:500}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:13px}
+.data-table th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 14px;border-bottom:1px solid var(--border2);font-weight:400}
+.data-table td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:middle}
+.data-table td:first-child{color:var(--text);font-weight:500}
+.data-table tr:hover td{background:rgba(255,255,255,.02)}
+.tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;padding:3px 8px;border-radius:4px;letter-spacing:.05em}
+.tag.bull{background:var(--up2);color:var(--up);border:1px solid rgba(76,175,133,.3)}
+.tag.bear{background:var(--down2);color:var(--down);border:1px solid rgba(224,90,90,.3)}
+.tag.mix{background:var(--amber2);color:var(--amber);border:1px solid rgba(224,168,76,.3)}
+.callout{border-radius:10px;padding:18px 20px;margin:20px 0;display:flex;gap:14px;font-size:13.5px}
+.callout.info{background:var(--blue2);border:1px solid rgba(90,157,224,.2)}
+.callout.warning{background:var(--amber2);border:1px solid rgba(224,168,76,.2)}
+.callout.success{background:var(--up2);border:1px solid rgba(76,175,133,.2)}
+.callout-icon{font-size:16px;margin-top:1px;flex-shrink:0}
+.callout p{color:var(--muted);margin:0;font-size:13.5px}
+.callout strong{color:var(--text)}
+.callout.info .callout-icon{color:var(--blue)}
+.callout.warning .callout-icon{color:var(--amber)}
+.callout.success .callout-icon{color:var(--up)}
+.phase-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}
+.phase-card{border-radius:10px;padding:16px;border:1px solid;text-align:center}
+.phase-card .phase-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.phase-card h4{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:6px}
+.phase-card p{font-size:11px;color:var(--muted);margin:0;line-height:1.5}
+.phase-card.ph1{background:var(--amber2);border-color:rgba(224,168,76,.2);color:var(--amber)}
+.phase-card.ph2{background:var(--down2);border-color:rgba(224,90,90,.2);color:var(--down)}
+.phase-card.ph3{background:var(--purple2);border-color:rgba(155,125,224,.2);color:var(--purple)}
+.phase-card.ph4{background:var(--up2);border-color:rgba(76,175,133,.2);color:var(--up)}
+.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.mini-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;transition:border-color .2s}
+.mini-card:hover{border-color:var(--border2)}
+.mini-card .ticker{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--gold2);margin-bottom:4px}
+.mini-card .name{font-size:12px;color:var(--muted);margin-bottom:8px}
+.mini-card .corr{font-size:11px;color:var(--text);font-family:'DM Mono',monospace}
+.mini-card .str{font-size:11px;color:var(--gold);margin-top:2px}
+.hierarchy{margin:20px 0}
+.hier-row{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:8px;margin-bottom:6px;background:var(--bg3);border:1px solid var(--border);transition:background .15s}
+.hier-row:hover{background:var(--bg4)}
+.hier-rank{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);width:20px;flex-shrink:0}
+.hier-ticker{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--gold2);min-width:90px}
+.hier-desc{font-size:13px;color:var(--muted);flex:1}
+.hier-stars{font-size:12px;color:var(--gold);letter-spacing:2px;flex-shrink:0}
+.bar-wrap{width:80px;flex-shrink:0}
+.bar{height:4px;border-radius:2px;background:var(--gold);opacity:.8}
+.matrix{margin:20px 0;overflow-x:auto}
+.matrix table{width:100%;border-collapse:collapse;font-size:12.5px}
+.matrix th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--border2);text-align:center;white-space:nowrap}
+.matrix th:first-child{text-align:left}
+.matrix td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle}
+.matrix td:first-child{text-align:left;font-weight:500;color:var(--text);font-family:'DM Mono',monospace;font-size:12px}
+.matrix .bull-cell{color:var(--up);font-weight:500}
+.matrix .bear-cell{color:var(--down);font-weight:500}
+.matrix .mix-cell{color:var(--amber);font-weight:500}
+.matrix tr:hover td{background:rgba(255,255,255,.02)}
+.divider{height:1px;background:var(--border);margin:48px 0}
+
+/* ── VIZ BLOCK ── */
+.viz-block{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:24px;margin:24px 0;overflow:hidden}
+.viz-block svg{display:block;width:100%;height:auto}
+.viz-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+
+@media(max-width:900px){aside{display:none}main{margin-left:0;padding:32px 20px}.impact-grid{grid-template-columns:1fr}.phase-grid{grid-template-columns:1fr 1fr}.mini-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:32px}}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+</style>
+</head>
+<body>
+
+<aside>
+  <div class="sidebar-logo">
+    <div class="mark">Makro × Gold</div>
+    <h2>Panduan Indikator Lengkap</h2>
+  </div>
+  <nav>
+    <div class="nav-group">
+      <div class="nav-label">Sudah Dibahas</div>
+      <a href="#rrpontsyd">RRPONTSYD <span class="star">★★★</span></a>
+      <a href="#dfii10">DFII10 <span class="star">★★★★★</span></a>
+      <a href="#us02y">US02Y <span class="star">★★★★</span></a>
+      <a href="#us10y">US10Y <span class="star">★★★★</span></a>
+      <a href="#gld">GLD ETF <span class="star">★★★★</span></a>
+      <a href="#vix">VIX <span class="star">★★★</span></a>
+      <a href="#yieldcurve">2s10s Spread <span class="star">★★★★</span></a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Kategori Tambahan</div>
+      <a href="#dxy">① Dolar &amp; Valas</a>
+      <a href="#inflasi">② Inflasi &amp; Ekonomi</a>
+      <a href="#centralbank">③ Bank Sentral</a>
+      <a href="#komoditas">④ Komoditas</a>
+      <a href="#positioning">⑤ Positioning</a>
+      <a href="#geopolitik">⑥ Geopolitik</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Referensi</div>
+      <a href="#hierarki">Hierarki Kekuatan</a>
+      <a href="#matrix">Matrix Ringkasan</a>
+      <a href="#petaindikator">Peta Indikator</a>
+      <a href="#prinsip">Prinsip Utama</a>
+    </div>
+  </nav>
+  <div class="sidebar-footer">XAUUSD Macro Guide v2.0</div>
+</aside>
+
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">XAUUSD Macro Framework</div>
+  <h1>Panduan Lengkap<br><span>Indikator Makro</span><br>Penggerak Gold</h1>
+  <p>Analisis komprehensif seluruh indikator fundamental, sentimen, dan struktural yang mempengaruhi harga emas — dilengkapi visualisasi mekanisme transmisi setiap indikator.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">30+</div><div class="label">Indikator</div></div>
+    <div class="hero-stat"><div class="num">6</div><div class="label">Kategori</div></div>
+    <div class="hero-stat"><div class="num">7</div><div class="label">Analisis + Visualisasi</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     01. RRPONTSYD
+══════════════════════════════════════ -->
+<section id="rrpontsyd">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-title-block">
+      <h2>RRPONTSYD</h2>
+      <div class="sub">Overnight Reverse Repo — Fed Liquidity Indicator</div>
+    </div>
+    <div class="strength-badge"><div class="strength-label">Korelasi</div><div class="stars">★★★☆☆</div></div>
+  </div>
+
+  <div class="prose">
+    <p>RRPONTSYD mengukur jumlah uang yang diparkir institusi keuangan ke Federal Reserve semalam melalui reverse repo. Ini adalah barometer <strong>likuiditas sistem keuangan</strong> — bukan penggerak langsung gold, melainkan indikator kondisi makro yang mendasarinya.</p>
+  </div>
+
+  <!-- VIZ: RRPONTSYD Flow -->
+  <div class="viz-block">
+    <div class="viz-label">Mekanisme Transmisi — RRPONTSYD ke Gold</div>
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#7a7870" stroke-width="1.5" stroke-linecap="round"/>
+        </marker>
+        <marker id="arru" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#4caf85" stroke-width="1.5" stroke-linecap="round"/>
+        </marker>
+        <marker id="arrd" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#e05a5a" stroke-width="1.5" stroke-linecap="round"/>
+        </marker>
+      </defs>
+
+      <!-- LEFT SIDE: NAIK -->
+      <text x="10" y="22" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="11" font-weight="500" letter-spacing="1">RRP NAIK ↑</text>
+      <!-- boxes -->
+      <rect x="10" y="32" width="140" height="34" rx="6" fill="#3d1a1a" stroke="#e05a5a" stroke-width="0.5"/>
+      <text x="80" y="53" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Bank parkir ke Fed</text>
+      <line x1="155" y1="49" x2="170" y2="49" stroke="#7a7870" stroke-width="1" marker-end="url(#arr)"/>
+
+      <rect x="172" y="32" width="130" height="34" rx="6" fill="#3d1a1a" stroke="#e05a5a" stroke-width="0.5"/>
+      <text x="237" y="48" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Likuiditas tersedot</text>
+      <text x="237" y="60" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">kondisi mengencang</text>
+      <line x1="305" y1="49" x2="320" y2="49" stroke="#7a7870" stroke-width="1" marker-end="url(#arr)"/>
+
+      <rect x="322" y="32" width="130" height="34" rx="6" fill="#3d1a1a" stroke="#e05a5a" stroke-width="0.5"/>
+      <text x="387" y="48" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">USD + real yield</text>
+      <text x="387" y="60" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">menguat</text>
+      <line x1="455" y1="49" x2="470" y2="49" stroke="#7a7870" stroke-width="1" marker-end="url(#arr)"/>
+
+      <rect x="472" y="32" width="130" height="34" rx="6" fill="#3d1a1a" stroke="#e05a5a" stroke-width="0.5"/>
+      <text x="537" y="48" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Risk appetite turun</text>
+      <text x="537" y="60" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">pilih aset berbunga</text>
+      <line x1="605" y1="49" x2="620" y2="49" stroke="#e05a5a" stroke-width="1.5" marker-end="url(#arrd)"/>
+
+      <rect x="622" y="24" width="160" height="50" rx="8" fill="#3d1a1a" stroke="#e05a5a" stroke-width="1.5"/>
+      <text x="702" y="46" fill="#e05a5a" font-family="'Syne',sans-serif" font-size="13" font-weight="700" text-anchor="middle">GOLD ↓</text>
+      <text x="702" y="62" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">tekanan bearish</text>
+
+      <!-- DIVIDER -->
+      <line x1="0" y1="110" x2="800" y2="110" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+      <!-- RIGHT SIDE: TURUN -->
+      <text x="10" y="135" fill="#4caf85" font-family="'DM Mono',monospace" font-size="11" font-weight="500" letter-spacing="1">RRP TURUN ↓</text>
+      <rect x="10" y="145" width="140" height="34" rx="6" fill="#1a3d2e" stroke="#4caf85" stroke-width="0.5"/>
+      <text x="80" y="166" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Bank tarik dari Fed</text>
+      <line x1="155" y1="162" x2="170" y2="162" stroke="#7a7870" stroke-width="1" marker-end="url(#arr)"/>
+
+      <rect x="172" y="145" width="130" height="34" rx="6" fill="#1a3d2e" stroke="#4caf85" stroke-width="0.5"/>
+      <text x="237" y="161" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Likuiditas dilepas</text>
+      <text x="237" y="173" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">kondisi melonggar</text>
+      <line x1="305" y1="162" x2="320" y2="162" stroke="#7a7870" stroke-width="1" marker-end="url(#arr)"/>
+
+      <rect x="322" y="145" width="130" height="34" rx="6" fill="#1a3d2e" stroke="#4caf85" stroke-width="0.5"/>
+      <text x="387" y="161" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">USD + real yield</text>
+      <text x="387" y="173" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">melemah</text>
+      <line x1="455" y1="162" x2="470" y2="162" stroke="#7a7870" stroke-width="1" marker-end="url(#arr)"/>
+
+      <rect x="472" y="145" width="130" height="34" rx="6" fill="#1a3d2e" stroke="#4caf85" stroke-width="0.5"/>
+      <text x="537" y="161" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Risk appetite naik</text>
+      <text x="537" y="173" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">cari aset riil</text>
+      <line x1="605" y1="162" x2="620" y2="162" stroke="#4caf85" stroke-width="1.5" marker-end="url(#arru)"/>
+
+      <rect x="622" y="137" width="160" height="50" rx="8" fill="#1a3d2e" stroke="#4caf85" stroke-width="1.5"/>
+      <text x="702" y="159" fill="#4caf85" font-family="'Syne',sans-serif" font-size="13" font-weight="700" text-anchor="middle">GOLD ↑</text>
+      <text x="702" y="175" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">dukungan bullish</text>
+
+      <!-- Historical context bar -->
+      <text x="10" y="230" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" letter-spacing="1">SALDO RRP HISTORIS (ILUSTRATIF)</text>
+      <rect x="10" y="242" width="780" height="8" rx="4" fill="#1e1e24"/>
+      <!-- 2021 low -->
+      <rect x="10" y="242" width="60" height="8" rx="0" fill="#3d2a1a"/>
+      <text x="40" y="262" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">2021 rendah</text>
+      <!-- 2022-23 peak -->
+      <rect x="70" y="242" width="400" height="8" rx="0" fill="#e05a5a" opacity="0.6"/>
+      <text x="270" y="262" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">$2.5T puncak → Gold tertekan</text>
+      <!-- 2024 turun -->
+      <rect x="470" y="242" width="200" height="8" rx="0" fill="#4caf85" opacity="0.7"/>
+      <text x="570" y="262" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">RRP turun → Gold ATH 2024</text>
+      <!-- now low -->
+      <rect x="670" y="242" width="120" height="8" rx="4" fill="#3d2a1a"/>
+      <text x="730" y="262" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">rendah kini</text>
+
+      <text x="10" y="290" fill="#5a7870" font-family="'DM Sans',sans-serif" font-size="10">★ RRPONTSYD adalah indikator tidak langsung — pengaruh terbesar saat tren berubah arah signifikan.</text>
+    </svg>
+  </div>
+
+  <div class="impact-grid">
+    <div class="impact-card up">
+      <div class="impact-card-header"><div class="impact-arrow">↑</div><div class="impact-card-title">RRPONTSYD NAIK</div></div>
+      <div class="impact-result">Gold Cenderung Turun</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Likuiditas tersedot — bank parkir uang ke Fed</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Uang keluar dari sistem, kondisi mengencang</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>USD &amp; real yield menguat</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Risk appetite turun → investor pilih aset berbunga</span></div>
+      </div>
+    </div>
+    <div class="impact-card down">
+      <div class="impact-card-header"><div class="impact-arrow">↓</div><div class="impact-card-title">RRPONTSYD TURUN</div></div>
+      <div class="impact-result">Gold Cenderung Naik</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Likuiditas dilepas — uang masuk ke pasar</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Kondisi keuangan melonggar</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>USD &amp; real yield melemah</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Risk appetite naik → kapital cari aset riil</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="callout warning"><div class="callout-icon">⚡</div><p><strong>Catatan:</strong> RRPONTSYD bukan satu-satunya faktor. Pengaruh terbesar terlihat saat terjadi perubahan tren besar — seperti penurunan dari puncak $2.5 triliun (2022) ke ratusan miliar (2024) yang turut mendukung rally gold ke ATH.</p></div>
+</section>
+
+<!-- ══════════════════════════════════════
+     02. DFII10
+══════════════════════════════════════ -->
+<section id="dfii10">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-title-block">
+      <h2>DFII10</h2>
+      <div class="sub">10-Year TIPS — Real Yield · Indikator #1 untuk Gold</div>
+    </div>
+    <div class="strength-badge"><div class="strength-label">Korelasi</div><div class="stars">★★★★★</div></div>
+  </div>
+  <div class="prose">
+    <p>DFII10 adalah <strong>real yield</strong> — imbal hasil obligasi AS 10 tahun setelah dikurangi ekspektasi inflasi. Indikator dengan korelasi langsung paling kuat terhadap gold. Emas tidak berbunga — ketika real yield negatif, biaya memegang emas = nol atau menguntungkan.</p>
+    <p style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gold2);background:var(--amber2);padding:10px 14px;border-radius:8px;border-left:3px solid var(--gold)">Real Yield = Nominal Yield 10Y − Break-even Inflation</p>
+  </div>
+
+  <!-- VIZ: DFII10 Opportunity Cost Scale -->
+  <div class="viz-block">
+    <div class="viz-label">Skala Opportunity Cost Emas vs Real Yield</div>
+    <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
+      <!-- Scale axis -->
+      <text x="400" y="22" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" letter-spacing="1">REAL YIELD SPECTRUM (DFII10)</text>
+      <rect x="40" y="34" width="720" height="16" rx="8" fill="#1e1e24"/>
+      <!-- negative zone -->
+      <rect x="40" y="34" width="240" height="16" rx="8" fill="#4caf85" opacity="0.7"/>
+      <!-- zero zone -->
+      <rect x="280" y="34" width="80" height="16" fill="#c9a84c" opacity="0.5"/>
+      <!-- positive zone -->
+      <rect x="360" y="34" width="400" height="16" rx="8" fill="#e05a5a" opacity="0.6"/>
+      <!-- labels -->
+      <text x="160" y="28" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">NEGATIF (bullish gold)</text>
+      <text x="320" y="28" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">NOL</text>
+      <text x="560" y="28" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">POSITIF (bearish gold)</text>
+      <!-- tick marks -->
+      <line x1="40" y1="50" x2="40" y2="60" stroke="#7a7870" stroke-width="1"/>
+      <line x1="160" y1="50" x2="160" y2="60" stroke="#7a7870" stroke-width="1"/>
+      <line x1="280" y1="50" x2="280" y2="60" stroke="#c9a84c" stroke-width="1.5"/>
+      <line x1="480" y1="50" x2="480" y2="60" stroke="#7a7870" stroke-width="1"/>
+      <line x1="760" y1="50" x2="760" y2="60" stroke="#7a7870" stroke-width="1"/>
+      <text x="40" y="72" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">-2%</text>
+      <text x="160" y="72" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">-1%</text>
+      <text x="280" y="72" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">0%</text>
+      <text x="480" y="72" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">+1.5%</text>
+      <text x="760" y="72" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">+3%</text>
+
+      <!-- Gold price chart (illustrative) -->
+      <text x="40" y="110" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" letter-spacing="1">KORELASI HISTORIS DFII10 vs GOLD (ILUSTRASI)</text>
+      <!-- chart background -->
+      <rect x="40" y="120" width="720" height="140" rx="8" fill="#111114"/>
+      <!-- grid lines -->
+      <line x1="40" y1="155" x2="760" y2="155" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <line x1="40" y1="190" x2="760" y2="190" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <line x1="40" y1="225" x2="760" y2="225" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <!-- Year labels -->
+      <text x="100" y="272" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">2019</text>
+      <text x="220" y="272" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">2020</text>
+      <text x="340" y="272" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">2021</text>
+      <text x="460" y="272" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">2022</text>
+      <text x="580" y="272" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">2023</text>
+      <text x="700" y="272" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">2024</text>
+      <!-- Gold price line (approximate) -->
+      <polyline points="60,215 100,210 160,200 200,175 220,160 280,150 320,148 360,153 400,175 440,195 480,205 520,200 560,195 580,185 620,175 660,160 700,148 740,138 760,130" fill="none" stroke="#c9a84c" stroke-width="2" stroke-linejoin="round"/>
+      <!-- DFII10 line (inverse approximate) -->
+      <polyline points="60,165 100,170 160,178 200,200 220,220 280,230 320,232 360,225 400,200 440,175 480,162 520,165 560,168 580,172 620,178 660,188 700,198 740,205 760,210" fill="none" stroke="#e05a5a" stroke-width="1.5" stroke-dasharray="4 3" stroke-linejoin="round"/>
+      <!-- legend -->
+      <rect x="55" y="125" width="10" height="3" rx="1" fill="#c9a84c"/>
+      <text x="70" y="132" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="9">XAUUSD</text>
+      <rect x="130" y="123" width="14" height="3" rx="1" fill="#e05a5a"/>
+      <text x="148" y="132" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9">DFII10 (inverse)</text>
+      <!-- annotations -->
+      <text x="270" y="145" fill="#4caf85" font-family="'DM Mono',monospace" font-size="8">DFII10 = -1.8% → ATH $2070</text>
+      <line x1="288" y1="148" x2="288" y2="150" stroke="#4caf85" stroke-width="1"/>
+      <text x="440" y="212" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="8">DFII10 = +2.5% → $1620</text>
+      <line x1="480" y1="215" x2="480" y2="205" stroke="#e05a5a" stroke-width="1"/>
+      <text x="650" y="140" fill="#4caf85" font-family="'DM Mono',monospace" font-size="8">DFII10 turun → ATH 2024</text>
+
+      <text x="400" y="310" fill="#5a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">★ Korelasi negatif terkuat di antara semua indikator makro vs gold — berlaku hampir setiap saat.</text>
+    </svg>
+  </div>
+
+  <div class="impact-grid">
+    <div class="impact-card up">
+      <div class="impact-card-header"><div class="impact-arrow">↑</div><div class="impact-card-title">DFII10 NAIK</div></div>
+      <div class="impact-result">Gold Cenderung Turun</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Imbal hasil riil obligasi tinggi</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Opportunity cost emas melonjak</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Capital mengalir ke fixed income</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>USD menguat → emas ditekan ganda</span></div>
+      </div>
+    </div>
+    <div class="impact-card down">
+      <div class="impact-card-header"><div class="impact-arrow">↓</div><div class="impact-card-title">DFII10 TURUN</div></div>
+      <div class="impact-result">Gold Cenderung Naik</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Return nyata obligasi kecil / negatif</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Opportunity cost emas turun / nol</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Capital berpindah ke aset riil</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>USD melemah → emas diuntungkan</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="prose"><h3>Bukti Historis</h3></div>
+  <table class="data-table">
+    <tr><th>Periode</th><th>DFII10</th><th>Harga Gold</th><th>Dampak</th></tr>
+    <tr><td>2020–2022</td><td>-1% hingga -2%</td><td>Rally ke ATH ~$2.070</td><td><span class="tag bull">BULLISH</span></td></tr>
+    <tr><td>2022–2023</td><td>+2.5% (naik agresif)</td><td>Turun ke ~$1.620</td><td><span class="tag bear">BEARISH</span></td></tr>
+    <tr><td>2024</td><td>Mulai turun ekspektasi</td><td>Rally ke ATH baru $2.400+</td><td><span class="tag bull">BULLISH</span></td></tr>
+  </table>
+</section>
+
+<!-- ══════════════════════════════════════
+     03. US02Y
+══════════════════════════════════════ -->
+<section id="us02y">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-title-block">
+      <h2>US02Y</h2>
+      <div class="sub">2-Year Treasury Yield — Cermin Kebijakan Fed</div>
+    </div>
+    <div class="strength-badge"><div class="strength-label">Korelasi</div><div class="stars">★★★★☆</div></div>
+  </div>
+  <div class="prose">
+    <p>US02Y adalah <strong>barometer paling sensitif terhadap ekspektasi kebijakan Fed</strong>. Bergerak bahkan sebelum Fed resmi mengumumkan keputusan — mencerminkan apa yang diperkirakan pasar dalam ~2 tahun ke depan.</p>
+  </div>
+
+  <!-- VIZ: US02Y Fed Expectations -->
+  <div class="viz-block">
+    <div class="viz-label">US02Y — Mekanisme Transmisi &amp; Sinyal Inversi</div>
+    <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+      <!-- Fed hawkish/dovish spectrum -->
+      <text x="400" y="20" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" letter-spacing="1">SPEKTRUM EKSPEKTASI FED</text>
+      <rect x="40" y="30" width="720" height="20" rx="10" fill="#1e1e24"/>
+      <rect x="40" y="30" width="360" height="20" rx="10" fill="#e05a5a" opacity="0.5"/>
+      <rect x="400" y="30" width="360" height="20" rx="10" fill="#4caf85" opacity="0.5"/>
+      <text x="220" y="45" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500">HAWKISH → US02Y NAIK</text>
+      <text x="580" y="45" fill="#4caf85" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500">DOVISH → US02Y TURUN</text>
+
+      <!-- Left: US02Y Naik chain -->
+      <text x="40" y="85" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="10" font-weight="500">US02Y ↑ NAIK</text>
+      <rect x="40" y="95" width="110" height="30" rx="6" fill="#3d1a1a" stroke="#e05a5a" stroke-width="0.5"/>
+      <text x="95" y="113" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Rate hike ekspektasi</text>
+      <line x1="152" y1="110" x2="165" y2="110" stroke="#7a7870" stroke-width="1" marker-end="url(#arr)"/>
+      <rect x="167" y="95" width="95" height="30" rx="6" fill="#3d1a1a" stroke="#e05a5a" stroke-width="0.5"/>
+      <text x="214" y="113" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">T-bill menarik</text>
+      <line x1="264" y1="110" x2="277" y2="110" stroke="#7a7870" stroke-width="1" marker-end="url(#arr)"/>
+      <rect x="279" y="95" width="95" height="30" rx="6" fill="#3d1a1a" stroke="#e05a5a" stroke-width="0.5"/>
+      <text x="326" y="113" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">USD menguat</text>
+      <line x1="376" y1="110" x2="389" y2="110" stroke="#e05a5a" stroke-width="1.5" marker-end="url(#arrd)"/>
+      <rect x="391" y="88" width="95" height="44" rx="8" fill="#3d1a1a" stroke="#e05a5a" stroke-width="1.5"/>
+      <text x="438" y="107" fill="#e05a5a" font-family="'Syne',sans-serif" font-size="13" font-weight="700" text-anchor="middle">GOLD ↓</text>
+      <text x="438" y="122" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">bearish</text>
+
+      <!-- Right: US02Y Turun chain -->
+      <text x="520" y="85" fill="#4caf85" font-family="'DM Mono',monospace" font-size="10" font-weight="500">US02Y ↓ TURUN</text>
+      <rect x="520" y="95" width="100" height="30" rx="6" fill="#1a3d2e" stroke="#4caf85" stroke-width="0.5"/>
+      <text x="570" y="113" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Rate cut ekspektasi</text>
+      <line x1="622" y1="110" x2="635" y2="110" stroke="#7a7870" stroke-width="1" marker-end="url(#arr)"/>
+      <rect x="637" y="95" width="85" height="30" rx="6" fill="#1a3d2e" stroke="#4caf85" stroke-width="0.5"/>
+      <text x="679" y="113" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">USD melemah</text>
+      <line x1="724" y1="110" x2="737" y2="110" stroke="#4caf85" stroke-width="1.5" marker-end="url(#arru)"/>
+      <rect x="739" y="88" width="55" height="44" rx="8" fill="#1a3d2e" stroke="#4caf85" stroke-width="1.5"/>
+      <text x="766" y="113" fill="#4caf85" font-family="'Syne',sans-serif" font-size="13" font-weight="700" text-anchor="middle">↑</text>
+
+      <!-- INVERSION DIAGRAM -->
+      <line x1="0" y1="165" x2="800" y2="165" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <text x="40" y="185" fill="#9b7de0" font-family="'DM Mono',monospace" font-size="10" font-weight="500" letter-spacing="1">SINYAL SPESIAL: YIELD CURVE INVERSION</text>
+
+      <!-- Normal curve -->
+      <text x="120" y="208" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">NORMAL CURVE</text>
+      <rect x="60" y="212" width="40" height="50" rx="4" fill="#1a3d2e" stroke="#4caf85" stroke-width="0.5"/>
+      <text x="80" y="232" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">2Y</text>
+      <text x="80" y="246" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">3.5%</text>
+      <rect x="110" y="195" width="40" height="67" rx="4" fill="#1a2e3d" stroke="#5a9de0" stroke-width="0.5"/>
+      <text x="130" y="220" fill="#5a9de0" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">10Y</text>
+      <text x="130" y="234" fill="#5a9de0" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">4.2%</text>
+      <text x="100" y="295" fill="#4caf85" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">10Y &gt; 2Y ✓</text>
+      <text x="100" y="308" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Ekonomi sehat</text>
+
+      <!-- Arrow -->
+      <text x="230" y="255" fill="#7a7870" font-family="'DM Mono',monospace" font-size="18" text-anchor="middle">→</text>
+      <text x="230" y="272" fill="#7a7870" font-family="'DM Mono',monospace" font-size="8" text-anchor="middle">Fed naikkan rate</text>
+
+      <!-- Inverted curve -->
+      <text x="370" y="208" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">INVERTED CURVE</text>
+      <rect x="310" y="192" width="40" height="70" rx="4" fill="#3d1a1a" stroke="#e05a5a" stroke-width="1"/>
+      <text x="330" y="220" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">2Y</text>
+      <text x="330" y="234" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">5.3%</text>
+      <rect x="360" y="220" width="40" height="42" rx="4" fill="#3d1a1a" stroke="#e05a5a" stroke-width="0.5"/>
+      <text x="380" y="238" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">10Y</text>
+      <text x="380" y="252" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">4.8%</text>
+      <text x="355" y="295" fill="#e05a5a" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">2Y &gt; 10Y !</text>
+      <text x="355" y="308" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Sinyal resesi</text>
+
+      <!-- Arrow to gold bullish -->
+      <text x="490" y="255" fill="#7a7870" font-family="'DM Mono',monospace" font-size="18" text-anchor="middle">→</text>
+      <text x="490" y="272" fill="#7a7870" font-family="'DM Mono',monospace" font-size="8" text-anchor="middle">pasar antisipasi rate cut</text>
+
+      <!-- Result -->
+      <rect x="540" y="215" width="240" height="80" rx="10" fill="#221a3d" stroke="#9b7de0" stroke-width="1.5"/>
+      <text x="660" y="242" fill="#9b7de0" font-family="'Syne',sans-serif" font-size="13" font-weight="700" text-anchor="middle">GOLD BULLISH</text>
+      <text x="660" y="258" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">jangka menengah</text>
+      <text x="660" y="278" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Re-steepening setelah inversi</text>
+      <text x="660" y="290" fill="#c9a84c" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">= fase paling bullish gold ★</text>
+    </svg>
+  </div>
+
+  <div class="impact-grid">
+    <div class="impact-card up">
+      <div class="impact-card-header"><div class="impact-arrow">↑</div><div class="impact-card-title">US02Y NAIK</div></div>
+      <div class="impact-result">Gold Cenderung Turun</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Ekspektasi Fed hawkish naik</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Short-term return obligasi sangat menarik</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>USD menguat signifikan</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Likuiditas ketat → tekanan aset riil</span></div>
+      </div>
+    </div>
+    <div class="impact-card down">
+      <div class="impact-card-header"><div class="impact-arrow">↓</div><div class="impact-card-title">US02Y TURUN</div></div>
+      <div class="impact-result">Gold Cenderung Naik</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Ekspektasi Fed dovish / rate cut naik</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Cash &amp; T-bill jangka pendek kurang menarik</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>USD melemah — rate differential menyempit</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Kapital global cari store of value</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="callout info"><div class="callout-icon">◈</div><p><strong>Sinyal Khusus — Yield Curve Inversion:</strong> Saat US02Y lebih tinggi dari US10Y, pasar mengantisipasi resesi dan rate cut. Ini sinyal <strong>bullish jangka menengah</strong> untuk gold. Ketika kurva mulai re-steepen setelah inversi, ini fase paling bullish gold dalam satu siklus penuh.</p></div>
+</section>
+
+<!-- ══════════════════════════════════════
+     04. US10Y
+══════════════════════════════════════ -->
+<section id="us10y">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-title-block">
+      <h2>US10Y</h2>
+      <div class="sub">10-Year Treasury Yield — Benchmark Biaya Modal Global</div>
+    </div>
+    <div class="strength-badge"><div class="strength-label">Korelasi</div><div class="stars">★★★★☆</div></div>
+  </div>
+  <div class="prose">
+    <p>US10Y sering disebut <strong>"the most important number in finance"</strong> karena menjadi patokan biaya modal global. Namun dampaknya pada gold lebih kompleks dari US02Y — penyebab kenaikan sangat menentukan hasilnya.</p>
+  </div>
+
+  <!-- VIZ: US10Y Dual Path -->
+  <div class="viz-block">
+    <div class="viz-label">US10Y Naik — Dua Jalur Berbeda, Dua Hasil Berbeda</div>
+    <svg viewBox="0 0 800 290" xmlns="http://www.w3.org/2000/svg">
+      <!-- Center: US10Y Naik -->
+      <rect x="310" y="10" width="180" height="44" rx="8" fill="#3d2a1a" stroke="#c9a84c" stroke-width="1.5"/>
+      <text x="400" y="30" fill="#f0c96e" font-family="'Syne',sans-serif" font-size="13" font-weight="700" text-anchor="middle">US10Y NAIK ↑</text>
+      <text x="400" y="46" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">APA PENYEBABNYA?</text>
+
+      <!-- Path 1: Inflasi -->
+      <line x1="310" y1="32" x2="230" y2="80" stroke="#4caf85" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <rect x="40" y="80" width="200" height="44" rx="8" fill="#1a3d2e" stroke="#4caf85" stroke-width="1"/>
+      <text x="140" y="99" fill="#4caf85" font-family="'Syne',sans-serif" font-size="12" font-weight="700" text-anchor="middle">Inflasi naik lebih cepat</text>
+      <text x="140" y="114" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">dari yield nominal</text>
+      <!-- Path 1 chain -->
+      <line x1="140" y1="124" x2="140" y2="142" stroke="#4caf85" stroke-width="1"/>
+      <rect x="60" y="142" width="160" height="34" rx="6" fill="#1a3d2e" stroke="#4caf85" stroke-width="0.5"/>
+      <text x="140" y="163" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">DFII10 flat / turun</text>
+      <line x1="140" y1="176" x2="140" y2="194" stroke="#4caf85" stroke-width="1"/>
+      <rect x="60" y="194" width="160" height="50" rx="8" fill="#1a3d2e" stroke="#4caf85" stroke-width="1.5"/>
+      <text x="140" y="215" fill="#4caf85" font-family="'Syne',sans-serif" font-size="13" font-weight="700" text-anchor="middle">GOLD ↑ NAIK</text>
+      <text x="140" y="232" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">emas sebagai inflation hedge</text>
+
+      <!-- Path 2: Growth -->
+      <line x1="490" y1="32" x2="570" y2="80" stroke="#e05a5a" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <rect x="560" y="80" width="200" height="44" rx="8" fill="#3d1a1a" stroke="#e05a5a" stroke-width="1"/>
+      <text x="660" y="99" fill="#e05a5a" font-family="'Syne',sans-serif" font-size="12" font-weight="700" text-anchor="middle">Growth kuat / term premium</text>
+      <text x="660" y="114" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">naik karena ekonomi bagus</text>
+      <!-- Path 2 chain -->
+      <line x1="660" y1="124" x2="660" y2="142" stroke="#e05a5a" stroke-width="1"/>
+      <rect x="580" y="142" width="160" height="34" rx="6" fill="#3d1a1a" stroke="#e05a5a" stroke-width="0.5"/>
+      <text x="660" y="163" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">DFII10 juga naik</text>
+      <line x1="660" y1="176" x2="660" y2="194" stroke="#e05a5a" stroke-width="1"/>
+      <rect x="580" y="194" width="160" height="50" rx="8" fill="#3d1a1a" stroke="#e05a5a" stroke-width="1.5"/>
+      <text x="660" y="215" fill="#e05a5a" font-family="'Syne',sans-serif" font-size="13" font-weight="700" text-anchor="middle">GOLD ↓ TURUN</text>
+      <text x="660" y="232" fill="#7a7870" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">real yield tinggi menekan emas</text>
+
+      <!-- Key insight box -->
+      <rect x="270" y="150" width="260" height="80" rx="10" fill="#1a2e3d" stroke="#5a9de0" stroke-width="1"/>
+      <text x="400" y="172" fill="#5a9de0" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500">KUNCI ANALISIS</text>
+      <text x="400" y="190" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Selalu cek DFII10 bersama US10Y</text>
+      <text x="400" y="206" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">US10Y ↑ + DFII10 flat = bullish gold</text>
+      <text x="400" y="220" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">US10Y ↑ + DFII10 ↑ = bearish gold</text>
+
+      <!-- US10Y turun -->
+      <text x="400" y="268" fill="#4caf85" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">US10Y TURUN ↓ → kondisi global melonggar → USD melemah → GOLD ↑ (lebih konsisten)</text>
+    </svg>
+  </div>
+
+  <div class="impact-grid">
+    <div class="impact-card up">
+      <div class="impact-card-header"><div class="impact-arrow">↑</div><div class="impact-card-title">US10Y NAIK</div></div>
+      <div class="impact-result">Gold Cenderung Turun*</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Biaya pinjaman global naik</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>USD &amp; DXY menguat</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Harga obligasi lama anjlok → forced selling</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>*Kecuali naik karena inflasi — cek DFII10</span></div>
+      </div>
+    </div>
+    <div class="impact-card down">
+      <div class="impact-card-header"><div class="impact-arrow">↓</div><div class="impact-card-title">US10Y TURUN</div></div>
+      <div class="impact-result">Gold Cenderung Naik</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Kondisi finansial global melonggar</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>USD &amp; DXY melemah</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Harga obligasi lama naik — portfolio gain</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Rotasi ke aset riil termasuk emas</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="callout success"><div class="callout-icon">◉</div><p><strong>Aturan Emas:</strong> Selalu cek DFII10 bersamaan dengan US10Y. Jika US10Y naik tapi DFII10 flat/turun → inflasi naik lebih cepat → bullish gold. Jika keduanya naik bersamaan → bearish gold.</p></div>
+</section>
+
+<!-- ══════════════════════════════════════
+     05. GLD ETF
+══════════════════════════════════════ -->
+<section id="gld">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-title-block">
+      <h2>GLD ETF</h2>
+      <div class="sub">SPDR Gold Shares — Konfirmator Demand Institusional</div>
+    </div>
+    <div class="strength-badge"><div class="strength-label">Korelasi</div><div class="stars">★★★★☆</div></div>
+  </div>
+  <div class="prose">
+    <p>GLD adalah <strong>gold itu sendiri</strong> dalam kemasan saham bursa. ETF terbesar di dunia ini menyimpan fisik emas batangan. Setiap pergerakan besar GLD secara mekanis menggerakkan permintaan atau penawaran emas fisik di pasar global.</p>
+  </div>
+
+  <!-- VIZ: GLD Creation/Redemption -->
+  <div class="viz-block">
+    <div class="viz-label">Mekanisme Kreasi &amp; Redemption — Bagaimana GLD Terhubung ke Fisik Gold</div>
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- CREATION (inflow) -->
+      <text x="200" y="20" fill="#4caf85" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500" letter-spacing="1">CREATION (GLD NAIK / INFLOW)</text>
+
+      <rect x="20" y="30" width="110" height="50" rx="8" fill="#1a3d2e" stroke="#4caf85" stroke-width="0.5"/>
+      <text x="75" y="50" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Investor</text>
+      <text x="75" y="66" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">beli saham GLD</text>
+
+      <line x1="132" y1="55" x2="155" y2="55" stroke="#4caf85" stroke-width="1.5" marker-end="url(#arru)"/>
+      <text x="143" y="48" fill="#4caf85" font-family="'DM Mono',monospace" font-size="8" text-anchor="middle">cash</text>
+
+      <rect x="157" y="30" width="110" height="50" rx="8" fill="#1a3d2e" stroke="#4caf85" stroke-width="1"/>
+      <text x="212" y="50" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">AP</text>
+      <text x="212" y="66" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Authorized Part.</text>
+
+      <line x1="269" y1="55" x2="292" y2="55" stroke="#4caf85" stroke-width="1.5" marker-end="url(#arru)"/>
+      <text x="280" y="48" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="8" text-anchor="middle">fisik gold</text>
+      <line x1="292" y1="65" x2="269" y2="65" stroke="#4caf85" stroke-width="1" stroke-dasharray="3 2" marker-end="url(#arru)"/>
+      <text x="280" y="78" fill="#4caf85" font-family="'DM Mono',monospace" font-size="8" text-anchor="middle">saham GLD</text>
+
+      <rect x="294" y="30" width="110" height="50" rx="8" fill="#1a3d2e" stroke="#4caf85" stroke-width="1.5"/>
+      <text x="349" y="50" fill="#4caf85" font-family="'Syne',sans-serif" font-size="12" font-weight="700" text-anchor="middle">GLD Trust</text>
+      <text x="349" y="66" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">fisik gold naik ↑</text>
+
+      <line x1="406" y1="55" x2="430" y2="55" stroke="#4caf85" stroke-width="2" marker-end="url(#arru)"/>
+      <rect x="432" y="24" width="130" height="62" rx="10" fill="#1a3d2e" stroke="#4caf85" stroke-width="2"/>
+      <text x="497" y="49" fill="#4caf85" font-family="'Syne',sans-serif" font-size="14" font-weight="800" text-anchor="middle">GOLD ↑</text>
+      <text x="497" y="65" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">demand fisik naik</text>
+      <text x="497" y="78" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">smart money masuk</text>
+
+      <!-- REDEMPTION (outflow) -->
+      <line x1="0" y1="120" x2="800" y2="120" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <text x="200" y="140" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500" letter-spacing="1">REDEMPTION (GLD TURUN / OUTFLOW)</text>
+
+      <rect x="20" y="150" width="110" height="50" rx="8" fill="#3d1a1a" stroke="#e05a5a" stroke-width="0.5"/>
+      <text x="75" y="170" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Investor</text>
+      <text x="75" y="186" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">jual saham GLD</text>
+
+      <line x1="132" y1="175" x2="155" y2="175" stroke="#e05a5a" stroke-width="1.5" marker-end="url(#arrd)"/>
+      <text x="143" y="168" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="8" text-anchor="middle">saham GLD</text>
+
+      <rect x="157" y="150" width="110" height="50" rx="8" fill="#3d1a1a" stroke="#e05a5a" stroke-width="1"/>
+      <text x="212" y="170" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">AP</text>
+      <text x="212" y="186" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Authorized Part.</text>
+
+      <line x1="269" y1="175" x2="292" y2="175" stroke="#e05a5a" stroke-width="1.5" marker-end="url(#arrd)"/>
+      <text x="280" y="168" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="8" text-anchor="middle">fisik gold keluar</text>
+
+      <rect x="294" y="150" width="110" height="50" rx="8" fill="#3d1a1a" stroke="#e05a5a" stroke-width="1.5"/>
+      <text x="349" y="170" fill="#e05a5a" font-family="'Syne',sans-serif" font-size="12" font-weight="700" text-anchor="middle">GLD Trust</text>
+      <text x="349" y="186" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">fisik gold turun ↓</text>
+
+      <line x1="406" y1="175" x2="430" y2="175" stroke="#e05a5a" stroke-width="2" marker-end="url(#arrd)"/>
+      <rect x="432" y="144" width="130" height="62" rx="10" fill="#3d1a1a" stroke="#e05a5a" stroke-width="2"/>
+      <text x="497" y="169" fill="#e05a5a" font-family="'Syne',sans-serif" font-size="14" font-weight="800" text-anchor="middle">GOLD ↓</text>
+      <text x="497" y="185" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">supply fisik naik</text>
+      <text x="497" y="198" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">tekanan bearish</text>
+
+      <!-- DIVERGENCE signals -->
+      <text x="400" y="235" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" letter-spacing="1">SINYAL DIVERGENSI</text>
+      <rect x="20" y="245" width="230" height="45" rx="8" fill="#221a3d" stroke="#9b7de0" stroke-width="1"/>
+      <text x="135" y="263" fill="#9b7de0" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">Holdings ↑ tapi harga flat</text>
+      <text x="135" y="278" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">→ Akumulasi diam-diam → Breakout akan datang</text>
+
+      <rect x="285" y="245" width="230" height="45" rx="8" fill="#3d2a1a" stroke="#e0a84c" stroke-width="1"/>
+      <text x="400" y="263" fill="#e0a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">Holdings ↓ tapi harga masih naik</text>
+      <text x="400" y="278" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">→ Rally tanpa dukungan ETF → Rawan koreksi</text>
+
+      <rect x="550" y="245" width="230" height="45" rx="8" fill="#1a3d2e" stroke="#4caf85" stroke-width="1.5"/>
+      <text x="665" y="263" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">Holdings ↑ + Harga naik bersamaan</text>
+      <text x="665" y="278" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">→ Konfirmasi terkuat → Tren paling sustain ★</text>
+    </svg>
+  </div>
+
+  <div class="impact-grid">
+    <div class="impact-card up">
+      <div class="impact-card-header"><div class="impact-arrow">↑</div><div class="impact-card-title">GLD NAIK (Inflow)</div></div>
+      <div class="impact-result">Gold Dikonfirmasi Naik</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Institusi aktif beli eksposur emas</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Fisik gold benar-benar dibeli &amp; disimpan</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>GLD holdings (ton) naik</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Rally lebih sustainable — smart money masuk</span></div>
+      </div>
+    </div>
+    <div class="impact-card down">
+      <div class="impact-card-header"><div class="impact-arrow">↓</div><div class="impact-card-title">GLD TURUN (Outflow)</div></div>
+      <div class="impact-result">Gold Dikonfirmasi Turun</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Institusi keluar dari eksposur emas</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Fisik gold dilepas ke pasar — supply naik</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>GLD holdings (ton) turun</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Tekanan bearish dari sisi penawaran fisik</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     06. VIX
+══════════════════════════════════════ -->
+<section id="vix">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div class="section-title-block">
+      <h2>VIX</h2>
+      <div class="sub">CBOE Volatility Index — Fear Index</div>
+    </div>
+    <div class="strength-badge"><div class="strength-label">Korelasi</div><div class="stars">★★★☆☆</div></div>
+  </div>
+  <div class="prose">
+    <p>VIX mengukur ekspektasi volatilitas S&amp;P 500 dalam 30 hari ke depan. Hubungannya dengan gold <strong>secara umum positif</strong> — tapi ada jebakan berbahaya saat VIX meledak di atas 30–40.</p>
+  </div>
+
+  <!-- VIZ: VIX Zones -->
+  <div class="viz-block">
+    <div class="viz-label">Zona VIX &amp; Respons Gold — Termasuk Pengecualian Kritis</div>
+    <svg viewBox="0 0 800 310" xmlns="http://www.w3.org/2000/svg">
+      <!-- VIX gauge bar -->
+      <text x="400" y="22" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" letter-spacing="1">VIX LEVEL SPECTRUM</text>
+      <rect x="40" y="32" width="720" height="28" rx="14" fill="#1e1e24"/>
+      <!-- zones -->
+      <rect x="40" y="32" width="180" height="28" rx="14" fill="#4caf85" opacity="0.25"/>
+      <rect x="220" y="32" width="180" height="28" fill="#c9a84c" opacity="0.2"/>
+      <rect x="400" y="32" width="200" height="28" fill="#e05a5a" opacity="0.35"/>
+      <rect x="600" y="32" width="160" height="28" rx="14" fill="#e05a5a" opacity="0.6"/>
+      <!-- zone labels -->
+      <text x="130" y="51" fill="#4caf85" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500">&lt; 15</text>
+      <text x="310" y="51" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500">15–25</text>
+      <text x="500" y="51" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500">25–40</text>
+      <text x="680" y="51" fill="#fff" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="700">&gt; 40</text>
+
+      <!-- Zone detail cards -->
+      <rect x="20" y="80" width="180" height="120" rx="10" fill="#1a3d2e" stroke="#4caf85" stroke-width="0.5"/>
+      <text x="110" y="102" fill="#4caf85" font-family="'Syne',sans-serif" font-size="12" font-weight="700" text-anchor="middle">VIX &lt; 15</text>
+      <text x="110" y="118" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Pasar tenang, risk-on</text>
+      <line x1="60" y1="128" x2="160" y2="128" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <text x="110" y="145" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Gold tertekan</text>
+      <text x="110" y="160" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">tapi institusi sering</text>
+      <text x="110" y="174" fill="#c9a84c" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">akumulasi diam-diam</text>
+
+      <rect x="210" y="80" width="180" height="120" rx="10" fill="#3d2a1a" stroke="#c9a84c" stroke-width="0.5"/>
+      <text x="300" y="102" fill="#c9a84c" font-family="'Syne',sans-serif" font-size="12" font-weight="700" text-anchor="middle">VIX 15–25</text>
+      <text x="300" y="118" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Kondisi normal</text>
+      <line x1="250" y1="128" x2="350" y2="128" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <text x="300" y="145" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Gold ikuti faktor</text>
+      <text x="300" y="160" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">makro dominan lain</text>
+      <text x="300" y="174" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">(DFII10, DXY, dll)</text>
+
+      <rect x="400" y="80" width="180" height="120" rx="10" fill="#3d1a1a" stroke="#e05a5a" stroke-width="1"/>
+      <text x="490" y="102" fill="#e05a5a" font-family="'Syne',sans-serif" font-size="12" font-weight="700" text-anchor="middle">VIX 25–40</text>
+      <text x="490" y="118" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Waspada, fear tinggi</text>
+      <line x1="440" y1="128" x2="540" y2="128" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <text x="490" y="145" fill="#4caf85" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Gold rally kuat ↑</text>
+      <text x="490" y="160" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">flight to safety aktif</text>
+      <text x="490" y="174" fill="#c9a84c" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">safe haven demand ↑↑</text>
+
+      <rect x="590" y="80" width="185" height="120" rx="10" fill="#3d1a1a" stroke="#e05a5a" stroke-width="2"/>
+      <text x="682" y="100" fill="#e05a5a" font-family="'Syne',sans-serif" font-size="11" font-weight="700" text-anchor="middle">VIX &gt; 40 ⚠️</text>
+      <text x="682" y="116" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">KRISIS EKSTREM</text>
+      <line x1="630" y1="124" x2="730" y2="124" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <text x="682" y="140" fill="#e05a5a" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Gold bisa TURUN dulu</text>
+      <text x="682" y="156" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">margin call → forced sell</text>
+      <text x="682" y="172" fill="#4caf85" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">lalu rally keras setelahnya</text>
+      <text x="682" y="188" fill="#7a7870" font-family="'DM Mono',monospace" font-size="8" text-anchor="middle">ex: Mar 2020</text>
+
+      <!-- VIX relationship diagram -->
+      <text x="400" y="230" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" letter-spacing="1">HUBUNGAN UMUM VIX ↔ GOLD (TIDAK SELALU LINEAR)</text>
+      <!-- axis -->
+      <line x1="60" y1="300" x2="740" y2="300" stroke="#3d3d3a" stroke-width="1"/>
+      <line x1="60" y1="300" x2="60" y2="245" stroke="#3d3d3a" stroke-width="1"/>
+      <!-- VIX rising gold path -->
+      <polyline points="60,295 150,285 250,270 350,255 420,248 480,250 550,260 620,270 680,285 740,295" fill="none" stroke="#c9a84c" stroke-width="2" stroke-linejoin="round"/>
+      <text x="400" y="243" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">Gold naik saat VIX naik... tapi turun saat VIX ekstrem (&gt;40)</text>
+      <!-- Labels -->
+      <text x="60" y="308" fill="#7a7870" font-family="'DM Mono',monospace" font-size="8">VIX rendah</text>
+      <text x="740" y="308" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="8" text-anchor="end">VIX tinggi →</text>
+    </svg>
+  </div>
+
+  <div class="impact-grid">
+    <div class="impact-card up">
+      <div class="impact-card-header"><div class="impact-arrow">↑</div><div class="impact-card-title">VIX NAIK</div></div>
+      <div class="impact-result">Gold Umumnya Naik</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Pasar saham bergejolak / crash</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Flight to safety dimulai</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Demand emas sebagai safe haven naik</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>⚠️ VIX &gt;40: forced liquidation — gold bisa ikut dijual untuk margin call</span></div>
+      </div>
+    </div>
+    <div class="impact-card down">
+      <div class="impact-card-header"><div class="impact-arrow">↓</div><div class="impact-card-title">VIX TURUN</div></div>
+      <div class="impact-result">Gold Cenderung Tertekan</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span>Pasar saham tenang / euforia</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Kapital masuk ke risk assets</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>Safe haven demand melemah</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span>⚠️ VIX &lt;12: institusi justru akumulasi gold diam-diam</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     07. YIELD CURVE SPREAD
+══════════════════════════════════════ -->
+<section id="yieldcurve">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <div class="section-title-block">
+      <h2>US10Y − US02Y</h2>
+      <div class="sub">2s10s Yield Curve Spread — Peta Siklus Ekonomi</div>
+    </div>
+    <div class="strength-badge"><div class="strength-label">Korelasi</div><div class="stars">★★★★☆</div></div>
+  </div>
+  <div class="prose">
+    <p>Yield curve spread adalah <strong>peta besar siklus multi-tahun gold</strong>. Jika DFII10 adalah kompas harian, 2s10s adalah GPS siklus. Posisi dan arah perubahan spread memberi sinyal fase ekonomi saat ini.</p>
+  </div>
+
+  <!-- VIZ: Yield Curve Full Cycle -->
+  <div class="viz-block">
+    <div class="viz-label">Siklus Lengkap Yield Curve — 4 Fase &amp; Respons Gold</div>
+    <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
+      <!-- Spread timeline -->
+      <text x="400" y="20" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" letter-spacing="1">2s10s SPREAD TIMELINE (ILUSTRATIF)</text>
+      <!-- Zero line -->
+      <line x1="40" y1="100" x2="760" y2="100" stroke="#3d3d3a" stroke-width="1" stroke-dasharray="4 3"/>
+      <text x="30" y="104" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="end">0%</text>
+      <text x="30" y="70" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="end">+%</text>
+      <text x="30" y="135" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="end">-%</text>
+
+      <!-- Spread curve -->
+      <polyline points="40,65 120,60 180,72 220,90 270,110 320,128 370,135 420,120 480,95 540,72 590,60 640,65 700,68 760,65"
+        fill="none" stroke="#9b7de0" stroke-width="2.5" stroke-linejoin="round"/>
+
+      <!-- Phase highlight areas -->
+      <rect x="200" y="55" width="130" height="90" rx="0" fill="#e05a5a" opacity="0.08"/>
+      <rect x="330" y="100" width="100" height="50" rx="0" fill="#e05a5a" opacity="0.15"/>
+      <rect x="430" y="55" width="140" height="90" rx="0" fill="#9b7de0" opacity="0.08"/>
+      <rect x="570" y="55" width="190" height="90" rx="0" fill="#4caf85" opacity="0.08"/>
+
+      <!-- Phase labels -->
+      <text x="265" y="52" fill="#e0a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">FASE 1</text>
+      <text x="265" y="64" fill="#e0a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">Bear Flatten</text>
+      <text x="380" y="155" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">FASE 2 · Inversion</text>
+      <text x="500" y="52" fill="#9b7de0" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">FASE 3</text>
+      <text x="500" y="64" fill="#9b7de0" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">Bull Steepen ★</text>
+      <text x="655" y="52" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">FASE 4</text>
+      <text x="655" y="64" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">Normal</text>
+
+      <!-- Gold response per phase (below) -->
+      <line x1="40" y1="175" x2="760" y2="175" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+      <text x="30" y="195" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="8" text-anchor="end">GOLD</text>
+
+      <rect x="200" y="182" width="130" height="28" rx="6" fill="#3d2a1a" stroke="#e0a84c" stroke-width="0.5"/>
+      <text x="265" y="200" fill="#e0a84c" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Tertekan ↓</text>
+
+      <rect x="330" y="182" width="100" height="28" rx="6" fill="#221a3d" stroke="#9b7de0" stroke-width="0.5"/>
+      <text x="380" y="200" fill="#9b7de0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Akumulasi</text>
+
+      <rect x="430" y="182" width="140" height="28" rx="6" fill="#1a3d2e" stroke="#4caf85" stroke-width="1.5"/>
+      <text x="500" y="196" fill="#4caf85" font-family="'Syne',sans-serif" font-size="11" font-weight="700" text-anchor="middle">RALLY KUAT ★★★</text>
+
+      <rect x="570" y="182" width="190" height="28" rx="6" fill="#1a2e3d" stroke="#5a9de0" stroke-width="0.5"/>
+      <text x="655" y="200" fill="#5a9de0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Konsolidasi</text>
+
+      <!-- Historical examples -->
+      <text x="400" y="240" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" letter-spacing="1">CONTOH HISTORIS</text>
+      <rect x="20" y="250" width="230" height="80" rx="8" fill="#1e1e24" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <text x="135" y="268" fill="#e0a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">2006–2008</text>
+      <text x="135" y="283" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Inversi → Gold rally $600→$1000</text>
+      <text x="135" y="297" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Bull steepen = fase terbaik emas</text>
+      <text x="135" y="320" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">+67% dalam 2 tahun</text>
+
+      <rect x="285" y="250" width="230" height="80" rx="8" fill="#1e1e24" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <text x="400" y="268" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">2022–2023</text>
+      <text x="400" y="283" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Inversi terdalam -100bps (40 thn)</text>
+      <text x="400" y="297" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Gold bertahan kuat di atas $1800</text>
+      <text x="400" y="320" fill="#9b7de0" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">Fase akumulasi terjadi</text>
+
+      <rect x="550" y="250" width="230" height="80" rx="8" fill="#1e1e24" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <text x="665" y="268" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">2024</text>
+      <text x="665" y="283" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Kurva mulai re-steepen</text>
+      <text x="665" y="297" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Fed mulai cut rate</text>
+      <text x="665" y="320" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle">Gold ke ATH $2500+ ★</text>
+    </svg>
+  </div>
+
+  <div class="impact-grid">
+    <div class="impact-card up">
+      <div class="impact-card-header"><div class="impact-arrow">↑</div><div class="impact-card-title">SPREAD NAIK (Steepening)</div></div>
+      <div class="impact-result">Tergantung Jenis Steepening</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span><strong style="color:var(--up)">Bull Steepen</strong> (2Y turun cepat): Fed akan cut → Gold naik kuat ★★★★★</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span><strong style="color:var(--amber)">Bear Steepen</strong> (10Y naik cepat): Inflasi/fiskal → Gold mixed, cek DFII10</span></div>
+      </div>
+    </div>
+    <div class="impact-card down">
+      <div class="impact-card-header"><div class="impact-arrow">↓</div><div class="impact-card-title">SPREAD TURUN (Flattening/Inversion)</div></div>
+      <div class="impact-result">Dua Fase Berbeda</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-dot"></div><span><strong style="color:var(--muted)">Flattening</strong> (spread→0): Fed hawkish, real yield tinggi → Gold tertekan</span></div>
+        <div class="flow-step"><div class="flow-dot"></div><span><strong style="color:var(--up)">Inversion</strong> (spread&lt;0): Antisipasi resesi &amp; rate cut → Gold bullish jk menengah</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="phase-grid">
+    <div class="phase-card ph1"><div class="phase-num">Fase 1</div><h4>Bear Flatten</h4><p>Fed naikkan rate agresif. 2Y naik cepat. Gold tertekan karena real yield melonjak.</p></div>
+    <div class="phase-card ph2"><div class="phase-num">Fase 2</div><h4>Inversion</h4><p>Spread negatif. Smart money mulai akumulasi gold antisipasi rate cut &amp; resesi.</p></div>
+    <div class="phase-card ph3"><div class="phase-num">Fase 3 ⭐</div><h4>Bull Steepen</h4><p>Fed cut rate. 2Y jatuh cepat. Ini fase paling bullish gold dalam satu siklus penuh.</p></div>
+    <div class="phase-card ph4"><div class="phase-num">Fase 4</div><h4>Normal Curve</h4><p>Ekonomi pulih, kurva normal kembali. Gold konsolidasi menunggu siklus berikutnya.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════
+     KATEGORI TAMBAHAN
+══════════════════════════════════════ -->
+<section id="dxy">
+  <div class="section-header">
+    <div class="section-num">①</div>
+    <div class="section-title-block"><h2>Dolar &amp; Mata Uang</h2><div class="sub">Korelasi Negatif Kuat — Rival Langsung Gold</div></div>
+  </div>
+  <div class="prose"><p>Karena gold dihargai dalam dolar AS, pergerakan DXY memiliki korelasi negatif hampir langsung terhadap gold. Ini kategori dengan dampak paling instan dan konsisten.</p></div>
+  <div class="mini-grid">
+    <div class="mini-card"><div class="ticker">DXY</div><div class="name">US Dollar Index</div><div class="corr">↑DXY = ↓Gold (negatif kuat)</div><div class="str">★★★★★</div></div>
+    <div class="mini-card"><div class="ticker">EURUSD</div><div class="name">Euro — bobot 57% DXY</div><div class="corr">↑EUR = ↑Gold (positif kuat)</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">USDJPY</div><div class="name">Yen — safe haven rival</div><div class="corr">↓JPY = mixed Gold</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">XAUEUR</div><div class="name">Gold dalam Euro</div><div class="corr">Demand lokal berbeda USD</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">XAUCNY</div><div class="name">Gold dalam Yuan</div><div class="corr">Demand China sangat besar</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">XAUINR</div><div class="name">Gold dalam Rupee India</div><div class="corr">Demand India — seasonal kuat</div><div class="str">★★★☆☆</div></div>
+  </div>
+</section>
+
+<section id="inflasi">
+  <div class="section-header">
+    <div class="section-num">②</div>
+    <div class="section-title-block"><h2>Inflasi &amp; Data Ekonomi</h2><div class="sub">Gold sebagai Inflation Hedge — Rilis Data High-Impact</div></div>
+  </div>
+  <div class="mini-grid">
+    <div class="mini-card"><div class="ticker">CPI</div><div class="name">Consumer Price Index</div><div class="corr">↑CPI = ↑Gold (hedge inflasi)</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">PCE</div><div class="name">Personal Consumption Exp.</div><div class="corr">↑PCE = ↑Gold (favorit Fed)</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">NFP</div><div class="name">Non-Farm Payrolls</div><div class="corr">↑NFP kuat = ↓Gold (Fed hawkish)</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">ISM PMI</div><div class="name">Manufacturing &amp; Services</div><div class="corr">↓PMI = ↑Gold (resesi fear)</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">GDP</div><div class="name">Gross Domestic Product</div><div class="corr">↓GDP = ↑Gold (safe haven)</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">JOLTS</div><div class="name">Job Openings &amp; Turnover</div><div class="corr">↓Openings = dovish = ↑Gold</div><div class="str">★★☆☆☆</div></div>
+  </div>
+  <div class="callout warning"><div class="callout-icon">⚡</div><p><strong>NFP &amp; CPI adalah rilis high-impact paling instan.</strong> Gold bisa bergerak $20–$50 dalam menit pertama setelah rilis. Kejutan vs konsensus yang menggerakkan pasar, bukan angka absolutnya.</p></div>
+</section>
+
+<section id="centralbank">
+  <div class="section-header">
+    <div class="section-num">③</div>
+    <div class="section-title-block"><h2>Bank Sentral &amp; Kebijakan Moneter</h2><div class="sub">Structural Demand Terbesar — Penggerak Jangka Panjang</div></div>
+  </div>
+  <div class="prose"><p>Bank sentral adalah pembeli gold terbesar dan tidak sensitif terhadap harga — mereka membeli berdasarkan strategi reserve diversifikasi. Pembelian mereka menciptakan <strong>structural floor</strong> pada harga gold.</p></div>
+  <div class="mini-grid">
+    <div class="mini-card"><div class="ticker">CB Reserves</div><div class="name">Central Bank Gold Buying</div><div class="corr">Pembelian rekor sejak 2022</div><div class="str">★★★★★</div></div>
+    <div class="mini-card"><div class="ticker">WALCL</div><div class="name">Fed Balance Sheet</div><div class="corr">↑QE = ↑Gold · ↑QT = ↓Gold</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">M2</div><div class="name">Money Supply</div><div class="corr">↑M2 = inflasi aset = ↑Gold</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">FOMC</div><div class="name">Statement &amp; Dot Plot</div><div class="corr">Hawkish = ↓Gold | Dovish = ↑Gold</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">Fed Speak</div><div class="name">Powell &amp; FOMC Members</div><div class="corr">Tone shift = immediate reaction</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">PBOC</div><div class="name">China Central Bank</div><div class="corr">Pembeli terbesar dunia</div><div class="str">★★★★☆</div></div>
+  </div>
+</section>
+
+<section id="komoditas">
+  <div class="section-header">
+    <div class="section-num">④</div>
+    <div class="section-title-block"><h2>Komoditas &amp; Pasar Terkait</h2><div class="sub">Proxy Inflasi, Risk Appetite &amp; Rival Gold</div></div>
+  </div>
+  <div class="mini-grid">
+    <div class="mini-card"><div class="ticker">WTI / Brent</div><div class="name">Crude Oil</div><div class="corr">↑Oil = inflasi = ↑Gold (tidak selalu)</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">XAGUSD</div><div class="name">Silver — Gold/Silver Ratio</div><div class="corr">Berkorelasi positif sangat kuat</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">HG Copper</div><div class="name">Dr. Copper</div><div class="corr">↑Cu = risk-on → mixed gold</div><div class="str">★★☆☆☆</div></div>
+    <div class="mini-card"><div class="ticker">BTC</div><div class="name">Bitcoin — Digital Gold</div><div class="corr">Rival / alternatif — korelasi variabel</div><div class="str">★★☆☆☆</div></div>
+    <div class="mini-card"><div class="ticker">BCOM</div><div class="name">Bloomberg Commodity Index</div><div class="corr">↑Commodity cycle = ↑Gold</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">Platinum / PGMs</div><div class="name">Platinum Group Metals</div><div class="corr">Korelasi positif tapi lebih lemah</div><div class="str">★★☆☆☆</div></div>
+  </div>
+</section>
+
+<section id="positioning">
+  <div class="section-header">
+    <div class="section-num">⑤</div>
+    <div class="section-title-block"><h2>Positioning &amp; Flows</h2><div class="sub">Sentimen Pelaku Pasar — Data Mingguan CFTC &amp; ETF</div></div>
+  </div>
+  <div class="mini-grid">
+    <div class="mini-card"><div class="ticker">COT Report</div><div class="name">Commitments of Traders</div><div class="corr">Net long tinggi = overbought rawan koreksi</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">ETF Holdings</div><div class="name">GLD + IAU + PHYS total</div><div class="corr">↑Holdings (ton) = bullish kuat</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">Open Interest</div><div class="name">COMEX Gold Futures</div><div class="corr">↑OI + ↑price = konfirmasi tren</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">Lease Rate</div><div class="name">Gold Lease Rate (London)</div><div class="corr">↑Rate = supply fisik ketat = ↑Gold</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">GOFO</div><div class="name">Gold Forward Rate</div><div class="corr">Negatif GOFO = backwardation = bullish</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">Spec Net</div><div class="name">Large Speculators Position</div><div class="corr">Extreme short = contrarian bullish</div><div class="str">★★★☆☆</div></div>
+  </div>
+  <div class="callout info"><div class="callout-icon">◈</div><p><strong>COT Rule of Thumb:</strong> Saat net long spekulan berada di persentil &gt;90% historis → overbought, hati-hati. Saat net long di persentil &lt;10% atau bahkan net short → setup contrarian bullish yang sangat kuat. COT dirilis tiap Jumat untuk posisi per Selasa.</p></div>
+</section>
+
+<section id="geopolitik">
+  <div class="section-header">
+    <div class="section-num">⑥</div>
+    <div class="section-title-block"><h2>Geopolitik &amp; Demand Struktural</h2><div class="sub">Tidak Dapat Dikuantifikasi — Namun Sangat Kuat</div></div>
+  </div>
+  <div class="mini-grid">
+    <div class="mini-card"><div class="ticker">Geopolitical Risk</div><div class="name">Perang, sanksi, krisis</div><div class="corr">Eskalasi = flight to gold</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">De-dollarisasi</div><div class="name">BRICS, CB EM diversifikasi</div><div class="corr">Tren struktural multi-dekade bullish</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">India Demand</div><div class="name">Diwali &amp; Wedding Season</div><div class="corr">Okt–Nov: demand fisik melonjak</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">China Demand</div><div class="name">PBOC + retail + Tahun Baru</div><div class="corr">Pembeli terbesar dunia sejak 2023</div><div class="str">★★★★☆</div></div>
+    <div class="mini-card"><div class="ticker">US Debt / Deficit</div><div class="name">Fiscal credibility AS</div><div class="corr">↑Debt ceiling crisis = ↑Gold</div><div class="str">★★★☆☆</div></div>
+    <div class="mini-card"><div class="ticker">Sanctions Risk</div><div class="name">Asset freeze precedent</div><div class="corr">CB diversifikasi keluar dollar</div><div class="str">★★★☆☆</div></div>
+  </div>
+  <div class="callout warning"><div class="callout-icon">⚡</div><p><strong>De-dollarisasi:</strong> Setelah AS membekukan cadangan devisa Rusia $300 miliar (2022), bank sentral di seluruh dunia mulai agresif mengurangi dolar dan menggantinya dengan gold. Ini pergeseran geopolitik struktural yang memberikan <strong>fundamental bullish jangka panjang</strong> yang belum pernah ada sebelumnya.</p></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PETA INDIKATOR LENGKAP -->
+<section id="petaindikator">
+  <div class="section-header">
+    <div class="section-num">MAP</div>
+    <div class="section-title-block"><h2>Peta Indikator Lengkap</h2><div class="sub">30+ variabel dalam 6 kategori</div></div>
+  </div>
+
+  <div class="viz-block">
+    <div class="viz-label">Ekosistem Lengkap Indikator Penggerak Gold</div>
+    <svg viewBox="0 0 800 580" xmlns="http://www.w3.org/2000/svg">
+      <!-- Center: GOLD -->
+      <rect x="330" y="255" width="140" height="52" rx="12" fill="#3d2a1a" stroke="#c9a84c" stroke-width="2"/>
+      <text x="400" y="277" fill="#f0c96e" font-family="'Syne',sans-serif" font-size="16" font-weight="800" text-anchor="middle">GOLD</text>
+      <text x="400" y="296" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">XAUUSD</text>
+
+      <!-- Lines from center to categories -->
+      <line x1="400" y1="255" x2="400" y2="198" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+      <line x1="400" y1="307" x2="400" y2="360" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+      <line x1="330" y1="281" x2="210" y2="175" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+      <line x1="330" y1="281" x2="145" y2="320" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+      <line x1="470" y1="281" x2="590" y2="175" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+      <line x1="470" y1="281" x2="655" y2="320" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+
+      <!-- TOP: REAL YIELD & RATES -->
+      <rect x="245" y="148" width="310" height="95" rx="10" fill="#221a3d" stroke="#9b7de0" stroke-width="1"/>
+      <text x="400" y="168" fill="#9b7de0" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500" letter-spacing="1">① REAL YIELD &amp; RATES</text>
+      <text x="280" y="188" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">DFII10 ★★★★★</text>
+      <text x="400" y="188" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">US02Y ★★★★</text>
+      <text x="520" y="188" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">US10Y ★★★★</text>
+      <text x="345" y="208" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">2s10s Spread ★★★★</text>
+      <text x="468" y="208" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">RRPONTSYD ★★★</text>
+      <text x="400" y="232" fill="#9b7de0" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Korelasi terkuat — biaya peluang &amp; siklus kebijakan Fed</text>
+
+      <!-- BOTTOM: DEMAND STRUKTURAL -->
+      <rect x="245" y="365" width="310" height="95" rx="10" fill="#1a3d2e" stroke="#4caf85" stroke-width="1"/>
+      <text x="400" y="385" fill="#4caf85" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500" letter-spacing="1">② DEMAND STRUKTURAL</text>
+      <text x="310" y="406" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">CB Reserves ★★★★★</text>
+      <text x="490" y="406" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">China/India ★★★★</text>
+      <text x="340" y="426" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">De-dollarisasi ★★★★</text>
+      <text x="470" y="426" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">GLD Holdings ★★★★</text>
+      <text x="400" y="448" fill="#4caf85" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Structural floor — tidak sensitif harga, multi-dekade</text>
+
+      <!-- LEFT TOP: DOLAR & INFLASI -->
+      <rect x="20" y="95" width="205" height="130" rx="10" fill="#1a2e3d" stroke="#5a9de0" stroke-width="1"/>
+      <text x="122" y="115" fill="#5a9de0" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500" letter-spacing="1">③ DOLAR &amp; INFLASI</text>
+      <text x="80" y="137" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">DXY ★★★★★</text>
+      <text x="165" y="137" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">EURUSD ★★★★</text>
+      <text x="80" y="157" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">CPI ★★★★</text>
+      <text x="165" y="157" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">PCE ★★★★</text>
+      <text x="80" y="177" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">NFP ★★★</text>
+      <text x="165" y="177" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">PMI ★★★</text>
+      <text x="122" y="212" fill="#5a9de0" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">↑DXY = ↓Gold · ↑CPI = ↑Gold</text>
+
+      <!-- LEFT BOTTOM: SENTIMEN -->
+      <rect x="20" y="260" width="205" height="130" rx="10" fill="#3d2a1a" stroke="#e0a84c" stroke-width="1"/>
+      <text x="122" y="280" fill="#e0a84c" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500" letter-spacing="1">④ SENTIMEN</text>
+      <text x="80" y="302" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">VIX ★★★</text>
+      <text x="165" y="302" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">COT ★★★★</text>
+      <text x="80" y="322" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">OI ★★★</text>
+      <text x="165" y="322" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">Gold Lease ★★★</text>
+      <text x="80" y="342" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">WALCL ★★★★</text>
+      <text x="165" y="342" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">M2 ★★★★</text>
+      <text x="122" y="375" fill="#e0a84c" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">VIX↑ = safe haven · COT extremes = reversal</text>
+
+      <!-- RIGHT TOP: KOMODITAS -->
+      <rect x="575" y="95" width="205" height="130" rx="10" fill="#3d1a1a" stroke="#e05a5a" stroke-width="1"/>
+      <text x="677" y="115" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500" letter-spacing="1">⑤ KOMODITAS</text>
+      <text x="635" y="137" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">Silver ★★★★</text>
+      <text x="720" y="137" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">Oil ★★★</text>
+      <text x="635" y="157" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">Copper ★★</text>
+      <text x="720" y="157" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">BCOM ★★★</text>
+      <text x="635" y="177" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">Bitcoin ★★</text>
+      <text x="720" y="177" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">Platinum ★★</text>
+      <text x="677" y="212" fill="#e05a5a" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Silver paling berkorelasi langsung</text>
+
+      <!-- RIGHT BOTTOM: GEOPOLITIK -->
+      <rect x="575" y="260" width="205" height="130" rx="10" fill="#1a1a3d" stroke="#5a5ae0" stroke-width="1"/>
+      <text x="677" y="280" fill="#9b9be0" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle" font-weight="500" letter-spacing="1">⑥ GEOPOLITIK</text>
+      <text x="635" y="302" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">Perang ★★★★</text>
+      <text x="720" y="302" fill="#e8e6e0" font-family="'DM Mono',monospace" font-size="11" text-anchor="middle" font-weight="500">Sanksi ★★★</text>
+      <text x="635" y="322" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">Dedolar ★★★★</text>
+      <text x="720" y="322" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">US Debt ★★★</text>
+      <text x="635" y="342" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">India ★★★</text>
+      <text x="720" y="342" fill="#7a7870" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">Krisis ★★★</text>
+      <text x="677" y="375" fill="#9b9be0" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Tidak terkuantifikasi — namun sangat kuat</text>
+
+      <!-- Footer -->
+      <text x="400" y="520" fill="#5a5a58" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Kekuatan analisis gold ada pada KONVERGENSI sinyal dari multiple kategori — bukan satu indikator tunggal.</text>
+      <text x="400" y="540" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="10" text-anchor="middle">★★★★★ = sangat kuat · ★★★★ = kuat · ★★★ = sedang · ★★ = lemah</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ══ HIERARKI ══ -->
+<section id="hierarki">
+  <div class="section-header">
+    <div class="section-num">REF</div>
+    <div class="section-title-block"><h2>Hierarki Kekuatan Indikator</h2><div class="sub">Urutan berdasarkan korelasi langsung dengan harga gold</div></div>
+  </div>
+  <div class="hierarchy">
+    <div class="hier-row"><div class="hier-rank">#1</div><div class="hier-ticker">DFII10</div><div class="hier-desc">Real yield 10Y — biaya peluang langsung vs emas</div><div class="bar-wrap"><div class="bar" style="width:100%"></div></div><div class="hier-stars">★★★★★</div></div>
+    <div class="hier-row"><div class="hier-rank">#2</div><div class="hier-ticker">DXY</div><div class="hier-desc">US Dollar Index — rival langsung gold</div><div class="bar-wrap"><div class="bar" style="width:100%"></div></div><div class="hier-stars">★★★★★</div></div>
+    <div class="hier-row"><div class="hier-rank">#3</div><div class="hier-ticker">CB Reserves</div><div class="hier-desc">Central bank gold buying — structural demand floor</div><div class="bar-wrap"><div class="bar" style="width:100%"></div></div><div class="hier-stars">★★★★★</div></div>
+    <div class="hier-row"><div class="hier-rank">#4</div><div class="hier-ticker">US02Y</div><div class="hier-desc">Ekspektasi kebijakan Fed — cermin arah rate</div><div class="bar-wrap"><div class="bar" style="width:80%"></div></div><div class="hier-stars">★★★★☆</div></div>
+    <div class="hier-row"><div class="hier-rank">#5</div><div class="hier-ticker">US10Y</div><div class="hier-desc">Benchmark biaya modal global</div><div class="bar-wrap"><div class="bar" style="width:80%"></div></div><div class="hier-stars">★★★★☆</div></div>
+    <div class="hier-row"><div class="hier-rank">#6</div><div class="hier-ticker">CPI / PCE</div><div class="hier-desc">Inflasi — gold sebagai hedge nilai uang</div><div class="bar-wrap"><div class="bar" style="width:80%"></div></div><div class="hier-stars">★★★★☆</div></div>
+    <div class="hier-row"><div class="hier-rank">#7</div><div class="hier-ticker">GLD Holdings</div><div class="hier-desc">Konfirmator demand institusional Barat</div><div class="bar-wrap"><div class="bar" style="width:80%"></div></div><div class="hier-stars">★★★★☆</div></div>
+    <div class="hier-row"><div class="hier-rank">#8</div><div class="hier-ticker">2s10s Spread</div><div class="hier-desc">Peta siklus ekonomi multi-tahun</div><div class="bar-wrap"><div class="bar" style="width:80%"></div></div><div class="hier-stars">★★★★☆</div></div>
+    <div class="hier-row"><div class="hier-rank">#9</div><div class="hier-ticker">COT Report</div><div class="hier-desc">Positioning spekulan — contrarian indicator</div><div class="bar-wrap"><div class="bar" style="width:60%"></div></div><div class="hier-stars">★★★☆☆</div></div>
+    <div class="hier-row"><div class="hier-rank">#10</div><div class="hier-ticker">VIX</div><div class="hier-desc">Fear index — sentimen jangka pendek</div><div class="bar-wrap"><div class="bar" style="width:60%"></div></div><div class="hier-stars">★★★☆☆</div></div>
+    <div class="hier-row"><div class="hier-rank">#11</div><div class="hier-ticker">RRPONTSYD</div><div class="hier-desc">Likuiditas overnight — indikator tidak langsung</div><div class="bar-wrap"><div class="bar" style="width:60%"></div></div><div class="hier-stars">★★★☆☆</div></div>
+    <div class="hier-row"><div class="hier-rank">#12</div><div class="hier-ticker">Geopolitik</div><div class="hier-desc">Perang, sanksi, de-dollarisasi — tidak terkuantifikasi</div><div class="bar-wrap"><div class="bar" style="width:80%"></div></div><div class="hier-stars">★★★★☆</div></div>
+  </div>
+</section>
+
+<!-- ══ MATRIX ══ -->
+<section id="matrix">
+  <div class="section-header">
+    <div class="section-num">REF</div>
+    <div class="section-title-block"><h2>Matrix Ringkasan</h2><div class="sub">Dampak naik/turun semua indikator terhadap gold</div></div>
+  </div>
+  <div class="matrix">
+    <table>
+      <tr><th>Indikator</th><th>Naik ↑ → Gold</th><th>Turun ↓ → Gold</th><th>Catatan</th></tr>
+      <tr><td>DFII10</td><td class="bear-cell">↓ Turun</td><td class="bull-cell">↑ Naik</td><td style="color:var(--muted);font-size:12px">Korelasi terkuat, berlaku hampir selalu</td></tr>
+      <tr><td>DXY</td><td class="bear-cell">↓ Turun</td><td class="bull-cell">↑ Naik</td><td style="color:var(--muted);font-size:12px">Korelasi negatif sangat konsisten</td></tr>
+      <tr><td>US02Y</td><td class="bear-cell">↓ Turun</td><td class="bull-cell">↑ Naik</td><td style="color:var(--muted);font-size:12px">Cermin ekspektasi kebijakan Fed</td></tr>
+      <tr><td>US10Y</td><td class="bear-cell">↓ Turun</td><td class="bull-cell">↑ Naik</td><td style="color:var(--muted);font-size:12px">Kecuali naik karena inflasi → cek DFII10</td></tr>
+      <tr><td>2s10s Spread</td><td class="mix-cell">Mixed</td><td class="mix-cell">Mixed</td><td style="color:var(--muted);font-size:12px">Bull steep = bullish, Bear steep = mixed</td></tr>
+      <tr><td>VIX</td><td class="bull-cell">↑ Naik</td><td class="bear-cell">↓ Turun</td><td style="color:var(--muted);font-size:12px">VIX &gt;40: forced sell, gold bisa ikut turun</td></tr>
+      <tr><td>GLD Holdings</td><td class="bull-cell">↑ Naik</td><td class="bear-cell">↓ Turun</td><td style="color:var(--muted);font-size:12px">Konfirmator — pantau ton, bukan harga saham</td></tr>
+      <tr><td>RRPONTSYD</td><td class="bear-cell">↓ Turun</td><td class="bull-cell">↑ Naik</td><td style="color:var(--muted);font-size:12px">Pengaruh tidak langsung via likuiditas</td></tr>
+      <tr><td>CPI / PCE</td><td class="bull-cell">↑ Naik</td><td class="bear-cell">↓ Turun</td><td style="color:var(--muted);font-size:12px">Surprises vs konsensus lebih berpengaruh</td></tr>
+      <tr><td>NFP</td><td class="bear-cell">↓ Turun</td><td class="bull-cell">↑ Naik</td><td style="color:var(--muted);font-size:12px">NFP kuat = Fed hawkish = bearish gold</td></tr>
+      <tr><td>Fed BS (WALCL)</td><td class="bull-cell">↑ Naik</td><td class="bear-cell">↓ Turun</td><td style="color:var(--muted);font-size:12px">QE = bullish, QT = bearish gold</td></tr>
+      <tr><td>M2 Money Supply</td><td class="bull-cell">↑ Naik</td><td class="bear-cell">↓ Turun</td><td style="color:var(--muted);font-size:12px">Hubungan jangka panjang sangat konsisten</td></tr>
+      <tr><td>CB Gold Buying</td><td class="bull-cell">↑ Naik</td><td class="bear-cell">↓ Turun</td><td style="color:var(--muted);font-size:12px">Structural demand — tidak sensitif harga</td></tr>
+      <tr><td>Oil (WTI)</td><td class="bull-cell">↑ Naik</td><td class="bear-cell">↓ Turun</td><td style="color:var(--muted);font-size:12px">Via inflasi — hubungan tidak selalu konsisten</td></tr>
+      <tr><td>COT Net Long</td><td class="mix-cell">Overbought</td><td class="mix-cell">Oversold</td><td style="color:var(--muted);font-size:12px">Contrarian indicator — extreme = reversal warning</td></tr>
+      <tr><td>Geopolitical Risk</td><td class="bull-cell">↑ Naik</td><td class="bear-cell">↓ Turun</td><td style="color:var(--muted);font-size:12px">Eskalasi = flight to safety</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ══ PRINSIP UTAMA ══ -->
+<section id="prinsip">
+  <div class="section-header">
+    <div class="section-num">★</div>
+    <div class="section-title-block"><h2>Prinsip Utama</h2><div class="sub">Framework analisis gold yang holistik</div></div>
+  </div>
+
+  <!-- VIZ: Convergence Framework -->
+  <div class="viz-block">
+    <div class="viz-label">Framework 6 Langkah Analisis Konvergensi Gold</div>
+    <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- 6 steps -->
+      <rect x="10" y="20" width="118" height="70" rx="8" fill="#221a3d" stroke="#9b7de0" stroke-width="1"/>
+      <text x="69" y="38" fill="#9b7de0" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">LANGKAH 1</text>
+      <text x="69" y="55" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Rezim Makro</text>
+      <text x="69" y="70" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">US02Y + 2s10s</text>
+      <text x="69" y="82" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Pengetatan / Longgar?</text>
+      <line x1="130" y1="55" x2="142" y2="55" stroke="#3d3d3a" stroke-width="1" marker-end="url(#arr)"/>
+
+      <rect x="144" y="20" width="118" height="70" rx="8" fill="#1a2e3d" stroke="#5a9de0" stroke-width="1"/>
+      <text x="203" y="38" fill="#5a9de0" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">LANGKAH 2</text>
+      <text x="203" y="55" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Biaya Peluang</text>
+      <text x="203" y="70" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">DFII10 di mana?</text>
+      <text x="203" y="82" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Kompas harian #1</text>
+      <line x1="264" y1="55" x2="276" y2="55" stroke="#3d3d3a" stroke-width="1" marker-end="url(#arr)"/>
+
+      <rect x="278" y="20" width="118" height="70" rx="8" fill="#1a3d2e" stroke="#4caf85" stroke-width="1"/>
+      <text x="337" y="38" fill="#4caf85" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">LANGKAH 3</text>
+      <text x="337" y="55" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Kondisi Likuiditas</text>
+      <text x="337" y="70" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">DXY ke mana?</text>
+      <text x="337" y="82" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">RRPONTSYD tren?</text>
+      <line x1="398" y1="55" x2="410" y2="55" stroke="#3d3d3a" stroke-width="1" marker-end="url(#arr)"/>
+
+      <rect x="412" y="20" width="118" height="70" rx="8" fill="#3d2a1a" stroke="#c9a84c" stroke-width="1"/>
+      <text x="471" y="38" fill="#c9a84c" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">LANGKAH 4</text>
+      <text x="471" y="55" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Konfirmasi Demand</text>
+      <text x="471" y="70" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">GLD holdings?</text>
+      <text x="471" y="82" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">CB masih beli?</text>
+      <line x1="532" y1="55" x2="544" y2="55" stroke="#3d3d3a" stroke-width="1" marker-end="url(#arr)"/>
+
+      <rect x="546" y="20" width="118" height="70" rx="8" fill="#3d1a1a" stroke="#e05a5a" stroke-width="1"/>
+      <text x="605" y="38" fill="#e05a5a" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">LANGKAH 5</text>
+      <text x="605" y="55" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Sentimen Pasar</text>
+      <text x="605" y="70" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">VIX zona mana?</text>
+      <text x="605" y="82" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">COT ekstrem?</text>
+      <line x1="666" y1="55" x2="678" y2="55" stroke="#3d3d3a" stroke-width="1" marker-end="url(#arr)"/>
+
+      <rect x="680" y="20" width="112" height="70" rx="8" fill="#1a1a3d" stroke="#5a5ae0" stroke-width="1"/>
+      <text x="736" y="38" fill="#9b9be0" font-family="'DM Mono',monospace" font-size="9" text-anchor="middle" font-weight="500">LANGKAH 6</text>
+      <text x="736" y="55" fill="#e8e6e0" font-family="'DM Sans',sans-serif" font-size="10" text-anchor="middle">Konteks Struktural</text>
+      <text x="736" y="70" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">Geopolitik besar?</text>
+      <text x="736" y="82" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="9" text-anchor="middle">De-dollarisasi?</text>
+
+      <!-- Result: convergence -->
+      <rect x="200" y="115" width="400" height="60" rx="10" fill="#3d2a1a" stroke="#c9a84c" stroke-width="1.5"/>
+      <text x="400" y="138" fill="#f0c96e" font-family="'Syne',sans-serif" font-size="14" font-weight="700" text-anchor="middle">KONVERGENSI SINYAL → KEPUTUSAN</text>
+      <text x="400" y="157" fill="#7a7870" font-family="'DM Sans',sans-serif" font-size="11" text-anchor="middle">Semakin banyak faktor yang menunjuk ke satu arah = semakin kuat &amp; sustainable pergerakannya</text>
+
+      <line x1="69" y1="90" x2="280" y2="115" stroke="#3d3d3a" stroke-width="0.5" stroke-dasharray="3 2"/>
+      <line x1="400" y1="90" x2="400" y2="115" stroke="#3d3d3a" stroke-width="0.5" stroke-dasharray="3 2"/>
+      <line x1="736" y1="90" x2="520" y2="115" stroke="#3d3d3a" stroke-width="0.5" stroke-dasharray="3 2"/>
+    </svg>
+  </div>
+
+  <div class="callout success"><div class="callout-icon">◉</div><p><strong>Setup paling bullish gold:</strong> DFII10 turun + DXY lemah + Bank sentral aktif beli + COT tidak overbought + Geopolitik panas + ETF inflow mulai + 2s10s dalam bull steepening</p></div>
+  <div class="callout warning"><div class="callout-icon">⚠</div><p><strong>Setup paling bearish gold:</strong> DFII10 naik + DXY kuat + NFP kuat berulang + Fed hawkish + ETF outflow + VIX rendah + 2s10s dalam bear flattening</p></div>
+
+  <div class="prose">
+    <h3>Jangka Waktu yang Berbeda, Indikator Berbeda</h3>
+  </div>
+  <table class="data-table">
+    <tr><th>Jangka Waktu</th><th>Indikator Paling Relevan</th></tr>
+    <tr><td>Intraday / harian</td><td>DXY, VIX, rilis data (NFP, CPI), Fed speak</td></tr>
+    <tr><td>Mingguan</td><td>DFII10, US02Y, COT Report, GLD Holdings</td></tr>
+    <tr><td>Bulanan</td><td>DFII10, US10Y, WALCL, M2, CB buying data</td></tr>
+    <tr><td>Kuartalan / tahunan</td><td>2s10s siklus, de-dollarisasi, geopolitik struktural</td></tr>
+  </table>
+  <div class="callout info"><div class="callout-icon">◈</div><p><strong>Ingat:</strong> GLD adalah <em>konfirmator</em>. DFII10 adalah <em>kompas harian</em>. 2s10s adalah <em>peta siklus</em>. Ketiganya harus dibaca bersamaan. Analisis terbaik selalu datang dari konvergensi — bukan dari satu indikator tunggal.</p></div>
+</section>
+
+<div style="height:48px"></div>
+<div style="border-top:1px solid var(--border);padding-top:24px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+  <span>XAUUSD Macro Guide v2.0</span>
+  <span>30+ Indikator · 6 Kategori · 7 Visualisasi Mekanisme</span>
+  <span>Hanya untuk tujuan edukasi — bukan saran investasi</span>
+</div>
+<div style="height:48px"></div>
+
+</main>
+
+<script>
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('nav a');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(a=>a.classList.remove('active'));
+      const l=document.querySelector(`nav a[href="#${e.target.id}"]`);
+      if(l)l.classList.add('active');
+    }
+  });
+},{threshold:0.2,rootMargin:'-10% 0px -60% 0px'});
+sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
