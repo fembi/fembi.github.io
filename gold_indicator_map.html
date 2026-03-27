@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peta Lengkap Indikator Penggerak Gold</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gold-dark: #8B6914;
+    --cream: #FFFDF7;
+    --text: #1A1612;
+    --text-muted: #6B5F4A;
+    --border: #E8D9B0;
+
+    --cat1: #2B4C8C; --cat1-bg: #EEF3FB; --cat1-border: #A8BEE8;
+    --cat2: #7B3A3A; --cat2-bg: #FBF0EE; --cat2-border: #E8AAAA;
+    --cat3: #2B6B4F; --cat3-bg: #EEF8F3; --cat3-border: #A0D9BC;
+    --cat4: #7B5A1A; --cat4-bg: #FBF5EE; --cat4-border: #E8CDA0;
+    --cat5: #3A5F7B; --cat5-bg: #EEF5FB; --cat5-border: #A0C8E8;
+    --cat6: #5A3A7B; --cat6-bg: #F5EEF8; --cat6-border: #C8A0E8;
+
+    --tf-h: #C0392B; --tf-h-bg: #FDF2F0; --tf-h-border: #F1948A;
+    --tf-w: #1A6B3A; --tf-w-bg: #F0FAF4; --tf-w-border: #82C99A;
+    --tf-m: #1A4B8C; --tf-m-bg: #EEF3FB; --tf-m-border: #89ABE3;
+    --tf-s: #5A3A7B; --tf-s-bg: #F5EEF8; --tf-s-border: #C8A0E8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background:var(--cream); font-family:'DM Sans',sans-serif; color:var(--text); min-height:100vh; padding:28px 16px 48px; }
+  .wrapper { max-width:780px; margin:0 auto; }
+
+  /* HEADER */
+  .header { text-align:center; margin-bottom:18px; }
+  .header h1 { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--text); letter-spacing:0.3px; margin-bottom:4px; }
+  .header p { font-size:12px; color:var(--text-muted); }
+
+  /* GOLD BADGE */
+  .badge-wrap { text-align:center; }
+  .gold-badge { display:inline-flex; flex-direction:column; align-items:center; background:linear-gradient(135deg,#C9A84C,#F0D080,#C9A84C); border:2px solid var(--gold-dark); border-radius:10px; padding:10px 32px; margin:12px auto 18px; box-shadow:0 4px 18px rgba(201,168,76,0.25); }
+  .gold-badge .badge-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:#5A3A00; letter-spacing:2px; }
+  .gold-badge .badge-sub { font-size:11px; color:#7A5A10; font-weight:500; letter-spacing:1px; }
+  .connector { width:2px; height:12px; background:linear-gradient(to bottom,var(--gold),var(--border)); margin:0 auto; }
+  .gold-divider { height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); margin:4px 0 18px; opacity:0.45; }
+
+  /* TABS */
+  .view-tabs { display:flex; gap:5px; margin-bottom:18px; background:white; border:1.5px solid var(--border); border-radius:10px; padding:5px; }
+  .view-tab { flex:1; text-align:center; padding:7px 4px; font-size:12px; font-weight:600; border-radius:7px; cursor:pointer; transition:all 0.18s; color:var(--text-muted); border:1.5px solid transparent; user-select:none; }
+  .view-tab:hover { background:#F5F0E8; }
+  .view-tab.active { background:linear-gradient(135deg,#C9A84C,#E8C860); color:#4A2E00; border-color:var(--gold-dark); box-shadow:0 2px 8px rgba(201,168,76,0.3); }
+
+  /* PANELS */
+  .panel { display:none; }
+  .panel.active { display:block; }
+
+  /* CAT SECTION */
+  .cat-section { border-radius:12px; padding:14px; margin-bottom:13px; border:1.5px solid; }
+  .cat-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:11px; }
+  .cat-title { font-size:13px; font-weight:600; display:flex; align-items:center; gap:6px; }
+  .cat-num { display:inline-flex; align-items:center; justify-content:center; width:21px; height:21px; border-radius:50%; font-size:10.5px; font-weight:700; color:white; flex-shrink:0; }
+  .cat-meta { font-size:10px; color:var(--text-muted); font-style:italic; text-align:right; }
+  .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(135px,1fr)); gap:8px; }
+
+  /* IND CARD */
+  .ind-card { background:white; border-radius:9px; padding:9px 10px; border:1.5px solid; transition:transform 0.15s,box-shadow 0.15s; position:relative; }
+  .ind-card:hover { transform:translateY(-2px); box-shadow:0 5px 16px rgba(0,0,0,0.08); }
+  .ind-code { font-size:12px; font-weight:700; display:block; margin-bottom:1px; padding-right:30px; }
+  .ind-name { font-size:9px; color:var(--text-muted); display:block; margin-bottom:5px; line-height:1.3; }
+  .ind-signal { font-size:9px; line-height:1.4; color:#444; border-top:1px dashed; padding-top:4px; }
+  .stars { color:var(--gold); font-size:9px; letter-spacing:-1px; }
+  .stars-empty { color:#ccc; font-size:9px; letter-spacing:-1px; }
+
+  /* TF BADGE */
+  .tf-badge { position:absolute; top:6px; right:6px; font-size:7.5px; font-weight:700; padding:1px 4px; border-radius:4px; letter-spacing:0.3px; }
+  .tf-H { background:var(--tf-h-bg); color:var(--tf-h); border:1px solid var(--tf-h-border); }
+  .tf-W { background:var(--tf-w-bg); color:var(--tf-w); border:1px solid var(--tf-w-border); }
+  .tf-M { background:var(--tf-m-bg); color:var(--tf-m); border:1px solid var(--tf-m-border); }
+  .tf-S { background:var(--tf-s-bg); color:var(--tf-s); border:1px solid var(--tf-s-border); }
+
+  /* CAT COLORS */
+  .cat1{background:var(--cat1-bg);border-color:var(--cat1-border)}.cat1 .cat-num{background:var(--cat1)}.cat1 .cat-title{color:var(--cat1)}.cat1 .ind-card{border-color:var(--cat1-border)}.cat1 .ind-code{color:var(--cat1)}.cat1 .ind-signal{border-color:var(--cat1-border)}
+  .cat2{background:var(--cat2-bg);border-color:var(--cat2-border)}.cat2 .cat-num{background:var(--cat2)}.cat2 .cat-title{color:var(--cat2)}.cat2 .ind-card{border-color:var(--cat2-border)}.cat2 .ind-code{color:var(--cat2)}.cat2 .ind-signal{border-color:var(--cat2-border)}
+  .cat3{background:var(--cat3-bg);border-color:var(--cat3-border)}.cat3 .cat-num{background:var(--cat3)}.cat3 .cat-title{color:var(--cat3)}.cat3 .ind-card{border-color:var(--cat3-border)}.cat3 .ind-code{color:var(--cat3)}.cat3 .ind-signal{border-color:var(--cat3-border)}
+  .cat4{background:var(--cat4-bg);border-color:var(--cat4-border)}.cat4 .cat-num{background:var(--cat4)}.cat4 .cat-title{color:var(--cat4)}.cat4 .ind-card{border-color:var(--cat4-border)}.cat4 .ind-code{color:var(--cat4)}.cat4 .ind-signal{border-color:var(--cat4-border)}
+  .cat5{background:var(--cat5-bg);border-color:var(--cat5-border)}.cat5 .cat-num{background:var(--cat5)}.cat5 .cat-title{color:var(--cat5)}.cat5 .ind-card{border-color:var(--cat5-border)}.cat5 .ind-code{color:var(--cat5)}.cat5 .ind-signal{border-color:var(--cat5-border)}
+  .cat6{background:var(--cat6-bg);border-color:var(--cat6-border)}.cat6 .cat-num{background:var(--cat6)}.cat6 .cat-title{color:var(--cat6)}.cat6 .ind-card{border-color:var(--cat6-border)}.cat6 .ind-code{color:var(--cat6)}.cat6 .ind-signal{border-color:var(--cat6-border)}
+
+  /* TIMEFRAME SECTIONS */
+  .tf-section { border-radius:12px; padding:14px; margin-bottom:13px; border:1.5px solid; }
+  .tf-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .tf-icon { width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+  .tf-title-block .tf-label { font-size:13.5px; font-weight:700; }
+  .tf-title-block .tf-desc { font-size:10px; color:var(--text-muted); margin-top:1px; }
+  .tf-count { margin-left:auto; font-size:11px; font-weight:600; padding:3px 9px; border-radius:20px; white-space:nowrap; }
+
+  .tf-H-section{background:var(--tf-h-bg);border-color:var(--tf-h-border)}.tf-H-section .tf-icon{background:var(--tf-h-border)}.tf-H-section .tf-label{color:var(--tf-h)}.tf-H-section .tf-count{background:var(--tf-h-border);color:var(--tf-h)}.tf-H-section .ind-card{border-color:var(--tf-h-border)}.tf-H-section .ind-code{color:var(--tf-h)}.tf-H-section .ind-signal{border-color:var(--tf-h-border)}
+  .tf-W-section{background:var(--tf-w-bg);border-color:var(--tf-w-border)}.tf-W-section .tf-icon{background:var(--tf-w-border)}.tf-W-section .tf-label{color:var(--tf-w)}.tf-W-section .tf-count{background:var(--tf-w-border);color:var(--tf-w)}.tf-W-section .ind-card{border-color:var(--tf-w-border)}.tf-W-section .ind-code{color:var(--tf-w)}.tf-W-section .ind-signal{border-color:var(--tf-w-border)}
+  .tf-M-section{background:var(--tf-m-bg);border-color:var(--tf-m-border)}.tf-M-section .tf-icon{background:var(--tf-m-border)}.tf-M-section .tf-label{color:var(--tf-m)}.tf-M-section .tf-count{background:var(--tf-m-border);color:var(--tf-m)}.tf-M-section .ind-card{border-color:var(--tf-m-border)}.tf-M-section .ind-code{color:var(--tf-m)}.tf-M-section .ind-signal{border-color:var(--tf-m-border)}
+  .tf-S-section{background:var(--tf-s-bg);border-color:var(--tf-s-border)}.tf-S-section .tf-icon{background:var(--tf-s-border)}.tf-S-section .tf-label{color:var(--tf-s)}.tf-S-section .tf-count{background:var(--tf-s-border);color:var(--tf-s)}.tf-S-section .ind-card{border-color:var(--tf-s-border)}.tf-S-section .ind-code{color:var(--tf-s)}.tf-S-section .ind-signal{border-color:var(--tf-s-border)}
+
+  /* KONVERGENSI */
+  .conv-intro { background:linear-gradient(135deg,#FDF6E3,#FFF9ED); border:1.5px solid var(--border); border-radius:12px; padding:15px 17px; margin-bottom:16px; }
+  .conv-intro-title { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:var(--gold-dark); margin-bottom:6px; display:flex; align-items:center; gap:7px; }
+  .conv-intro p { font-size:11.5px; color:var(--text-muted); line-height:1.75; }
+  .conv-intro strong { color:var(--text); }
+
+  .conv-rule { border-radius:12px; padding:14px 16px; margin-bottom:12px; border:1.5px solid; }
+  .conv-rule-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .conv-rule-num { width:27px; height:27px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:white; flex-shrink:0; }
+  .conv-rule-title { font-size:13px; font-weight:700; }
+  .conv-rule-sub { font-size:10px; color:var(--text-muted); margin-top:1px; }
+  .conv-signals { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:9px; }
+  .conv-signal-box { background:white; border-radius:8px; padding:9px 10px; border:1.5px solid; }
+  .conv-signal-box .sig-label { font-size:9px; font-weight:700; letter-spacing:0.4px; text-transform:uppercase; margin-bottom:5px; display:block; }
+  .conv-signal-box .sig-items { font-size:10px; line-height:1.85; color:var(--text); }
+  .conv-signal-box .sig-items span { display:block; }
+  .conv-outcome { background:white; border-radius:8px; padding:10px 12px; border:1.5px solid; display:flex; align-items:flex-start; gap:9px; }
+  .conv-outcome .out-icon { font-size:17px; flex-shrink:0; margin-top:1px; }
+  .conv-outcome .out-text { font-size:11px; line-height:1.65; color:var(--text); }
+  .conv-outcome .out-text strong { color:var(--gold-dark); }
+
+  .scen-bull{background:#F0FAF4;border-color:#82C99A}.scen-bull .conv-rule-num{background:#1A6B3A}.scen-bull .conv-rule-title{color:#1A6B3A}.scen-bull .conv-signal-box{border-color:#B0DFC0}.scen-bull .conv-signal-box .sig-label{color:#1A6B3A}.scen-bull .conv-outcome{border-color:#82C99A}
+  .scen-bear{background:#FDF2F0;border-color:#F1948A}.scen-bear .conv-rule-num{background:#C0392B}.scen-bear .conv-rule-title{color:#C0392B}.scen-bear .conv-signal-box{border-color:#F5B7B1}.scen-bear .conv-signal-box .sig-label{color:#C0392B}.scen-bear .conv-outcome{border-color:#F1948A}
+  .scen-conf{background:#FBF5EE;border-color:#E8CDA0}.scen-conf .conv-rule-num{background:#7B5A1A}.scen-conf .conv-rule-title{color:#7B5A1A}.scen-conf .conv-signal-box{border-color:#E8CDA0}.scen-conf .conv-signal-box .sig-label{color:#7B5A1A}.scen-conf .conv-outcome{border-color:#E8CDA0}
+  .scen-trap{background:#F5EEF8;border-color:#C8A0E8}.scen-trap .conv-rule-num{background:#5A3A7B}.scen-trap .conv-rule-title{color:#5A3A7B}.scen-trap .conv-signal-box{border-color:#D8B8F0}.scen-trap .conv-signal-box .sig-label{color:#5A3A7B}.scen-trap .conv-outcome{border-color:#C8A0E8}
+  .scen-method{background:#EEF3FB;border-color:#A8BEE8}.scen-method .conv-rule-num{background:#2B4C8C}.scen-method .conv-rule-title{color:#2B4C8C}.scen-method .conv-signal-box{border-color:#C0D4F0}.scen-method .conv-signal-box .sig-label{color:#2B4C8C}.scen-method .conv-outcome{border-color:#A8BEE8}
+
+  /* SCORE MATRIX */
+  .score-matrix { background:white; border:1.5px solid var(--border); border-radius:12px; padding:14px; margin-bottom:12px; }
+  .score-matrix-title { font-size:12.5px; font-weight:700; color:var(--gold-dark); margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+  .score-rows { display:flex; flex-direction:column; gap:7px; }
+  .score-row { display:flex; align-items:center; gap:9px; }
+  .score-label { font-size:10.5px; font-weight:600; width:115px; flex-shrink:0; color:var(--text); }
+  .score-bar-wrap { flex:1; background:#F0EDE6; border-radius:20px; height:9px; overflow:hidden; }
+  .score-bar { height:100%; border-radius:20px; }
+  .score-val { font-size:10px; font-weight:700; width:26px; text-align:right; color:var(--text-muted); }
+  .bar-strong{background:linear-gradient(to right,#C9A84C,#E8C860)}
+  .bar-medium{background:linear-gradient(to right,#89ABE3,#5B8BD4)}
+  .bar-weak{background:linear-gradient(to right,#C8A0E8,#9B59B6)}
+
+  /* LEGEND */
+  .legend { background:white; border:1.5px solid var(--border); border-radius:12px; padding:12px 16px; margin-top:16px; text-align:center; }
+  .legend-title { font-size:11px; font-weight:600; color:var(--text-muted); margin-bottom:8px; }
+  .legend-items { display:flex; flex-wrap:wrap; justify-content:center; gap:8px 16px; }
+  .legend-item { display:flex; align-items:center; gap:4px; font-size:10px; color:var(--text-muted); }
+  .tf-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+
+  /* FOOTER */
+  .footer-note { margin-top:13px; text-align:center; font-size:11px; color:var(--text-muted); line-height:1.8; padding:0 10px; }
+  .footer-note strong { color:var(--gold-dark); }
+
+  @media(max-width:520px){
+    .cards-grid{grid-template-columns:repeat(2,1fr)}
+    .conv-signals{grid-template-columns:1fr}
+    .cat-header{flex-direction:column;gap:3px}
+    .cat-meta{text-align:left}
+    .view-tab{font-size:10px;padding:6px 2px}
+    .score-label{width:90px;font-size:9.5px}
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <h1>Peta Lengkap Indikator Penggerak Gold</h1>
+    <p>6 kategori · 60 indikator · timeframe · panduan konvergensi sinyal</p>
+  </div>
+
+  <div class="badge-wrap">
+    <div class="gold-badge">
+      <span class="badge-title">GOLD</span>
+      <span class="badge-sub">XAUUSD</span>
+    </div>
+  </div>
+  <div class="connector"></div>
+  <div class="gold-divider"></div>
+
+  <div class="view-tabs">
+    <div class="view-tab active" onclick="switchTab('kategori',this)">📂 Per Kategori</div>
+    <div class="view-tab" onclick="switchTab('timeframe',this)">⏱ Per Timeframe</div>
+    <div class="view-tab" onclick="switchTab('konvergensi',this)">🎯 Konvergensi Sinyal</div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       PANEL 1 — PER KATEGORI
+  ═══════════════════════════════ -->
+  <div id="panel-kategori" class="panel active">
+
+    <div class="cat-section cat1">
+      <div class="cat-header">
+        <div class="cat-title"><span class="cat-num">①</span>Dolar &amp; Mata Uang</div>
+        <div class="cat-meta">Korelasi Negatif Kuat vs Gold</div>
+      </div>
+      <div class="cards-grid">
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">DXY</span><span class="ind-name">US Dollar Index</span><div class="ind-signal">↑DXY = ↓Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">EURUSD</span><span class="ind-name">Euro vs Dolar</span><div class="ind-signal">↑EUR = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">USDJPY</span><span class="ind-name">Yen vs Dolar</span><div class="ind-signal">↑JPY = safe haven flow <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">USDCNH</span><span class="ind-name">Yuan Offshore China</span><div class="ind-signal">↑CNH lemah = ↑Gold China <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">XAUEUR/CNY/INR</span><span class="ind-name">Gold Mata Uang Lain</span><div class="ind-signal">Demand lokal vs USD <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+      </div>
+    </div>
+
+    <div class="cat-section cat2">
+      <div class="cat-header">
+        <div class="cat-title"><span class="cat-num">②</span>Inflasi &amp; Data Ekonomi</div>
+        <div class="cat-meta">Gold sebagai Inflation Hedge</div>
+      </div>
+      <div class="cards-grid">
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">CPI</span><span class="ind-name">Consumer Price Index</span><div class="ind-signal">↑CPI = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">PCE</span><span class="ind-name">Fed's Fav. Metric</span><div class="ind-signal">↑PCE = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">PPI</span><span class="ind-name">Producer Price Index</span><div class="ind-signal">↑PPI = inflasi hulu ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">NFP</span><span class="ind-name">Non-Farm Payroll</span><div class="ind-signal">↑NFP = ↓Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">ISM PMI Mfg</span><span class="ind-name">Manufacturing PMI</span><div class="ind-signal">↓PMI = slowdown ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">ISM Services</span><span class="ind-name">Services PMI (dominan)</span><div class="ind-signal">↓Services = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">Retail Sales</span><span class="ind-name">Consumer Spending</span><div class="ind-signal">↓Retail = ↑Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-W">Mingguan</span><span class="ind-code">Jobless Claims</span><span class="ind-name">Initial Weekly</span><div class="ind-signal">↑Claims = ↑Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">Michigan Sentiment</span><span class="ind-name">Consumer Confidence</span><div class="ind-signal">↓Sentiment = ↑Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">Housing Starts</span><span class="ind-name">Building Permits</span><div class="ind-signal">↓Housing = recessionary ↑Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">GDP</span><span class="ind-name">Growth Data Quarterly</span><div class="ind-signal">↓GDP = risk off ↑Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+      </div>
+    </div>
+
+    <div class="cat-section cat3">
+      <div class="cat-header">
+        <div class="cat-title"><span class="cat-num">③</span>Bank Sentral, Obligasi &amp; Moneter</div>
+        <div class="cat-meta">Driver Terkuat Jangka Panjang</div>
+      </div>
+      <div class="cards-grid">
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">DFII10</span><span class="ind-name">Real Yield 10Y</span><div class="ind-signal">↑Real Yield = ↓Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">US02Y</span><span class="ind-name">Fed Expectations</span><div class="ind-signal">↑Rate Exp = ↓Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">US10Y</span><span class="ind-name">Treasury Benchmark</span><div class="ind-signal">↑Yield = ↓Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">TIPS Breakeven</span><span class="ind-name">Inflation Expectation</span><div class="ind-signal">↑Breakeven = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">CME FedWatch</span><span class="ind-name">Rate Cut Probability</span><div class="ind-signal">↑Cut prob = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">2s10s</span><span class="ind-name">Yield Curve</span><div class="ind-signal">Inversi = Risk off ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">FOMC Statement</span><span class="ind-name">Dot Plot / Minutes</span><div class="ind-signal">Hawkish = ↓Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">Fed Balance Sheet</span><span class="ind-name">WALCL</span><div class="ind-signal">↑BS = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">M2 Money Supply</span><span class="ind-name">Uang Beredar</span><div class="ind-signal">↑M2 = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">Yield Spread</span><span class="ind-name">US vs DE / JP / GB</span><div class="ind-signal">↓Spread = ↓USD = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-S">Struktural</span><span class="ind-code">Central Bank Rsv</span><span class="ind-name">CB Gold Reserves</span><div class="ind-signal">↑Pembelian CB = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-S">Struktural</span><span class="ind-code">Global QE / QT</span><span class="ind-name">ECB, BOJ, PBOC</span><div class="ind-signal">↑Global QE = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-S">Struktural</span><span class="ind-code">5y5y Fwd Swap</span><span class="ind-name">Long-term Infl. Exp.</span><div class="ind-signal">↑Swap = ↑Gold jk panjang <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+      </div>
+    </div>
+
+    <div class="cat-section cat4">
+      <div class="cat-header">
+        <div class="cat-title"><span class="cat-num">④</span>Komoditas &amp; Pasar Terkait</div>
+        <div class="cat-meta">Proxy Inflasi &amp; Risk Appetite</div>
+      </div>
+      <div class="cards-grid">
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">Silver (XAGUSD)</span><span class="ind-name">Precious Metal Peer</span><div class="ind-signal">Korelasi positif kuat <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">S&amp;P 500 (SPX)</span><span class="ind-name">Equity Risk Barometer</span><div class="ind-signal">↓SPX = risk off ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">Oil WTI/Brent</span><span class="ind-name">Energy / Infl. Proxy</span><div class="ind-signal">↑Oil = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">Gold/Silver Ratio</span><span class="ind-name">XAU ÷ XAG</span><div class="ind-signal">↑Ratio = flight to safety <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">Copper (HG)</span><span class="ind-name">Dr. Copper</span><div class="ind-signal">risk-on → mixed Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">BCOM / CRB</span><span class="ind-name">Broad Commodity Index</span><div class="ind-signal">↑BCOM = inflasi luas ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">TIC Flow</span><span class="ind-name">Treasury Foreign Buying</span><div class="ind-signal">↓TIC = asing jual UST ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">Platinum/Palladium</span><span class="ind-name">PGM Group</span><div class="ind-signal">Divergensi = sinyal supply <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-S">Struktural</span><span class="ind-code">Bitcoin (BTC)</span><span class="ind-name">Digital Gold Narrative</span><div class="ind-signal">Rival hedge alternatif <span class="stars">★★</span><span class="stars-empty">★★★</span></div></div>
+      </div>
+    </div>
+
+    <div class="cat-section cat5">
+      <div class="cat-header">
+        <div class="cat-title"><span class="cat-num">⑤</span>Positioning, Flows &amp; Sentimen</div>
+        <div class="cat-meta">Sentimen Pelaku Pasar</div>
+      </div>
+      <div class="cards-grid">
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">VIX</span><span class="ind-name">Fear Index (CBOE)</span><div class="ind-signal">↑VIX = ↑Gold safe haven <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">GVZ</span><span class="ind-name">Gold Volatility Index</span><div class="ind-signal">↑GVZ = uncertainty ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">GDX / GDXJ</span><span class="ind-name">Gold Mining Stocks</span><div class="ind-signal">Leading indicator Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">GLD / IAU ETF</span><span class="ind-name">ETF Gold Holdings</span><div class="ind-signal">↑Holdings = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">GLD Put/Call</span><span class="ind-name">Options Ratio</span><div class="ind-signal">↑Put = bearish positioning <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-W">Mingguan</span><span class="ind-code">CFTC Net Spec</span><span class="ind-name">Speculative Position</span><div class="ind-signal">↑Net long = bullish <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-W">Mingguan</span><span class="ind-code">COT Report</span><span class="ind-name">Futures Positioning</span><div class="ind-signal">Net long = momentum <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-W">Mingguan</span><span class="ind-code">Open Interest</span><span class="ind-name">COMEX Futures</span><div class="ind-signal">↑OI + ↑harga = kuat <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-W">Mingguan</span><span class="ind-code">SGE Premium</span><span class="ind-name">Shanghai Gold Exch.</span><div class="ind-signal">↑Premium = demand China <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-W">Mingguan</span><span class="ind-code">LBMA Clearing</span><span class="ind-name">London Physical Vol.</span><div class="ind-signal">↑Volume = demand global <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">RRP (Repo)</span><span class="ind-name">Fed Reverse Repo</span><div class="ind-signal">↓RRP = likuiditas keluar <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">Gold Lease Rate</span><span class="ind-name">Biaya Pinjam Fisik</span><div class="ind-signal">↑Rate = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+      </div>
+    </div>
+
+    <div class="cat-section cat6">
+      <div class="cat-header">
+        <div class="cat-title"><span class="cat-num">⑥</span>Geopolitik &amp; Demand Struktural</div>
+        <div class="cat-meta">Tidak Terkuantifikasi — Namun Sangat Kuat</div>
+      </div>
+      <div class="cards-grid">
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">Geopolitical Risk</span><span class="ind-name">Perang, Sanksi, Krisis</span><div class="ind-signal">Eskalasi = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-H">Harian</span><span class="ind-code">Tarif &amp; Trade War</span><span class="ind-name">Perang Dagang Global</span><div class="ind-signal">Eskalasi = ↑Gold safe haven <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">Sovereign CDS</span><span class="ind-name">Credit Default Swap</span><div class="ind-signal">↑CDS = default risk ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">India/China Demand</span><span class="ind-name">Seasonal &amp; Cultural</span><div class="ind-signal">Diwali, CNY = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-M">Bulanan</span><span class="ind-code">Gold Scrap Supply</span><span class="ind-name">Recycling / Daur Ulang</span><div class="ind-signal">↑Harga = ↑Scrap = ↓tekanan <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-S">Struktural</span><span class="ind-code">De-dollarisasi</span><span class="ind-name">China, BRICS, CB</span><div class="ind-signal">Tren jangka panjang <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-S">Struktural</span><span class="ind-code">Sanctions Risk</span><span class="ind-name">Asset Freeze / Seizure</span><div class="ind-signal">CB beli Gold post-Russia 2022 <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-S">Struktural</span><span class="ind-code">US Deficit / Debt</span><span class="ind-name">Fiscal Credibility</span><div class="ind-signal">↑Debt = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="tf-badge tf-S">Struktural</span><span class="ind-code">Global Debt/GDP</span><span class="ind-name">Rasio Utang Dunia</span><div class="ind-signal">↑Rasio = tren bullion panjang <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-title">Kekuatan Korelasi &amp; Timeframe</div>
+      <div class="legend-items">
+        <div class="legend-item"><span class="stars">★★★★★</span>&nbsp;Sangat Kuat</div>
+        <div class="legend-item"><span class="stars">★★★★</span><span class="stars-empty">★</span>&nbsp;Kuat</div>
+        <div class="legend-item"><span class="stars">★★★</span><span class="stars-empty">★★</span>&nbsp;Sedang</div>
+        <div class="legend-item"><span class="tf-dot" style="background:var(--tf-h)"></span>&nbsp;Harian</div>
+        <div class="legend-item"><span class="tf-dot" style="background:var(--tf-w)"></span>&nbsp;Mingguan</div>
+        <div class="legend-item"><span class="tf-dot" style="background:var(--tf-m)"></span>&nbsp;Bulanan</div>
+        <div class="legend-item"><span class="tf-dot" style="background:var(--tf-s)"></span>&nbsp;Struktural</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       PANEL 2 — PER TIMEFRAME
+  ═══════════════════════════════ -->
+  <div id="panel-timeframe" class="panel">
+
+    <div class="tf-section tf-H-section">
+      <div class="tf-header">
+        <div class="tf-icon">⚡</div>
+        <div class="tf-title-block">
+          <div class="tf-label">Harian — Real-Time</div>
+          <div class="tf-desc">Pantau setiap hari saat sesi NY &amp; London buka</div>
+        </div>
+        <div class="tf-count">20 indikator</div>
+      </div>
+      <div class="cards-grid">
+        <div class="ind-card"><span class="ind-code">DXY</span><span class="ind-name">US Dollar Index</span><div class="ind-signal">↑DXY = ↓Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">EURUSD</span><span class="ind-name">Euro vs Dolar</span><div class="ind-signal">↑EUR = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">USDJPY</span><span class="ind-name">Yen vs Dolar</span><div class="ind-signal">Safe haven flow <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">USDCNH</span><span class="ind-name">Yuan Offshore</span><div class="ind-signal">China demand signal <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">DFII10</span><span class="ind-name">Real Yield 10Y</span><div class="ind-signal">↑Real Yield = ↓Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">US02Y</span><span class="ind-name">Fed Expectations</span><div class="ind-signal">↑Rate Exp = ↓Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">US10Y</span><span class="ind-name">Treasury Benchmark</span><div class="ind-signal">↑Yield = ↓Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">TIPS Breakeven</span><span class="ind-name">Inflation Exp.</span><div class="ind-signal">↑Breakeven = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">CME FedWatch</span><span class="ind-name">Rate Cut Prob.</span><div class="ind-signal">↑Cut prob = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">VIX</span><span class="ind-name">Fear Index</span><div class="ind-signal">↑VIX = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">GVZ</span><span class="ind-name">Gold Volatility</span><div class="ind-signal">↑GVZ = uncertainty <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">GDX / GDXJ</span><span class="ind-name">Mining Stocks</span><div class="ind-signal">Leading indicator <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">GLD / IAU ETF</span><span class="ind-name">ETF Holdings</span><div class="ind-signal">↑Holdings = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">GLD Put/Call</span><span class="ind-name">Options Ratio</span><div class="ind-signal">↑Put = bearish <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Silver XAGUSD</span><span class="ind-name">Precious Peer</span><div class="ind-signal">Korelasi positif <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">S&amp;P 500 SPX</span><span class="ind-name">Equity Barometer</span><div class="ind-signal">↓SPX = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Oil WTI/Brent</span><span class="ind-name">Energy Prices</span><div class="ind-signal">↑Oil = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Gold/Silver Ratio</span><span class="ind-name">XAU ÷ XAG</span><div class="ind-signal">↑Ratio = flight safety <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">BCOM / CRB</span><span class="ind-name">Commodity Index</span><div class="ind-signal">↑BCOM = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Geopolitical Risk</span><span class="ind-name">Perang, Sanksi, Trade War</span><div class="ind-signal">Eskalasi = ↑Gold <span class="stars">★★★★★</span></div></div>
+      </div>
+    </div>
+
+    <div class="tf-section tf-W-section">
+      <div class="tf-header">
+        <div class="tf-icon">📅</div>
+        <div class="tf-title-block">
+          <div class="tf-label">Mingguan — Short-Term Momentum</div>
+          <div class="tf-desc">Review tiap akhir pekan untuk konfirmasi tren</div>
+        </div>
+        <div class="tf-count">6 indikator</div>
+      </div>
+      <div class="cards-grid">
+        <div class="ind-card"><span class="ind-code">CFTC Net Spec</span><span class="ind-name">Speculative Position</span><div class="ind-signal">↑Net long = bullish <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">COT Report</span><span class="ind-name">Futures Positioning</span><div class="ind-signal">Konfirmasi tren <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Open Interest</span><span class="ind-name">COMEX Futures</span><div class="ind-signal">↑OI + ↑harga = kuat <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Jobless Claims</span><span class="ind-name">Initial Weekly</span><div class="ind-signal">↑Claims = ↑Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">SGE Premium</span><span class="ind-name">Shanghai Gold Exch.</span><div class="ind-signal">↑Premium = demand China <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">LBMA Clearing</span><span class="ind-name">London Physical Vol.</span><div class="ind-signal">↑Volume = demand global <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+      </div>
+    </div>
+
+    <div class="tf-section tf-M-section">
+      <div class="tf-header">
+        <div class="tf-icon">📊</div>
+        <div class="tf-title-block">
+          <div class="tf-label">Bulanan — Medium-Term Trend</div>
+          <div class="tf-desc">Event kalender ekonomi — tentukan bias bulan berjalan</div>
+        </div>
+        <div class="tf-count">23 indikator</div>
+      </div>
+      <div class="cards-grid">
+        <div class="ind-card"><span class="ind-code">CPI</span><span class="ind-name">Consumer Price</span><div class="ind-signal">↑CPI = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">PCE</span><span class="ind-name">Fed's Metric</span><div class="ind-signal">↑PCE = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">PPI</span><span class="ind-name">Producer Price</span><div class="ind-signal">↑PPI = inflasi hulu <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">NFP</span><span class="ind-name">Non-Farm Payroll</span><div class="ind-signal">↑NFP = ↓Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">ISM PMI Mfg</span><span class="ind-name">Manufacturing</span><div class="ind-signal">↓PMI = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">ISM Services</span><span class="ind-name">Services PMI</span><div class="ind-signal">↓Services = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Retail Sales</span><span class="ind-name">Consumer Spending</span><div class="ind-signal">↓Retail = ↑Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Michigan Sent.</span><span class="ind-name">Confidence</span><div class="ind-signal">↓Sentiment = ↑Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Housing Starts</span><span class="ind-name">Building Permits</span><div class="ind-signal">↓Housing = ↑Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">FOMC Statement</span><span class="ind-name">Dot Plot / Minutes</span><div class="ind-signal">Hawkish = ↓Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">2s10s</span><span class="ind-name">Yield Curve</span><div class="ind-signal">Inversi = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Fed Balance Sheet</span><span class="ind-name">WALCL</span><div class="ind-signal">↑BS = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">M2 Money Supply</span><span class="ind-name">Uang Beredar</span><div class="ind-signal">↑M2 = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Yield Spread</span><span class="ind-name">US vs DE/JP/GB</span><div class="ind-signal">↓Spread = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">TIC Flow</span><span class="ind-name">Treasury Foreign</span><div class="ind-signal">↓TIC = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">RRP (Repo)</span><span class="ind-name">Fed Reverse Repo</span><div class="ind-signal">↓RRP = likuiditas <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Gold Lease Rate</span><span class="ind-name">Biaya Pinjam Fisik</span><div class="ind-signal">↑Rate = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">XAUEUR/CNY/INR</span><span class="ind-name">Gold Lokal</span><div class="ind-signal">Demand regional <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">TIC Flow</span><span class="ind-name">Treasury Foreign</span><div class="ind-signal">↓TIC = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Copper HG</span><span class="ind-name">Dr. Copper</span><div class="ind-signal">risk-on mixed <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Platinum/Pd</span><span class="ind-name">PGM Group</span><div class="ind-signal">Divergensi supply <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Sovereign CDS</span><span class="ind-name">Default Swap</span><div class="ind-signal">↑CDS = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">India/China Demand</span><span class="ind-name">Seasonal Cultural</span><div class="ind-signal">Diwali, CNY = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+      </div>
+    </div>
+
+    <div class="tf-section tf-S-section">
+      <div class="tf-header">
+        <div class="tf-icon">🏛</div>
+        <div class="tf-title-block">
+          <div class="tf-label">Struktural — Long-Term Macro</div>
+          <div class="tf-desc">Berubah perlahan — tentukan tren besar multi-tahun</div>
+        </div>
+        <div class="tf-count">11 indikator</div>
+      </div>
+      <div class="cards-grid">
+        <div class="ind-card"><span class="ind-code">Central Bank Rsv</span><span class="ind-name">CB Gold Reserves</span><div class="ind-signal">↑Pembelian CB = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Global QE / QT</span><span class="ind-name">ECB, BOJ, PBOC</span><div class="ind-signal">↑Global QE = ↑Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">De-dollarisasi</span><span class="ind-name">BRICS, CB Global</span><div class="ind-signal">Tren multi-tahun <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Sanctions Risk</span><span class="ind-name">Asset Freeze</span><div class="ind-signal">CB diversifikasi Gold <span class="stars">★★★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">5y5y Fwd Swap</span><span class="ind-name">Long-term Infl. Exp</span><div class="ind-signal">↑Swap = ↑Gold jk panjang <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">US Deficit/Debt</span><span class="ind-name">Fiscal Credibility</span><div class="ind-signal">↑Debt = ↑Gold <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Global Debt/GDP</span><span class="ind-name">Rasio Utang Dunia</span><div class="ind-signal">↑Rasio = tren bullion <span class="stars">★★★★</span><span class="stars-empty">★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Gold Scrap Supply</span><span class="ind-name">Recycling</span><div class="ind-signal">↑Harga = ↑Scrap ↓tekanan <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Bitcoin BTC</span><span class="ind-name">Digital Gold Narr.</span><div class="ind-signal">Rival hedge alternatif <span class="stars">★★</span><span class="stars-empty">★★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">GDP (Quarterly)</span><span class="ind-name">Growth Outlook</span><div class="ind-signal">↓GDP = risk off ↑Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+        <div class="ind-card"><span class="ind-code">Gold Mining Cost</span><span class="ind-name">AISC Break-even</span><div class="ind-signal">Floor harga produksi Gold <span class="stars">★★★</span><span class="stars-empty">★★</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       PANEL 3 — KONVERGENSI SINYAL
+  ═══════════════════════════════ -->
+  <div id="panel-konvergensi" class="panel">
+
+    <div class="conv-intro">
+      <div class="conv-intro-title">🎯 Apa itu Konvergensi Sinyal?</div>
+      <p>Tidak ada satu indikator pun yang cukup untuk mengambil keputusan. <strong>Kekuatan sinyal Gold terletak pada konvergensi</strong> — yaitu ketika <strong>3 atau lebih indikator dari kategori berbeda menunjuk ke arah yang sama</strong> secara bersamaan. Semakin banyak dan beragam indikator yang selaras, semakin tinggi probabilitas pergerakan Gold.</p>
+    </div>
+
+    <div class="conv-rule scen-bull">
+      <div class="conv-rule-header">
+        <div class="conv-rule-num">①</div>
+        <div>
+          <div class="conv-rule-title">🟢 Skenario Bullish Kuat</div>
+          <div class="conv-rule-sub">Probabilitas naik tinggi — 3+ sinyal hijau dari kategori berbeda</div>
+        </div>
+      </div>
+      <div class="conv-signals">
+        <div class="conv-signal-box">
+          <span class="sig-label">✅ Sinyal Utama</span>
+          <div class="sig-items">
+            <span>📉 Real Yield (DFII10) turun/negatif</span>
+            <span>📉 DXY melemah / turun</span>
+            <span>📈 VIX naik atau elevated</span>
+            <span>📈 ETF GLD/IAU holdings naik</span>
+            <span>📈 CFTC Net Long meningkat</span>
+          </div>
+        </div>
+        <div class="conv-signal-box">
+          <span class="sig-label">🔥 Penguat Tambahan</span>
+          <div class="sig-items">
+            <span>📈 CME FedWatch: prob. cut naik</span>
+            <span>📈 GDX/GDXJ outperform Gold</span>
+            <span>📈 TIPS Breakeven naik</span>
+            <span>📈 SGE Premium tinggi</span>
+            <span>⚡ Ada eskalasi geopolitik</span>
+          </div>
+        </div>
+      </div>
+      <div class="conv-outcome">
+        <div class="out-icon">🚀</div>
+        <div class="out-text"><strong>Aksi:</strong> Bias long. Jika 5+ sinyal bullish aktif bersamaan, ini setup dengan probabilitas tertinggi. Semakin banyak kategori yang konvergen, semakin kuat conviction untuk long Gold.</div>
+      </div>
+    </div>
+
+    <div class="conv-rule scen-bear">
+      <div class="conv-rule-header">
+        <div class="conv-rule-num">②</div>
+        <div>
+          <div class="conv-rule-title">🔴 Skenario Bearish / Tekanan Turun</div>
+          <div class="conv-rule-sub">Angin berlawanan dari beberapa arah</div>
+        </div>
+      </div>
+      <div class="conv-signals">
+        <div class="conv-signal-box">
+          <span class="sig-label">❌ Sinyal Tekanan Turun</span>
+          <div class="sig-items">
+            <span>📈 Real Yield naik / DXY kuat</span>
+            <span>📈 US10Y naik tajam</span>
+            <span>📉 ETF holdings turun konsisten</span>
+            <span>📉 CFTC Net Long berkurang</span>
+            <span>📉 GDX underperform Gold</span>
+          </div>
+        </div>
+        <div class="conv-signal-box">
+          <span class="sig-label">⚠️ Konfirmasi Tambahan</span>
+          <div class="sig-items">
+            <span>📈 CME FedWatch: prob. hike naik</span>
+            <span>📉 VIX rendah (risk-on, Gold diabaikan)</span>
+            <span>📉 NFP / data ekonomi kuat</span>
+            <span>📉 SGE Premium negatif</span>
+            <span>📈 S&amp;P 500 rally kuat</span>
+          </div>
+        </div>
+      </div>
+      <div class="conv-outcome">
+        <div class="out-icon">⛔</div>
+        <div class="out-text"><strong>Aksi:</strong> Hindari long baru. Tekanan paling berat terjadi saat <strong>real yield naik + DXY kuat + ETF outflow</strong> berlangsung bersamaan. Jika sudah holding, pertimbangkan reduce atau tight stop-loss.</div>
+      </div>
+    </div>
+
+    <div class="conv-rule scen-conf">
+      <div class="conv-rule-header">
+        <div class="conv-rule-num">③</div>
+        <div>
+          <div class="conv-rule-title">🟡 Konflik Sinyal — Pasar Bingung</div>
+          <div class="conv-rule-sub">Sinyal campuran — tunggu klarifikasi sebelum aksi</div>
+        </div>
+      </div>
+      <div class="conv-signals">
+        <div class="conv-signal-box">
+          <span class="sig-label">🔀 Contoh Konflik</span>
+          <div class="sig-items">
+            <span>CPI tinggi (↑Gold) tapi DXY kuat (↓Gold)</span>
+            <span>VIX naik tapi real yield juga naik</span>
+            <span>ETF inflow tapi CFTC long turun</span>
+            <span>Fed dovish tapi data ekonomi kuat</span>
+          </div>
+        </div>
+        <div class="conv-signal-box">
+          <span class="sig-label">🧭 Urutan Prioritas</span>
+          <div class="sig-items">
+            <span>① Real Yield — selalu yang pertama</span>
+            <span>② DXY — konfirmator kedua</span>
+            <span>③ CME FedWatch — arah kebijakan</span>
+            <span>④ ETF + CFTC — konfirmasi flow</span>
+          </div>
+        </div>
+      </div>
+      <div class="conv-outcome">
+        <div class="out-icon">⏸</div>
+        <div class="out-text"><strong>Aksi:</strong> Tunggu. Kurangi size. Konflik sinyal = volatilitas tinggi tanpa arah jelas. <strong>Tidak ada posisi lebih baik daripada posisi yang salah.</strong> Gunakan waktu ini untuk memperbarui watchlist.</div>
+      </div>
+    </div>
+
+    <div class="conv-rule scen-trap">
+      <div class="conv-rule-header">
+        <div class="conv-rule-num">④</div>
+        <div>
+          <div class="conv-rule-title">🪤 Waspada Bull Trap / Bear Trap</div>
+          <div class="conv-rule-sub">Harga bergerak tapi indikator tidak konfirmasi</div>
+        </div>
+      </div>
+      <div class="conv-signals">
+        <div class="conv-signal-box">
+          <span class="sig-label">🚩 Tanda Bull Trap</span>
+          <div class="sig-items">
+            <span>Gold naik tajam tapi GDX diam</span>
+            <span>Harga naik tapi ETF holdings flat/turun</span>
+            <span>Volume COMEX rendah saat rally</span>
+            <span>Open Interest turun saat harga naik</span>
+          </div>
+        </div>
+        <div class="conv-signal-box">
+          <span class="sig-label">🚩 Tanda Bear Trap</span>
+          <div class="sig-items">
+            <span>Gold turun tapi GDX tetap kuat</span>
+            <span>Harga turun tapi ETF inflow tetap jalan</span>
+            <span>CFTC masih net long ekstrem</span>
+            <span>SGE Premium masih tinggi</span>
+          </div>
+        </div>
+      </div>
+      <div class="conv-outcome">
+        <div class="out-icon">🔍</div>
+        <div class="out-text"><strong>Kunci:</strong> <strong>GDX/GDXJ adalah konfirmator terbaik</strong> — jika mining stocks tidak ikut naik saat Gold naik, pergerakan tersebut sering tidak sustain. Selalu cek volume COMEX dan ETF flow sebelum entry.</div>
+      </div>
+    </div>
+
+    <div class="conv-rule scen-method">
+      <div class="conv-rule-header">
+        <div class="conv-rule-num">⑤</div>
+        <div>
+          <div class="conv-rule-title">📋 Metode Scoring Harian (Praktis)</div>
+          <div class="conv-rule-sub">Sistem sederhana membaca konvergensi setiap hari</div>
+        </div>
+      </div>
+      <div class="conv-signals">
+        <div class="conv-signal-box">
+          <span class="sig-label">🏅 Bobot per Indikator</span>
+          <div class="sig-items">
+            <span>+3 poin: Real Yield, DXY, CME FedWatch</span>
+            <span>+2 poin: VIX, GDX, ETF Flow</span>
+            <span>+2 poin: CFTC, TIPS Breakeven</span>
+            <span>+1 poin: Geopolitik, Oil, Silver</span>
+          </div>
+        </div>
+        <div class="conv-signal-box">
+          <span class="sig-label">📊 Interpretasi Total Skor</span>
+          <div class="sig-items">
+            <span>≥ +8 poin bullish → Bias long kuat</span>
+            <span>+5 s/d +7 → Bias long moderat</span>
+            <span>+2 s/d +4 → Netral / tunggu</span>
+            <span>≤ +1 atau negatif → Hindari long</span>
+          </div>
+        </div>
+      </div>
+      <div class="conv-outcome">
+        <div class="out-icon">💡</div>
+        <div class="out-text"><strong>Cara pakai:</strong> Setiap pagi beri skor +1 (bullish) atau -1 (bearish) lalu kalikan bobot. Jumlahkan total. <strong>Skor ≥ +6 = setup bullish valid. Skor ≤ −4 = setup bearish valid.</strong> Di tengah = tunggu event berikutnya (FOMC, CPI, NFP).</div>
+      </div>
+    </div>
+
+    <div class="score-matrix">
+      <div class="score-matrix-title">⚖️ Hierarki Kekuatan Indikator — Mana yang Paling Dominan?</div>
+      <div class="score-rows">
+        <div class="score-row"><div class="score-label">Real Yield (DFII10)</div><div class="score-bar-wrap"><div class="score-bar bar-strong" style="width:100%"></div></div><div class="score-val">100</div></div>
+        <div class="score-row"><div class="score-label">DXY / Dollar</div><div class="score-bar-wrap"><div class="score-bar bar-strong" style="width:92%"></div></div><div class="score-val">92</div></div>
+        <div class="score-row"><div class="score-label">CME FedWatch</div><div class="score-bar-wrap"><div class="score-bar bar-strong" style="width:88%"></div></div><div class="score-val">88</div></div>
+        <div class="score-row"><div class="score-label">TIPS Breakeven</div><div class="score-bar-wrap"><div class="score-bar bar-strong" style="width:85%"></div></div><div class="score-val">85</div></div>
+        <div class="score-row"><div class="score-label">VIX / GVZ</div><div class="score-bar-wrap"><div class="score-bar bar-medium" style="width:80%"></div></div><div class="score-val">80</div></div>
+        <div class="score-row"><div class="score-label">ETF Holdings</div><div class="score-bar-wrap"><div class="score-bar bar-medium" style="width:78%"></div></div><div class="score-val">78</div></div>
+        <div class="score-row"><div class="score-label">GDX / GDXJ Mining</div><div class="score-bar-wrap"><div class="score-bar bar-medium" style="width:75%"></div></div><div class="score-val">75</div></div>
+        <div class="score-row"><div class="score-label">CFTC Net Spec</div><div class="score-bar-wrap"><div class="score-bar bar-medium" style="width:72%"></div></div><div class="score-val">72</div></div>
+        <div class="score-row"><div class="score-label">CB Reserves / QE</div><div class="score-bar-wrap"><div class="score-bar bar-medium" style="width:68%"></div></div><div class="score-val">68</div></div>
+        <div class="score-row"><div class="score-label">Geopolitik / Trade War</div><div class="score-bar-wrap"><div class="score-bar bar-weak" style="width:62%"></div></div><div class="score-val">62</div></div>
+        <div class="score-row"><div class="score-label">CPI / PCE / PPI</div><div class="score-bar-wrap"><div class="score-bar bar-weak" style="width:58%"></div></div><div class="score-val">58</div></div>
+        <div class="score-row"><div class="score-label">Oil / Silver / BCOM</div><div class="score-bar-wrap"><div class="score-bar bar-weak" style="width:50%"></div></div><div class="score-val">50</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">
+    <p>60 indikator · 6 kategori · 4 timeframe · <strong>Kekuatan ada pada konvergensi sinyal, bukan satu indikator.</strong></p>
+    <p>Trio terpenting pantau setiap hari: <strong>Real Yield · DXY · CME FedWatch</strong></p>
+  </div>
+
+</div>
+<script>
+  function switchTab(name, el) {
+    document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    el.classList.add('active');
+  }
+</script>
+</body>
+</html>
