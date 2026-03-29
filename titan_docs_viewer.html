@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titan Quant v11 — Documentation Viewer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: #1a2035;
+            --bg-hover: #1e2a45;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-gold: #f0b429;
+            --accent-cyan: #22d3ee;
+            --accent-green: #34d399;
+            --border: #1e293b;
+            --sidebar-width: 300px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter', sans-serif; background:var(--bg-primary); color:var(--text-primary); height:100vh; overflow:hidden; }
+        
+        .header { height:64px; background:#0f172a; border-bottom:1px solid var(--border); display:flex; align-items:center; padding:0 24px; gap:20px; position:fixed; top:0; left:0; right:0; z-index:100; }
+        .header-logo { display:flex; align-items:center; gap:12px; }
+        .header-logo .icon { width:36px; height:36px; background:linear-gradient(135deg, var(--accent-gold), #f59e0b); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; }
+        .header-logo h1 { font-size:18px; font-weight:700; background:linear-gradient(90deg, var(--accent-gold), var(--accent-cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        
+        .search-container { flex:1; max-width:500px; position:relative; }
+        .search-container input { width:100%; padding:10px 40px; background:var(--bg-secondary); border:1px solid var(--border); border-radius:10px; color:var(--text-primary); outline:none; }
+        .search-container::before { content:'🔍'; position:absolute; left:14px; top:50%; transform:translateY(-50%); font-size:14px; }
+        
+        .layout { display:flex; margin-top:64px; height:calc(100vh - 64px); }
+        .sidebar { width:var(--sidebar-width); background:var(--bg-secondary); border-right:1px solid var(--border); overflow-y:auto; flex-shrink:0; padding:16px 0; }
+        .nav-group { margin-bottom:8px; }
+        .nav-group-header { padding:10px 20px; cursor:pointer; color:var(--text-secondary); font-size:13px; font-weight:600; display:flex; align-items:center; justify-content:space-between; }
+        .nav-group-header:hover { background:var(--bg-hover); color:var(--text-primary); }
+        .nav-group-header.active { color:var(--accent-cyan); }
+        .nav-items { overflow:hidden; display:none; }
+        .nav-items.expanded { display:block; }
+        .nav-item { padding:8px 20px 8px 44px; color:var(--text-muted); font-size:12px; cursor:pointer; border-left:3px solid transparent; }
+        .nav-item:hover { color:var(--text-primary); background:var(--bg-hover); }
+        .nav-item.active { color:var(--accent-gold); border-left-color:var(--accent-gold); background:rgba(240, 180, 41, 0.05); }
+        
+        .content { flex:1; overflow-y:auto; padding:40px; position:relative; scroll-behavior:smooth; }
+        #loadingOverlay { position:absolute; inset:0; background:var(--bg-primary); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:200; }
+        .spinner { width:40px; height:40px; border:4px solid var(--border); border-top-color:var(--accent-cyan); border-radius:50%; animation:spin 1s linear infinite; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+
+        .md-content { max-width:900px; line-height:1.7; font-size:15px; padding-bottom:100px; }
+        .md-content h1 { font-size:32px; color:var(--accent-gold); margin-bottom:16px; border-bottom:1px solid var(--border); padding-bottom:8px; }
+        .md-content h2 { font-size:24px; color:var(--accent-cyan); margin:32px 0 16px; border-bottom:1px solid var(--border); scroll-margin-top:80px; }
+        .md-content p { margin:16px 0; color:var(--text-secondary); }
+        .md-content code { background:var(--bg-card); color:var(--accent-gold); padding:2px 6px; border-radius:4px; font-family:monospace; }
+        .md-content pre { background:#0d1117; padding:16px; border-radius:10px; margin:20px 0; overflow-x:auto; border:1px solid var(--border); }
+        .md-content table { width:100%; border-collapse:collapse; margin:20px 0; }
+        .md-content th, .md-content td { border:1px solid var(--border); padding:12px; text-align:left; }
+        .alert { padding:16px; border-radius:8px; margin:20px 0; border-left:4px solid; background:rgba(255,255,255,0.05); }
+        
+        /* Mermaid Diagram Styling - Ensure it's rendered properly */
+        .mermaid { background:white !important; padding:24px; border-radius:10px; margin:24px 0; display:block; width:100%; min-height:100px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.5); }
+        .mermaid svg { max-width:100%; height:auto; }
+
+        .back-to-top { position: fixed; bottom: 24px; right: 24px; width: 44px; height: 44px; background: var(--accent-cyan); color: black; border: none; border-radius: 50%; cursor: pointer; display: none; align-items: center; justify-content: center; font-weight: bold; z-index: 100; }
+        .back-to-top.visible { display: flex; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo"><div class="icon">⚔️</div><h1>TITAN QUANT</h1></div>
+        <div class="search-container"><input type="text" id="searchInput" placeholder="Cari dokumentasi..."></div>
+    </header>
+
+    <div class="layout">
+        <nav class="sidebar" id="sidebar"></nav>
+        <main class="content" id="content">
+            <div id="loadingOverlay"><div class="spinner"></div><p style="margin-top:20px">Menyiapkan dokumentasi...</p></div>
+            <div id="mainView" class="md-content"></div>
+        </main>
+    </div>
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script>
+    const PARTS = [
+        { id: 'part1', file: 'titan_quant_documentation part1.md', title: 'Part 1 — Arsitektur' },
+        { id: 'part2', file: 'titan_quant_documentation part2.md', title: 'Part 2 — Deep Dive' },
+        { id: 'part3', file: 'titan_quant_documentation part3.md', title: 'Part 3 — Tuning' },
+        { id: 'part4', file: 'titan_quant_documentation part4.md', title: 'Part 4 — Reference' },
+        { id: 'part5', file: 'titan_quant_documentation part5.md', title: 'Part 5 — Formula' },
+        { id: 'part6', file: 'titan_quant_documentation part6.md', title: 'Part 6 — SMC' },
+        { id: 'part7', file: 'titan_quant_documentation part7.md', title: 'Part 7 — Code Map' },
+        { id: 'part8', file: 'titan_quant_documentation part8.md', title: 'Part 8 — Risk & Projection' },
+        { id: 'part9', file: 'titan_quant_documentation part9.md', title: 'Part 9 — Quick Ref' }
+    ];
+
+    let allContent = {};
+    let currentPart = null;
+    window.PARTS = PARTS; // expose for inline onclick
+
+    // Correct Marked.js Renderer API for v12.0+
+    function setupMarked() {
+        const renderer = new marked.Renderer();
+        
+        // Use destructuring for the new API
+        // marked.js v12+ API: renderer methods receive token object
+        renderer.code = function(codeToken) {
+            const code = codeToken.text || codeToken.raw || "";
+            const lang = codeToken.lang || "";
+            if (lang === 'mermaid') {
+                return `<div class="mermaid">${code}</div>`;
+            }
+            return `<pre><code class="hljs language-${lang}">${code}</code></pre>`;
+        };
+
+        marked.use({ renderer });
+    }
+
+    function renderMarkdown(text) {
+        if (typeof marked === 'undefined') return text;
+        
+        // Basic Alert patch
+        let processed = text.replace(/> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\n> (.*?)(?=\n(?!>)|\n*$)/gs, (_, type, content) => {
+            return `<div class="alert alert-${type.toLowerCase()}"><strong>${type}</strong>: ${content.replace(/\n> /g, ' ')}</div>`;
+        });
+        
+        return marked.parse(processed);
+    }
+
+    function slugifyHeading(text) {
+        return (text || "")
+            .toLowerCase()
+            .normalize('NFKD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^\w\s-]/g, '')
+            .trim()
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-') || 'section';
+    }
+
+    function assignHeadingIds(container) {
+        const slugCounts = new Map();
+        container.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(h => {
+            const baseSlug = slugifyHeading(h.textContent);
+            const count = slugCounts.get(baseSlug) || 0;
+            slugCounts.set(baseSlug, count + 1);
+            h.id = count === 0 ? baseSlug : `${baseSlug}-${count + 1}`;
+        });
+    }
+
+    async function loadPart(partId, targetSection = null) {
+        const mainView = document.getElementById('mainView');
+        const overlay = document.getElementById('loadingOverlay');
+        
+        if (!allContent[partId]) return;
+        
+        currentPart = partId;
+        overlay.style.display = 'flex';
+        
+        try {
+            // Set HTML
+            mainView.innerHTML = renderMarkdown(allContent[partId]);
+            assignHeadingIds(mainView);
+            
+            // Run Mermaid after DOM update
+            if (typeof mermaid !== 'undefined') {
+                try {
+                    await mermaid.run();
+                } catch (e) { console.warn("Mermaid run error:", e); }
+            }
+            
+            // Highlight.js
+            if (typeof hljs !== 'undefined') {
+                document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+            }
+            
+            if (targetSection) {
+                setTimeout(() => {
+                    const el = document.getElementById(targetSection);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+        } catch (e) {
+            console.error("Render error:", e);
+            mainView.innerHTML = "<h1>Error</h1><p>Gagal memproses dokumen.</p>";
+        } finally {
+            overlay.style.display = 'none';
+        }
+    }
+
+    function buildSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.innerHTML = PARTS.map(p => {
+            const sections = [];
+            const sectionSlugs = new Map();
+            const regex = /^## (.+)$/gm;
+            let match;
+            while ((match = regex.exec(allContent[p.id] || "")) !== null) {
+                const rawTitle = match[1];
+                const baseSlug = slugifyHeading(rawTitle);
+                const seen = sectionSlugs.get(baseSlug) || 0;
+                sectionSlugs.set(baseSlug, seen + 1);
+                const sid = seen === 0 ? baseSlug : `${baseSlug}-${seen + 1}`;
+                sections.push({
+                    rawTitle,
+                    displayTitle: rawTitle.replace(/^[\d.]+\s*/, ''),
+                    sid
+                });
+            }
+            
+            return `
+                <div class="nav-group">
+                    <div class="nav-group-header" data-part="${p.id}">
+                        ${p.title}
+                        <span style="font-size:10px">${sections.length}</span>
+                    </div>
+                    <div class="nav-items" id="items-${p.id}">
+                        ${sections.map(s => {
+                            return `<div class="nav-item" data-part="${p.id}" data-target="${s.sid}">${s.displayTitle}</div>`;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        sidebar.querySelectorAll('.nav-group-header').forEach(h => {
+            h.addEventListener('click', () => {
+                const partId = h.dataset.part;
+                const items = document.getElementById(`items-${partId}`);
+                
+                // Toggle other parts
+                document.querySelectorAll('.nav-items').forEach(ni => {
+                    if (ni.id !== `items-${partId}`) ni.classList.remove('expanded');
+                });
+                document.querySelectorAll('.nav-group-header').forEach(gh => {
+                    if (gh !== h) gh.classList.remove('active');
+                });
+                
+                const isExpanded = items.classList.toggle('expanded');
+                h.classList.toggle('active', isExpanded);
+                if (isExpanded) {
+                    loadPart(partId);
+                }
+            });
+        });
+
+        sidebar.querySelectorAll('.nav-item').forEach(i => {
+            i.addEventListener('click', (e) => {
+                e.stopPropagation();
+                loadPart(i.dataset.part, i.dataset.target);
+                
+                document.querySelectorAll('.nav-item').forEach(x => x.classList.remove('active'));
+                i.classList.add('active');
+                document.querySelectorAll('.nav-group-header').forEach(h => {
+                    h.classList.toggle('active', h.dataset.part === i.dataset.part);
+                });
+                document.querySelectorAll('.nav-items').forEach(ni => {
+                    ni.classList.toggle('expanded', ni.id === `items-${i.dataset.part}`);
+                });
+            });
+        });
+    }
+
+    async function init() {
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
+        }
+        setupMarked();
+
+        for (const p of PARTS) {
+            try {
+                const res = await fetch(p.file);
+                if (res.ok) allContent[p.id] = await res.text();
+            } catch (e) { console.warn("Fetch error:", p.file); }
+        }
+
+        buildSidebar();
+        if (allContent['part1']) loadPart('part1');
+        
+        document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+    window.onload = init;
+
+    // Search
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        const q = e.target.value.trim().toLowerCase();
+        if (q.length < 2) return;
+        const mainView = document.getElementById('mainView');
+        
+        let html = `<h1>Hasil Pencarian: "${e.target.value}"</h1>`;
+        let found = 0;
+        
+        PARTS.forEach(p => {
+            const lines = (allContent[p.id] || "").split('\n');
+            lines.forEach(line => {
+                if (line.toLowerCase().includes(q)) {
+                    found++;
+                    html += `
+                        <div class="search-result-item" data-part="${p.id}" style="padding:15px; background:var(--bg-card); border-radius:8px; margin-bottom:10px; cursor:pointer">
+                            <div style="font-size:11px; color:var(--accent-cyan)">${p.title}</div>
+                            <div style="font-size:14px">${line.replace(new RegExp(`(${q})`, 'gi'), '<span style="background:var(--accent-gold);color:black">$1</span>')}</div>
+                        </div>
+                    `;
+                }
+            });
+        });
+        
+        mainView.innerHTML = found > 0 ? html : "<h1>Kosong</h1><p>Tidak ada hasil.</p>";
+    });
+
+    // Event delegation for search results
+    document.getElementById('mainView').addEventListener('click', (e) => {
+        const resultItem = e.target.closest('.search-result-item');
+        if (resultItem) {
+            loadPart(resultItem.dataset.part);
+        }
+    });
+
+    // UI
+    document.getElementById('content').addEventListener('scroll', function() {
+        document.getElementById('backToTop').classList.toggle('visible', this.scrollTop > 400);
+    });
+    document.getElementById('backToTop').addEventListener('click', () => {
+        document.getElementById('content').scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    </script>
+</body>
+</html>
