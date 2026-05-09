@@ -1,0 +1,1439 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Penjelasan GOLD MACRO SIGNAL v5.1 ALMA+KNN</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --paper: #ffffff;
+      --text: #172033;
+      --muted: #5c6b82;
+      --line: #d9e1ec;
+      --header: #0d1b2a;
+      --accent: #0077b6;
+      --bull: #138a52;
+      --bear: #c73545;
+      --gold: #b7791f;
+      --soft-blue: #eaf5ff;
+      --soft-green: #edf9f3;
+      --soft-red: #fff0f2;
+      --soft-gold: #fff7e7;
+      --code: #0b1320;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+
+    .hero {
+      background: var(--header);
+      color: #f8fbff;
+      border-radius: 8px;
+      padding: 28px;
+      margin-bottom: 22px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.25;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: 30px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-top: 30px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h3 {
+      font-size: 17px;
+      margin-top: 18px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    .subtitle {
+      color: #c8d7e8;
+      max-width: 860px;
+      margin-bottom: 0;
+    }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      background: var(--soft-blue);
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+
+    .warning {
+      border-left: 4px solid var(--gold);
+      background: var(--soft-gold);
+      padding: 12px 14px;
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+
+    .example {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+
+    .example-title {
+      display: block;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 10px;
+      margin: 2px 4px 2px 0;
+      font-size: 13px;
+      background: #f8fafc;
+      color: var(--muted);
+    }
+
+    .equation {
+      background: #f1f5f9;
+      border: 1px dashed #b6c4d6;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: Consolas, Monaco, monospace;
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--paper);
+      margin: 14px 0 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #edf2f8;
+      color: #0f233a;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    code {
+      background: #eef2f6;
+      color: var(--code);
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.95em;
+    }
+
+    ul,
+    ol {
+      margin: 8px 0 18px 22px;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    .tag-bull {
+      background: var(--soft-green);
+      color: var(--bull);
+    }
+
+    .tag-bear {
+      background: var(--soft-red);
+      color: var(--bear);
+    }
+
+    .tag-neutral {
+      background: #edf2f8;
+      color: var(--muted);
+    }
+
+    .flow {
+      counter-reset: step;
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .flow li {
+      position: relative;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 12px 12px 48px;
+      margin-bottom: 10px;
+    }
+
+    .flow li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 14px;
+      top: 12px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      text-align: center;
+      line-height: 24px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .scenario-grid {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="hero">
+      <h1>Penjelasan Lengkap GOLD MACRO SIGNAL v5.1 ALMA+KNN</h1>
+      <p class="subtitle">
+        Dokumen ini menjelaskan fungsi setiap fitur utama pada script Pine
+        <code>gold_macro_signal</code>. Indikator ini dibuat
+        untuk membaca bias XAUUSD/GOLD, terutama pada timeframe M5, dengan kombinasi
+        macro driver, trend multi-timeframe, smart money concept, KNN gate, dashboard,
+        dan risk level otomatis.
+      </p>
+    </section>
+
+    <section>
+      <h2>Gambaran Umum</h2>
+      <p>
+        <strong>GOLD MACRO SIGNAL v5.1 ALMA+KNN</strong> adalah indikator overlay
+        TradingView Pine Script v6. Script ini tidak membuka posisi otomatis, tetapi
+        memberi sinyal visual BUY/SELL, level entry, stop loss, take profit, status
+        market, dan alasan entry melalui dashboard.
+      </p>
+      <div class="grid">
+        <div class="card">
+          <strong>Market utama</strong>
+          XAUUSD/GOLD, paling cocok dipakai di M5 sesuai komentar script.
+        </div>
+        <div class="card">
+          <strong>Model utama</strong>
+          Macro driver + trend filter + trigger price action + quality score.
+        </div>
+        <div class="card">
+          <strong>Fitur tambahan</strong>
+          AI KNN gate, OB/FVG, liquidity sweep, killzone, risk plan, dashboard.
+        </div>
+      </div>
+      <div class="warning">
+        Indikator ini adalah alat bantu analisis, bukan jaminan profit. Semua sinyal
+        tetap perlu dikombinasikan dengan manajemen risiko, spread, kondisi news, dan
+        disiplin eksekusi.
+      </div>
+    </section>
+
+    <section>
+      <h2>Alur Kerja Sinyal</h2>
+      <ol class="flow">
+        <li>
+          Script membaca kondisi makro dari DXY, US02Y, dan US10Y, lalu mengubahnya
+          menjadi <code>Macro Score</code>. Nilai positif berarti bullish untuk emas,
+          nilai negatif berarti bearish untuk emas.
+        </li>
+        <li>
+          Script membaca trend besar dari H1 dan H4 memakai EMA 50/200. Filter ini
+          dipakai untuk memastikan sinyal tidak melawan arah institusional kecuali
+          macro score sangat kuat.
+        </li>
+        <li>
+          Script membaca trend M5 sebagai anchor dengan MA pilihan pengguna:
+          <code>EMA</code>, <code>ALMA</code>, atau <code>HMA</code>. Default-nya ALMA.
+        </li>
+        <li>
+          Script membaca tape cepat M1 untuk melihat apakah gerakan mikro sudah
+          searah dengan rencana BUY atau SELL.
+        </li>
+        <li>
+          Script mencari trigger entry: liquidity sweep, BOS, VWAP cross, MA cross,
+          pullback, FVG mitigation, OB mitigation, PDH/PDL/PWH/PWL sweep, atau Asia
+          range sweep.
+        </li>
+        <li>
+          Script menghitung <code>Signal Quality</code> dari macro, HTF, tape,
+          trigger, volume/displacement, session, dan confluence OB/FVG.
+        </li>
+        <li>
+          Jika KNN mode aktif dan sample sudah cukup, script mengecek apakah kondisi
+          sekarang mirip dengan trade historis yang bagus atau buruk.
+        </li>
+        <li>
+          Jika semua filter lolos, muncul sinyal BUY/SELL, label entry, SL, TP1,
+          TP2, TP3, serta alasan entry pada dashboard.
+        </li>
+      </ol>
+
+      <div class="example">
+        <span class="example-title">Contoh alur sederhana</span>
+        <p>
+          Misalnya DXY turun kuat, US02Y turun, dan US10Y turun. Karena ketiga
+          driver ini biasanya berlawanan arah dengan emas, <code>Macro Score</code>
+          menjadi positif. Jika H1/H4 juga bullish, M5 berada di atas MA dan VWAP,
+          lalu muncul sweep low yang close kembali naik, script bisa menganggap itu
+          sebagai kandidat BUY. Setelah quality, KNN, cooldown, dan candle close
+          lolos, barulah label BUY muncul.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Contoh Pembacaan Macro Score</h2>
+      <p>
+        Macro score adalah fondasi arah. Script membalik efek DXY dan yield terhadap
+        emas, sehingga pelemahan DXY/yield cenderung menjadi nilai bullish untuk gold.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Kondisi Driver</th>
+            <th>Dampak ke Gold</th>
+            <th>Kemungkinan Dashboard</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DXY turun kuat, US02Y turun, US10Y turun</td>
+            <td>Bullish kuat untuk emas</td>
+            <td><code>BUY BIAS</code> atau <code>STRONG BUY BIAS</code></td>
+          </tr>
+          <tr>
+            <td>DXY naik kuat, US02Y naik, US10Y naik</td>
+            <td>Bearish kuat untuk emas</td>
+            <td><code>SELL BIAS</code> atau <code>STRONG SELL BIAS</code></td>
+          </tr>
+          <tr>
+            <td>DXY turun, tetapi yield naik kuat</td>
+            <td>Campuran, bisa netral atau lemah</td>
+            <td><code>HANYA MACRO</code>, <code>PARTIAL ALIGN</code>, atau <code>NEUTRAL</code></td>
+          </tr>
+          <tr>
+            <td>Semua driver bergerak kecil</td>
+            <td>Tidak ada arah makro dominan</td>
+            <td><code>Macro netral - tidak ada arah dominan</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="example">
+        <span class="example-title">Contoh angka hipotetis</span>
+        <div class="equation">
+          DXY driver = +0.70 dengan bobot 40<br>
+          US02Y driver = +0.45 dengan bobot 25<br>
+          US10Y driver = +0.50 dengan bobot 35<br>
+          Macro Score kira-kira positif kuat, sehingga gold punya bias BUY.
+        </div>
+        <p>
+          Jika dynamic threshold saat itu 22, maka <code>Macro Score +50</code>
+          sudah melewati threshold dan dianggap bullish. Tetapi sinyal BUY tetap
+          belum boleh muncul sebelum HTF, M5/M1 tape, trigger, quality, dan KNN ikut
+          lolos.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Daftar Fitur dan Fungsi</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Kelompok</th>
+            <th>Fitur</th>
+            <th>Fungsi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Core</td>
+            <td><code>anchorTf</code></td>
+            <td>Menentukan timeframe anchor utama. Default <code>5</code>, berarti M5.</td>
+          </tr>
+          <tr>
+            <td>Core</td>
+            <td><code>strictAnchor</code></td>
+            <td>Jika aktif, sinyal hanya boleh keluar saat chart berada di timeframe anchor.</td>
+          </tr>
+          <tr>
+            <td>Core</td>
+            <td><code>signalOnClose</code></td>
+            <td>Jika aktif, sinyal hanya muncul setelah candle close untuk mengurangi sinyal berubah-ubah saat candle
+              berjalan.</td>
+          </tr>
+          <tr>
+            <td>Core</td>
+            <td><code>cooldownBars</code></td>
+            <td>Memberi jeda beberapa bar setelah sinyal agar indikator tidak terlalu sering memberi sinyal berdekatan.
+            </td>
+          </tr>
+          <tr>
+            <td>Core</td>
+            <td><code>resetKnn</code></td>
+            <td>Menghapus sample KNN. Wajib dipertimbangkan saat mengganti jenis MA agar data lama tidak mencampur
+              karakter sinyal lama.</td>
+          </tr>
+          <tr>
+            <td>Macro Drivers</td>
+            <td>DXY</td>
+            <td>DXY dibalik arahnya untuk emas. Jika DXY melemah, efeknya bullish untuk gold.</td>
+          </tr>
+          <tr>
+            <td>Macro Drivers</td>
+            <td>US02Y</td>
+            <td>Yield 2 tahun dibalik arahnya. Yield turun biasanya mendukung emas.</td>
+          </tr>
+          <tr>
+            <td>Macro Drivers</td>
+            <td>US10Y</td>
+            <td>Yield 10 tahun juga dibalik arahnya sebagai driver tambahan untuk emas.</td>
+          </tr>
+          <tr>
+            <td>Macro Drivers</td>
+            <td><code>macroScore</code></td>
+            <td>Skor gabungan DXY, US02Y, dan US10Y. Positif = bias BUY gold, negatif = bias SELL gold.</td>
+          </tr>
+          <tr>
+            <td>Macro Drivers</td>
+            <td><code>macroThreshold</code></td>
+            <td>Batas minimal agar macro dianggap bullish atau bearish. Default 22.</td>
+          </tr>
+          <tr>
+            <td>Macro Drivers</td>
+            <td>Driver weight</td>
+            <td>Mengatur bobot DXY, US02Y, dan US10Y dalam perhitungan macro score.</td>
+          </tr>
+          <tr>
+            <td>Macro Drivers</td>
+            <td>Z-score</td>
+            <td>Mengukur seberapa ekstrem perubahan driver dibanding rata-ratanya.</td>
+          </tr>
+          <tr>
+            <td>Trend</td>
+            <td>HTF H1/H4 EMA 50/200</td>
+            <td>Memfilter arah besar. H1 berbobot 60%, H4 berbobot 40% dalam <code>htfScore</code>.</td>
+          </tr>
+          <tr>
+            <td>Trend</td>
+            <td>MA Type Selector</td>
+            <td>Memilih MA anchor M5 dan M1: EMA untuk klasik, ALMA untuk smooth low lag, HMA untuk agresif.</td>
+          </tr>
+          <tr>
+            <td>Trend</td>
+            <td>ALMA Settings</td>
+            <td>Mengatur offset dan sigma ALMA. Offset tinggi lebih responsif, sigma tinggi lebih halus.</td>
+          </tr>
+          <tr>
+            <td>Trend</td>
+            <td>M1 Fast Tape</td>
+            <td>Membaca arah mikro dengan length lebih pendek agar konfirmasi entry lebih cepat.</td>
+          </tr>
+          <tr>
+            <td>Trend</td>
+            <td>Slope Filter</td>
+            <td>Mencegah entry saat MA datar. Sangat berguna untuk menghindari whipsaw.</td>
+          </tr>
+          <tr>
+            <td>Trend</td>
+            <td>VWAP Alignment</td>
+            <td>BUY idealnya di atas VWAP, SELL di bawah VWAP. Bisa dimatikan melalui input.</td>
+          </tr>
+          <tr>
+            <td>Trigger</td>
+            <td>Liquidity Sweep</td>
+            <td>Mendeteksi wick yang menyapu high/low lalu close kembali ke dalam area. Ini sering dipakai sebagai tanda
+              stop hunt.</td>
+          </tr>
+          <tr>
+            <td>Trigger</td>
+            <td>BOS</td>
+            <td>Break of Structure, yaitu close menembus high/low struktur sebelumnya.</td>
+          </tr>
+          <tr>
+            <td>Trigger</td>
+            <td>Displacement</td>
+            <td>Candle body besar relatif terhadap ATR. Menunjukkan dorongan harga yang kuat.</td>
+          </tr>
+          <tr>
+            <td>Trigger</td>
+            <td>Volume Spike</td>
+            <td>Volume lebih besar dari rata-rata, dipakai sebagai konfirmasi aktivitas institusional.</td>
+          </tr>
+          <tr>
+            <td>Trigger</td>
+            <td>Pullback Continuation</td>
+            <td>Entry lanjutan saat harga retest MA cepat lalu kembali searah trend.</td>
+          </tr>
+          <tr>
+            <td>SMC</td>
+            <td>M5 FVG</td>
+            <td>Mendeteksi Fair Value Gap tiga candle dan menggambar zona imbalance.</td>
+          </tr>
+          <tr>
+            <td>SMC</td>
+            <td>FVG Mitigation</td>
+            <td>Trigger ketika harga kembali mengetes FVG lalu close valid searah bias.</td>
+          </tr>
+          <tr>
+            <td>SMC</td>
+            <td>PDH/PDL</td>
+            <td>Previous Day High dan Previous Day Low. Dipakai sebagai level likuiditas harian.</td>
+          </tr>
+          <tr>
+            <td>SMC</td>
+            <td>PWH/PWL</td>
+            <td>Previous Week High dan Previous Week Low. Dipakai sebagai level likuiditas mingguan.</td>
+          </tr>
+          <tr>
+            <td>SMC</td>
+            <td>Major Liquidity Cluster</td>
+            <td>Menandai area penting ketika level harian dan mingguan berdekatan.</td>
+          </tr>
+          <tr>
+            <td>H1 OB</td>
+            <td>Order Block H1</td>
+            <td>Mendeteksi OB berdasarkan displacement, inducement sweep, BOS, momentum, volume, dan close near extreme.
+            </td>
+          </tr>
+          <tr>
+            <td>H1 OB</td>
+            <td>OB Grade</td>
+            <td>Memberi kualitas OB dari C sampai A+ berdasarkan score.</td>
+          </tr>
+          <tr>
+            <td>H1 OB</td>
+            <td>Breaker Block</td>
+            <td>Jika OB gagal ditembus berlawanan, zona tersebut dikonversi menjadi breaker.</td>
+          </tr>
+          <tr>
+            <td>H1 OB</td>
+            <td>Retest Confirmation</td>
+            <td>OB/Breaker dianggap valid untuk entry jika ada rejection, engulfing, atau impulse di M5.</td>
+          </tr>
+          <tr>
+            <td>M15 OB</td>
+            <td>Execution OB</td>
+            <td>Order block M15 untuk area eksekusi yang lebih presisi dibanding H1.</td>
+          </tr>
+          <tr>
+            <td>M15 OB</td>
+            <td>Zone Mode</td>
+            <td>Memilih cara membentuk zona: refined 50% body, mean threshold, atau full candle.</td>
+          </tr>
+          <tr>
+            <td>Session</td>
+            <td>Asian Range</td>
+            <td>Menggambar high/low sesi Asia dan memantau sweep setelah sesi selesai.</td>
+          </tr>
+          <tr>
+            <td>Session</td>
+            <td>Asia Sweep Target</td>
+            <td>Jika Asia high/low tersapu, script menggambar target 2x dan ekstensi 4x range.</td>
+          </tr>
+          <tr>
+            <td>Session</td>
+            <td>Killzones</td>
+            <td>Memberi background untuk London, New York, dan London/NY overlap.</td>
+          </tr>
+          <tr>
+            <td>Session</td>
+            <td>Session Gate</td>
+            <td>Jika <code>requireSessionEdge</code> aktif, sinyal hanya boleh muncul saat London/NY.</td>
+          </tr>
+          <tr>
+            <td>Reference</td>
+            <td>Daily Open</td>
+            <td>Menampilkan open harian sebagai level psikologis intraday.</td>
+          </tr>
+          <tr>
+            <td>Filter</td>
+            <td>Keltner Exhaustion</td>
+            <td>Memblok BUY saat harga di KC upper dan SELL saat harga di KC lower agar tidak masuk terlalu terlambat.
+            </td>
+          </tr>
+          <tr>
+            <td>Filter</td>
+            <td>Order Flow Score</td>
+            <td>Estimasi delta dari posisi close dalam candle dan volume. Dipakai untuk membaca tekanan buyer/seller.
+            </td>
+          </tr>
+          <tr>
+            <td>Filter</td>
+            <td>RSI Momentum</td>
+            <td>RSI di atas 55 menambah bias bullish, di bawah 45 menambah bias bearish.</td>
+          </tr>
+          <tr>
+            <td>Filter</td>
+            <td>Fakeout Divergence</td>
+            <td>Memblok sinyal jika harga membuat sweep tetapi delta tidak mendukung arah sweep tersebut.</td>
+          </tr>
+          <tr>
+            <td>Quality</td>
+            <td>Signal Quality Score</td>
+            <td>Skor 0 sampai 100 yang mengukur kualitas sinyal dari beberapa komponen.</td>
+          </tr>
+          <tr>
+            <td>Quality</td>
+            <td>Signal Grade</td>
+            <td>Grade kualitas: A+, A, B+, B, C, atau D.</td>
+          </tr>
+          <tr>
+            <td>KNN</td>
+            <td>AI KNN Engine</td>
+            <td>Membandingkan kondisi saat ini dengan trade historis yang mirip untuk memperkirakan win rate.</td>
+          </tr>
+          <tr>
+            <td>KNN</td>
+            <td>8 Features</td>
+            <td>KNN memakai macro score, volatilitas, waktu, HTF score, RSI, signal strength, order flow, dan regime.
+            </td>
+          </tr>
+          <tr>
+            <td>KNN</td>
+            <td>Wilson Score</td>
+            <td>Menurunkan estimasi win rate agar tidak terlalu percaya diri saat sample masih kecil.</td>
+          </tr>
+          <tr>
+            <td>KNN</td>
+            <td>Temporal Decay</td>
+            <td>Trade lama diberi bobot lebih kecil dibanding trade baru.</td>
+          </tr>
+          <tr>
+            <td>KNN</td>
+            <td>Regime Filter</td>
+            <td>Memprioritaskan sample dengan regime yang sama: ranging, trending, atau high-vol.</td>
+          </tr>
+          <tr>
+            <td>KNN</td>
+            <td>Continuous Outcome</td>
+            <td>Menyimpan hasil sebagai R-multiple, bukan hanya menang/kalah.</td>
+          </tr>
+          <tr>
+            <td>KNN</td>
+            <td>Active Gate</td>
+            <td>Jika sample cukup dan win rate di bawah threshold, sinyal bisa diblok.</td>
+          </tr>
+          <tr>
+            <td>KNN</td>
+            <td>Quality Boost</td>
+            <td>Jika win rate KNN tinggi, Signal Quality mendapat tambahan poin.</td>
+          </tr>
+          <tr>
+            <td>Risk</td>
+            <td>Entry, SL, TP</td>
+            <td>Menggambar entry, stop loss, TP1, TP2, dan TP3 otomatis setelah sinyal.</td>
+          </tr>
+          <tr>
+            <td>Risk</td>
+            <td>ATR Stop Multiplier</td>
+            <td>Mengontrol jarak stop berbasis ATR dan struktur swing.</td>
+          </tr>
+          <tr>
+            <td>Risk</td>
+            <td>R Multiples</td>
+            <td>TP default memakai 1R, 2R, 3R, dan dapat diperbesar jika macro score kuat.</td>
+          </tr>
+          <tr>
+            <td>Risk</td>
+            <td>Partial Tracking</td>
+            <td>TP1 dihitung 50%, TP2 25%, TP3 25%. Jika stop kena setelah TP sebagian, net R dihitung ulang.</td>
+          </tr>
+          <tr>
+            <td>Dashboard</td>
+            <td>Main Status</td>
+            <td>Menampilkan kondisi utama seperti Manage, Signal, Entry, Watch, Cooldown, Ranging, atau Wrong TF.</td>
+          </tr>
+          <tr>
+            <td>Dashboard</td>
+            <td>Next Action</td>
+            <td>Memberi arahan ringkas seperti ENTRY, WAIT CLS, WAIT TRIG, COOLDOWN, RUN, HOLD BE, TRAIL, DEFEND, atau
+              CUT.</td>
+          </tr>
+          <tr>
+            <td>Dashboard</td>
+            <td>Driver Table</td>
+            <td>Menampilkan DXY, US02Y, US10Y, move, z-score, factor, weight, dan state.</td>
+          </tr>
+          <tr>
+            <td>Dashboard</td>
+            <td>Bias Sekarang</td>
+            <td>Menampilkan bias live yang terus dihitung ulang dari kondisi bar terakhir.</td>
+          </tr>
+          <tr>
+            <td>Dashboard</td>
+            <td>SNAP</td>
+            <td>Menyimpan alasan entry saat sinyal muncul, berbeda dari bias live yang berubah tiap bar.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Logika BUY dan SELL</h2>
+      <h3>BUY Signal</h3>
+      <p>Sinyal BUY membutuhkan kombinasi kondisi berikut:</p>
+      <ul>
+        <li>Data macro siap.</li>
+        <li><code>macroScore</code> berada di atas dynamic threshold.</li>
+        <li>HTF bullish atau macro override cukup kuat.</li>
+        <li>M5/M1 tape mendukung arah bullish.</li>
+        <li>Ada trigger valid seperti sweep buy, BOS buy, VWAP/EMA cross up, pullback, OB/FVG mitigation, atau liquidity
+          support sweep.</li>
+        <li>Tidak sedang exhausted di Keltner upper.</li>
+        <li>Tidak ada bearish fakeout divergence.</li>
+        <li>Tidak diblok oleh KNN active gate.</li>
+        <li>Cooldown selesai dan candle sudah close jika <code>signalOnClose</code> aktif.</li>
+      </ul>
+
+      <h3>SELL Signal</h3>
+      <p>Sinyal SELL adalah kebalikan dari BUY:</p>
+      <ul>
+        <li><code>macroScore</code> berada di bawah negatif dynamic threshold.</li>
+        <li>HTF bearish atau macro override bearish cukup kuat.</li>
+        <li>M5/M1 tape mendukung bearish.</li>
+        <li>Ada trigger valid seperti sweep sell, BOS sell, VWAP/EMA cross down, pullback, OB/FVG mitigation, atau
+          liquidity resistance sweep.</li>
+        <li>Tidak sedang exhausted di Keltner lower.</li>
+        <li>Tidak ada bullish fakeout divergence.</li>
+        <li>Tidak diblok oleh KNN active gate.</li>
+      </ul>
+
+      <h3>Contoh Skenario Entry</h3>
+      <div class="scenario-grid">
+        <div class="example">
+          <span class="example-title">Contoh BUY valid</span>
+          <p>
+            <span class="pill">Macro Score +48</span>
+            <span class="pill">Threshold 22</span>
+            <span class="pill">HTF Bull</span>
+            <span class="pill">M5 di atas VWAP</span>
+            <span class="pill">M1 Bull</span>
+          </p>
+          <p>
+            Harga sweep PDL, lalu close kembali di atas PDL dengan candle bullish.
+            Ada volume spike dan tidak sedang menyentuh KC upper. Dashboard bisa
+            menampilkan <code>SETUP READY BUY</code>, <code>BUY SIGNAL B+</code>,
+            atau <code>BUY ARMED</code> sebelum candle close.
+          </p>
+          <p>
+            Fungsi praktisnya: trader menunggu candle close, melihat entry/SL/TP yang
+            digambar, lalu mengecek apakah spread dan news masih aman.
+          </p>
+        </div>
+
+        <div class="example">
+          <span class="example-title">Contoh SELL valid</span>
+          <p>
+            <span class="pill">Macro Score -52</span>
+            <span class="pill">HTF Bear</span>
+            <span class="pill">M5 di bawah VWAP</span>
+            <span class="pill">M1 Bear</span>
+            <span class="pill">PDH Sweep</span>
+          </p>
+          <p>
+            Harga mengambil likuiditas di atas PDH, lalu close kembali di bawah PDH.
+            Delta melemah dan candle bearish cukup besar. Jika quality lolos dan KNN
+            tidak block, label <code>SELL</code> muncul dengan grade seperti
+            <code>B+</code> atau <code>A</code>.
+          </p>
+          <p>
+            Fungsi praktisnya: PDH sweep menjadi trigger, macro/HTF menjadi filter,
+            dan risk line memberi batas invalidasi.
+          </p>
+        </div>
+
+        <div class="example">
+          <span class="example-title">Contoh no-trade karena konflik</span>
+          <p>
+            <span class="pill">Macro Bull</span>
+            <span class="pill">HTF Bear</span>
+            <span class="pill">M5 Mixed</span>
+            <span class="pill">Trigger ada</span>
+          </p>
+          <p>
+            Walaupun ada sweep low, dashboard bisa menampilkan
+            <code>HTF counter-trend</code> atau <code>KONFLIK HTF</code>. Artinya
+            trigger ada, tetapi arah besar belum mendukung.
+          </p>
+        </div>
+
+        <div class="example">
+          <span class="example-title">Contoh no-trade karena exhausted</span>
+          <p>
+            <span class="pill">Macro Bull</span>
+            <span class="pill">HTF Bull</span>
+            <span class="pill">Harga di KC Upper</span>
+          </p>
+          <p>
+            BUY bisa dibatalkan karena harga sudah terlalu jauh naik. Dashboard akan
+            memberi alasan seperti <code>Exhausted (Harga di KC Upper)</code>. Fungsi
+            filter ini adalah menghindari entry di area yang sudah terlalu mahal.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Komponen Signal Quality</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Komponen</th>
+            <th>Maksimal</th>
+            <th>Penjelasan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Macro</td>
+            <td>20</td>
+            <td>Semakin kuat macro score melewati threshold, semakin besar poinnya.</td>
+          </tr>
+          <tr>
+            <td>HTF</td>
+            <td>15</td>
+            <td>Trend H1/H4 searah memberi nilai tinggi. Adaptive HTF memberi nilai sedang.</td>
+          </tr>
+          <tr>
+            <td>M5/M1 Tape</td>
+            <td>15</td>
+            <td>MA anchor, M1 tape, dan posisi terhadap VWAP.</td>
+          </tr>
+          <tr>
+            <td>Trigger</td>
+            <td>15</td>
+            <td>Sweep, BOS, VWAP/EMA cross, pullback, dan trigger M5 confirmed.</td>
+          </tr>
+          <tr>
+            <td>Impulse</td>
+            <td>15</td>
+            <td>Displacement, volume spike, dan konfirmasi M5/M15.</td>
+          </tr>
+          <tr>
+            <td>Session</td>
+            <td>10</td>
+            <td>London/NY overlap paling tinggi, London atau NY sedang, Asia rendah.</td>
+          </tr>
+          <tr>
+            <td>Institutional</td>
+            <td>10</td>
+            <td>OB confluence, FVG confluence, atau kombinasi keduanya.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Grade sinyal: <code>A+</code> untuk skor sangat tinggi, lalu <code>A</code>,
+        <code>B+</code>, <code>B</code>, <code>C</code>, dan <code>D</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Penjelasan AI KNN Engine</h2>
+      <p>
+        KNN pada script ini bukan AI cloud atau machine learning eksternal. Ia adalah
+        sistem nearest-neighbor lokal di Pine Script. Setiap trade yang selesai akan
+        disimpan sebagai sample, lalu kondisi saat ini dibandingkan dengan sample lama
+        yang paling mirip.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Mode</th>
+            <th>Fungsi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Off</code></td>
+            <td>KNN tidak dipakai untuk display maupun filter sinyal.</td>
+          </tr>
+          <tr>
+            <td><code>Advisory Only</code></td>
+            <td>KNN hanya tampil di dashboard sebagai informasi, tidak memblok sinyal.</td>
+          </tr>
+          <tr>
+            <td><code>Active Gate</code></td>
+            <td>Jika sample sudah mencapai batas minimal, KNN boleh memblok sinyal dengan win rate rendah.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        KNN memakai 8 fitur: macro score, ATR percent volatility, jam trading, HTF
+        score, RSI, signal strength, order flow score, dan market regime. Hasilnya
+        berupa win rate, expected R, jarak rata-rata neighbor, dan grade AI.
+      </p>
+      <div class="note">
+        Saat sample masih kecil, status KNN akan berada di fase learning/advisory.
+        Setelah sample cukup, barulah <code>Active Gate</code> benar-benar relevan.
+      </div>
+
+      <h3>Contoh KNN dalam Praktik</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Kondisi</th>
+            <th>Contoh Tampilan</th>
+            <th>Arti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sample masih sedikit</td>
+            <td><code>AI LEARNING 18/30</code></td>
+            <td>KNN belum cukup data. Jangan terlalu mengandalkan grade AI.</td>
+          </tr>
+          <tr>
+            <td>Sample belum mencapai active gate</td>
+            <td><code>AI B ADV 55/80</code></td>
+            <td>KNN memberi informasi, tetapi belum memblok sinyal.</td>
+          </tr>
+          <tr>
+            <td>Sample cukup dan win rate rendah</td>
+            <td><code>AI D BLOCK</code></td>
+            <td>Sinyal bisa diblok karena kondisi mirip historisnya buruk.</td>
+          </tr>
+          <tr>
+            <td>Sample cukup dan win rate tinggi</td>
+            <td><code>AI A BOOST</code></td>
+            <td>Signal Quality ditambah karena kondisi mirip historisnya bagus.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="example">
+        <span class="example-title">Contoh KNN block</span>
+        <p>
+          Misalnya setup SELL muncul saat macro bearish, tetapi KNN menemukan 11
+          tetangga historis yang mirip: mayoritas trade serupa gagal atau expected R
+          negatif. Jika <code>knnWinRate</code> hanya 32% dan
+          <code>knnBlockThreshold</code> 35%, dashboard menulis
+          <code>KNN BLOCK 32%</code>. Walaupun trigger teknikal terlihat valid,
+          sinyal akhir bisa tidak keluar.
+        </p>
+      </div>
+      <div class="example">
+        <span class="example-title">Contoh KNN boost</span>
+        <p>
+          Jika kondisi BUY mirip dengan sample historis yang sering mencapai TP,
+          misalnya KNN win rate 74% dan threshold boost 70%, script menambah kualitas
+          sinyal sebesar <code>knnBoostAmount</code>. Setup yang tadinya grade
+          <code>B+</code> bisa naik mendekati <code>A</code>.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Risk Management Otomatis</h2>
+      <p>
+        Setelah sinyal muncul, script membuat rencana risiko otomatis:
+      </p>
+      <ul>
+        <li><strong>Entry</strong>: memakai harga close anchor saat sinyal.</li>
+        <li><strong>Stop Loss</strong>: berbasis swing lokal dan ATR buffer.</li>
+        <li><strong>TP1</strong>: target pertama berbasis R multiple.</li>
+        <li><strong>TP2</strong>: target kedua berbasis R multiple.</li>
+        <li><strong>TP3</strong>: target akhir berbasis R multiple.</li>
+      </ul>
+      <p>
+        Jika macro score kuat, script dapat memperbesar target R melalui
+        <code>tradeRMultipliers</code>. Misalnya macro strength tinggi dapat membuat
+        target lebih jauh dibanding default.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Peran</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SL</td>
+            <td>Batas invalidasi trade. Jika kena sebelum TP, trade dihitung loss.</td>
+          </tr>
+          <tr>
+            <td>TP1</td>
+            <td>Partial profit pertama, dihitung 50% posisi dalam tracker.</td>
+          </tr>
+          <tr>
+            <td>TP2</td>
+            <td>Partial profit kedua, dihitung 25% posisi.</td>
+          </tr>
+          <tr>
+            <td>TP3</td>
+            <td>Target akhir, dihitung 25% posisi dan menutup trade tracking.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Contoh Hitung Risk</h3>
+      <div class="example">
+        <span class="example-title">Contoh BUY dengan entry 2350.00</span>
+        <div class="equation">
+          Entry = 2350.00<br>
+          Stop Loss = 2345.00<br>
+          Risk = 2350.00 - 2345.00 = 5.00 poin<br>
+          TP1 1R = 2355.00<br>
+          TP2 2R = 2360.00<br>
+          TP3 3R = 2365.00
+        </div>
+        <p>
+          Jika TP1 kena, tracker menghitung 50% posisi sudah profit. Jika setelah TP1
+          harga turun dan stop kena, trade tidak selalu menjadi full loss karena sudah
+          ada partial profit.
+        </p>
+      </div>
+      <div class="example">
+        <span class="example-title">Contoh SELL dengan entry 2350.00</span>
+        <div class="equation">
+          Entry = 2350.00<br>
+          Stop Loss = 2356.00<br>
+          Risk = 2356.00 - 2350.00 = 6.00 poin<br>
+          TP1 1R = 2344.00<br>
+          TP2 2R = 2338.00<br>
+          TP3 3R = 2332.00
+        </div>
+        <p>
+          Untuk SELL, target berada di bawah entry dan stop berada di atas entry.
+          Dashboard akan menampilkan live R, misalnya <code>+0.45R</code> jika harga
+          sudah bergerak hampir setengah risk ke arah profit.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Dashboard</h2>
+      <p>
+        Dashboard adalah pusat informasi indikator. Isinya bukan hanya status BUY/SELL,
+        tetapi juga alasan kenapa sinyal muncul atau kenapa belum boleh entry.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Bagian Dashboard</th>
+            <th>Fungsi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Main Status</td>
+            <td>Status utama: Manage, Signal, Entry, Watch, Cooldown, Bear, Bull, Ranging, atau Wrong TF.</td>
+          </tr>
+          <tr>
+            <td>Bear/Bull Probability</td>
+            <td>Probabilitas arah berbasis macro, HTF, anchor, trigger, order flow, RSI, dan session.</td>
+          </tr>
+          <tr>
+            <td>Next Action</td>
+            <td>Arahan cepat seperti ENTRY, WAIT CLS, WAIT TRIG, COOLDOWN, RUN, HOLD BE, TRAIL, DEFEND, atau CUT.</td>
+          </tr>
+          <tr>
+            <td>AI KNN</td>
+            <td>Menampilkan grade KNN, status learning/advisory/pass/block/boost, win rate, expected R, dan sample.</td>
+          </tr>
+          <tr>
+            <td>Signal Q</td>
+            <td>Ringkasan kualitas sinyal dan breakdown komponen kualitas.</td>
+          </tr>
+          <tr>
+            <td>LIQ/OB/FVG</td>
+            <td>Status liquidity, order block H1/M15, breaker, dan FVG aktif.</td>
+          </tr>
+          <tr>
+            <td>Risk Row</td>
+            <td>Entry, SL, live R, TP1, serta status risk seperti BE atau TRAIL.</td>
+          </tr>
+          <tr>
+            <td>Driver Rows</td>
+            <td>Data DXY, US02Y, US10Y beserta move, z-score, factor, weight, dan state.</td>
+          </tr>
+          <tr>
+            <td>Bias Sekarang</td>
+            <td>Bias live yang berubah mengikuti kondisi bar terakhir.</td>
+          </tr>
+          <tr>
+            <td>SNAP</td>
+            <td>Alasan entry yang disimpan saat sinyal muncul, berguna untuk evaluasi setelah trade berjalan.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Contoh Membaca Dashboard</h3>
+      <div class="scenario-grid">
+        <div class="example">
+          <span class="example-title">Dashboard menunjukkan BUY HUNT</span>
+          <p>
+            Contoh teks: <code>BUY HUNT | WAIT TRIG</code>.
+          </p>
+          <p>
+            Artinya macro dan HTF sudah condong bullish, tetapi trigger entry belum
+            muncul. Pada kondisi ini trader tidak perlu mengejar harga. Tunggu sweep,
+            BOS, VWAP cross, pullback, OB tap, atau FVG mitigation.
+          </p>
+        </div>
+        <div class="example">
+          <span class="example-title">Dashboard menunjukkan BUY ARMED</span>
+          <p>
+            Contoh teks: <code>BUY ARMED | B+</code>.
+          </p>
+          <p>
+            Artinya setup BUY sudah lengkap secara logika, tetapi bisa saja masih
+            menunggu candle close atau cooldown. Jika candle close dan tidak ada block,
+            sinyal BUY bisa muncul.
+          </p>
+        </div>
+        <div class="example">
+          <span class="example-title">Dashboard menunjukkan Manage</span>
+          <p>
+            Contoh teks: <code>BUY DRIVE +0.62R | GREEN FLOW+ | Q A</code>.
+          </p>
+          <p>
+            Artinya posisi BUY aktif, trade sedang profit +0.62R, arah masih selaras,
+            flow masih mendukung, dan kualitas setup tinggi. Next Action bisa
+            menunjukkan <code>RUN BUY</code> atau <code>MANAGE BUY</code>.
+          </p>
+        </div>
+        <div class="example">
+          <span class="example-title">Dashboard menunjukkan CUT/DEFEND</span>
+          <p>
+            Contoh teks: <code>SELL ALERT -0.28R | COUNTER FLOW-</code>.
+          </p>
+          <p>
+            Artinya posisi SELL aktif, tetapi harga bergerak melawan posisi atau
+            kondisi berbalik. Dashboard bisa menyarankan <code>DEFEND SELL</code> atau
+            <code>CUT SELL</code> sebagai peringatan manajemen risiko.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Visual pada Chart</h2>
+      <ul>
+        <li><code>M5 MA Fast</code> dan <code>M5 MA Slow</code>: garis trend anchor.</li>
+        <li><code>M5 VWAP</code>: garis VWAP session-anchored.</li>
+        <li><code>KC Upper/Lower Exhaustion</code>: area over-extension untuk anti-entry terlambat.</li>
+        <li><code>Macro Bias Background</code>: warna background sesuai bias macro dan HTF.</li>
+        <li><code>Institutional Footprint</code>: bar berwarna saat volume spike.</li>
+        <li>Box FVG: zona imbalance M5 aktif.</li>
+        <li>Box H1/M15 OB: zona order block dan breaker.</li>
+        <li>Marker sweep: tanda saat PDH, PDL, PWH, PWL, atau Asia range tersapu.</li>
+        <li>Label BUY/SELL: sinyal entry beserta grade kualitas.</li>
+        <li>Line entry, SL, TP1, TP2, TP3: level manajemen trade aktif.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Pengaturan Penting</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Dampak jika dinaikkan/diaktifkan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>macroThreshold</code></td>
+            <td>Semakin tinggi, sinyal lebih sedikit tetapi bias macro lebih kuat.</td>
+          </tr>
+          <tr>
+            <td><code>slopeMinAtr</code></td>
+            <td>Semakin tinggi, trend harus lebih tajam. Sinyal lebih bersih tetapi lebih jarang.</td>
+          </tr>
+          <tr>
+            <td><code>requireVwap</code></td>
+            <td>BUY/SELL harus sesuai posisi VWAP. Cocok untuk filter disiplin.</td>
+          </tr>
+          <tr>
+            <td><code>requireDisplacement</code></td>
+            <td>Sinyal wajib punya displacement atau volume spike. Lebih ketat.</td>
+          </tr>
+          <tr>
+            <td><code>requireSessionEdge</code></td>
+            <td>Sinyal hanya keluar saat London/NY. Menghindari sesi sepi.</td>
+          </tr>
+          <tr>
+            <td><code>knnMinSampleActive</code></td>
+            <td>Menentukan jumlah sample minimal sebelum KNN boleh memblok sinyal.</td>
+          </tr>
+          <tr>
+            <td><code>knnBlockThreshold</code></td>
+            <td>Jika win rate KNN di bawah nilai ini, sinyal diblok saat Active Gate aktif.</td>
+          </tr>
+          <tr>
+            <td><code>atrStopMult</code></td>
+            <td>Semakin tinggi, stop loss cenderung lebih lebar.</td>
+          </tr>
+          <tr>
+            <td><code>rr1</code>, <code>rr2</code>, <code>rr3</code></td>
+            <td>Mengatur target TP dalam R multiple.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Contoh Profil Setting</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Profil</th>
+            <th>Setting Utama</th>
+            <th>Cocok Untuk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Konservatif</td>
+            <td>
+              <code>signalOnClose = true</code>,
+              <code>requireVwap = true</code>,
+              <code>requireDisplacement = true</code>,
+              <code>requireSessionEdge = true</code>,
+              <code>knnMode = Advisory Only</code> sampai sample cukup.
+            </td>
+            <td>Trader yang ingin sinyal lebih sedikit tetapi lebih terfilter.</td>
+          </tr>
+          <tr>
+            <td>Balanced</td>
+            <td>
+              <code>maType = ALMA</code>,
+              <code>useSlopeFilter = true</code>,
+              <code>requireVwap = true</code>,
+              <code>useContinuation = true</code>,
+              <code>knnMode = Active Gate</code> setelah sample cukup.
+            </td>
+            <td>Penggunaan normal XAUUSD M5, sesuai desain utama script.</td>
+          </tr>
+          <tr>
+            <td>Agresif</td>
+            <td>
+              <code>maType = HMA</code>,
+              <code>requireDisplacement = false</code>,
+              <code>requireSessionEdge = false</code>,
+              cooldown lebih pendek.
+            </td>
+            <td>Trader yang ingin menangkap reversal lebih cepat, tetapi harus siap noise lebih tinggi.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Istilah pada Dashboard</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Istilah</th>
+            <th>Arti</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-bull">FULL TAILWIND</span></td>
+            <td>Macro, HTF, dan M5 mendukung arah bullish.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-bear">FULL HEADWIND</span></td>
+            <td>Macro, HTF, dan M5 mendukung arah bearish.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-neutral">KONFLIK HTF</span></td>
+            <td>Macro dan HTF berlawanan arah.</td>
+          </tr>
+          <tr>
+            <td>BUY/SELL ARMED</td>
+            <td>Setup sudah siap, menunggu kondisi akhir seperti candle close atau cooldown.</td>
+          </tr>
+          <tr>
+            <td>WAIT TRIG</td>
+            <td>Bias ada, tetapi trigger entry belum muncul.</td>
+          </tr>
+          <tr>
+            <td>WAIT CLS</td>
+            <td>Menunggu candle close.</td>
+          </tr>
+          <tr>
+            <td>COOLDOWN</td>
+            <td>Indikator masih dalam jeda setelah sinyal sebelumnya.</td>
+          </tr>
+          <tr>
+            <td>KNN BLOCK</td>
+            <td>KNN menilai kondisi historis mirip punya win rate rendah.</td>
+          </tr>
+          <tr>
+            <td>HOLD BE</td>
+            <td>TP1 sudah kena, posisi diasumsikan masuk fase break-even management.</td>
+          </tr>
+          <tr>
+            <td>TRAIL</td>
+            <td>TP2 sudah kena, dashboard menyarankan mode trailing/harvest.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Kelebihan</h2>
+      <ul>
+        <li>Menggabungkan macro driver dan price action, bukan hanya indikator teknikal.</li>
+        <li>Memakai multi-timeframe: M1, M5, M15, H1, H4.</li>
+        <li>Ada filter anti-whipsaw, anti-pucuk, dan fakeout divergence.</li>
+        <li>Dashboard sangat informatif untuk membaca alasan entry dan alasan no trade.</li>
+        <li>KNN menyimpan hasil trade historis sehingga indikator bisa menilai konteks yang mirip.</li>
+        <li>Risk level otomatis memudahkan evaluasi R-multiple.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Keterbatasan</h2>
+      <ul>
+        <li>Tidak ada <code>alertcondition</code> di script, jadi alert TradingView belum dibuat secara eksplisit.</li>
+        <li>Ini indikator, bukan strategy backtest resmi. Performance tracker internal tidak sama dengan backtest
+          strategy TradingView.</li>
+        <li>KNN membutuhkan sample cukup banyak agar informasinya bermakna.</li>
+        <li>Data macro bergantung pada ketersediaan simbol TradingView seperti <code>TVC:DXY</code>,
+          <code>TVC:US02Y</code>, dan <code>TVC:US10Y</code>.
+        </li>
+        <li>Sinyal tetap bisa buruk saat spread melebar, news besar, data simbol lag, atau market sangat tidak normal.
+        </li>
+        <li>Beberapa label di file asli terlihat memiliki karakter encoding rusak, tetapi logika script tetap bisa
+          dijelaskan dari struktur kodenya.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Rekomendasi Penggunaan</h2>
+      <ol>
+        <li>Gunakan pada XAUUSD M5 sesuai komentar script.</li>
+        <li>Biarkan <code>signalOnClose</code> aktif untuk mengurangi sinyal prematur.</li>
+        <li>Gunakan ALMA default jika fokus pada balance antara smooth dan responsif.</li>
+        <li>Aktifkan <code>resetKnn</code> setelah mengganti MA type atau mengubah setting besar.</li>
+        <li>Untuk pemula, gunakan KNN sebagai <code>Advisory Only</code> dulu sampai sample cukup.</li>
+        <li>Perhatikan dashboard <strong>noTradeReason</strong>; sering kali alasan tidak entry lebih penting daripada
+          sinyal entry.</li>
+        <li>Hindari eksekusi buta saat dashboard menunjukkan <code>KONFLIK HTF</code>, <code>KNN BLOCK</code>,
+          <code>KC upper/lower</code>, atau sesi tidak ideal.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Kesimpulan</h2>
+      <p>
+        Script ini adalah sistem sinyal gold yang cukup lengkap: ia membaca arah makro,
+        menyaring trend multi-timeframe, mencari trigger SMC, menilai kualitas setup,
+        mengelola risk level, dan menampilkan semua konteks melalui dashboard.
+        Kekuatan utamanya ada pada kombinasi filter, bukan pada satu indikator tunggal.
+      </p>
+      <p class="small">
+        By: <code>fembi isnanto</code>.
+      </p>
+    </section>
+  </main>
+</body>
+
+</html>
